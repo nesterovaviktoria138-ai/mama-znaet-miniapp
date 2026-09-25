@@ -1,27 +1,381 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Мама знает</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta name="theme-color" content="#fff8f6">
+
+    <title>МАМА ЗНАЕТ</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div id="app">
-  <header>
-    <div><b>МАМА ЗНАЕТ ♥</b><small>Навигатор малыша от рождения до 1 года</small></div>
-    <button onclick="profile()">👶</button>
-  </header>
-  <main id="screen"></main>
-  <nav>
-    <button onclick="home()">⌂<small>Главная</small></button>
-    <button onclick="diary()">＋<small>Дневник</small></button>
-    <button onclick="favorites()">♡<small>Избранное</small></button>
-    <button onclick="premium()">★<small>Premium</small></button>
-  </nav>
+
+<div id="app" class="app">
+
+    <!-- ШАПКА -->
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">♡</div>
+
+            <div>
+                МАМА ЗНАЕТ
+            </div>
+        </div>
+
+        <button class="back-button" onclick="profile()">
+            👩
+        </button>
+
+    </header>
+
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <main id="screen">
+
+        <section class="hero">
+
+            <span class="age-badge">
+                От рождения до 1 года
+            </span>
+
+            <h1>
+                Всё самое важное для мамы и малыша 🤍
+            </h1>
+
+            <p>
+                Понятный помощник по развитию, кормлению,
+                сну, здоровью малыша и восстановлению мамы.
+            </p>
+
+        </section>
+
+
+        <!-- РЕБЁНОК -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Мой малыш 👶
+            </h2>
+
+            <p class="section-subtitle">
+                Выбери нужный раздел
+            </p>
+
+
+            <div class="cards">
+
+                <div class="card" onclick="openSection('development')">
+
+                    <div class="card-icon">🌱</div>
+
+                    <div>
+                        <h3>Развитие</h3>
+                        <p>
+                            Навыки малыша по месяцам
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('feeding')">
+
+                    <div class="card-icon">🍼</div>
+
+                    <div>
+                        <h3>Кормление</h3>
+                        <p>
+                            ГВ, смесь и режим кормлений
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('sleep')">
+
+                    <div class="card-icon">🌙</div>
+
+                    <div>
+                        <h3>Сон</h3>
+                        <p>
+                            Режим, нормы и регрессы сна
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('health')">
+
+                    <div class="card-icon">🩺</div>
+
+                    <div>
+                        <h3>Здоровье</h3>
+                        <p>
+                            Симптомы и когда нужен врач
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('complementary')">
+
+                    <div class="card-icon">🥣</div>
+
+                    <div>
+                        <h3>Прикорм</h3>
+                        <p>
+                            Введение продуктов по шагам
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('care')">
+
+                    <div class="card-icon">🛁</div>
+
+                    <div>
+                        <h3>Уход</h3>
+                        <p>
+                            Купание, кожа, ногти и гигиена
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- МАМА -->
+
+        <section class="mom-section">
+
+            <h2>
+                А как же мама? 🌷
+            </h2>
+
+            <p>
+                Восстановление после родов — такая же важная
+                часть материнства.
+            </p>
+
+
+            <div class="cards">
+
+                <div class="card" onclick="openSection('postpartum')">
+
+                    <div class="card-icon">🌸</div>
+
+                    <div>
+                        <h3>После родов</h3>
+                        <p>
+                            Восстановление организма
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="openSection('cesarean')">
+
+                    <div class="card-icon">🤍</div>
+
+                    <div>
+                        <h3>После КС</h3>
+                        <p>
+                            Шов, нагрузка и восстановление
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card card-large"
+                     onclick="openSection('breastfeeding')">
+
+                    <div class="card-icon">🤱</div>
+
+                    <div>
+                        <h3>Грудное вскармливание</h3>
+
+                        <p>
+                            Прикладывание, лактация,
+                            сцеживание и частые сложности
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ПОЛЕЗНОЕ -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Полезное каждый день ✨
+            </h2>
+
+
+            <div class="cards">
+
+                <div class="card" onclick="diary()">
+
+                    <div class="card-icon">📔</div>
+
+                    <div>
+                        <h3>Дневник</h3>
+                        <p>
+                            Сон, кормления, рост и вес
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card" onclick="favorites()">
+
+                    <div class="card-icon">❤️</div>
+
+                    <div>
+                        <h3>Избранное</h3>
+                        <p>
+                            Всё важное в одном месте
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PREMIUM -->
+
+        <section class="section">
+
+            <div class="card card-large"
+                 onclick="premium()">
+
+                <div class="card-icon">👑</div>
+
+                <div>
+
+                    <h3>МАМА ЗНАЕТ Premium</h3>
+
+                    <p>
+                        Полный доступ к материалам,
+                        чек-листам и полезным гайдам
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+
+            Сделано с <span>♡</span> для мам
+
+            <br>
+
+            Информация носит справочный характер
+            и не заменяет консультацию врача.
+
+        </footer>
+
+    </main>
+
 </div>
-<div id="modal" class="hidden"><div class="modal"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+
+<div id="modal" class="hidden">
+
+    <div class="modal">
+
+        <button class="close"
+                onclick="closeModal()">
+            ×
+        </button>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+
+<!-- TELEGRAM -->
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<!-- НАША ЛОГИКА -->
+
 <script src="app.js"></script>
+
+
+<script>
+/*
+  Временно добавляем обработчик разделов.
+  Позже каждый раздел наполним полноценным содержанием.
+*/
+
+function openSection(section) {
+
+    const names = {
+
+        development: "🌱 Развитие малыша",
+        feeding: "🍼 Кормление",
+        sleep: "🌙 Сон малыша",
+        health: "🩺 Здоровье",
+        complementary: "🥣 Прикорм",
+        care: "🛁 Уход за малышом",
+
+        postpartum: "🌸 Восстановление после родов",
+        cesarean: "🤍 Восстановление после кесарева",
+        breastfeeding: "🤱 Грудное вскармливание"
+
+    };
+
+    const title = names[section] || "Раздел";
+
+    const modal = document.getElementById("modal");
+    const body = document.getElementById("modalBody");
+
+    if (modal && body) {
+
+        body.innerHTML =
+            "<h2>" + title + "</h2>" +
+            "<p>Скоро здесь появится подробный материал.</p>";
+
+        modal.classList.remove("hidden");
+
+    }
+
+}
+</script>
+
+
 </body>
 </html>
