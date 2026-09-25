@@ -1765,6 +1765,215 @@ function openArticle(sectionName, index) {
         modal.classList.remove("hidden");
         return;
     }
+       // ===== КОРМЛЕНИЕ: ИВ, СВ И ОБЪЁМ КОРМЛЕНИЯ =====
+
+    if (
+        sectionName === "feeding" &&
+        index >= 1 &&
+        index <= 3 &&
+        feedingArticles[index]
+    ) {
+        const article = feedingArticles[index];
+
+        let articleContent = "";
+
+        // ===== ИСКУССТВЕННОЕ ВСКАРМЛИВАНИЕ =====
+        if (index === 1) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        🍼 Как начать
+                    </strong>
+                    <p>
+                        ${article.start}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        📏 Сколько смеси давать
+                    </strong>
+                    <p>
+                        ${article.amount}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🤍 Как кормить из бутылочки
+                    </strong>
+                    <p>
+                        ${article.feeding}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🛡️ Безопасность
+                    </strong>
+                    <p>
+                        ${article.safety}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🩺 Когда обратиться к врачу
+                    </strong>
+                    <p>
+                        ${article.doctor}
+                    </p>
+                </div>
+            `;
+        }
+
+        // ===== СМЕШАННОЕ ВСКАРМЛИВАНИЕ =====
+        if (index === 2) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        🤱 С чего начать
+                    </strong>
+                    <p>
+                        ${article.start}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🤱 + 🍼 Как организовать кормление
+                    </strong>
+                    <p>
+                        ${article.how}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        👶 Хватает ли малышу питания
+                    </strong>
+                    <p>
+                        ${article.enough}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        💡 Что может помочь
+                    </strong>
+                    <p>
+                        ${article.tips}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🩺 Когда обратиться за помощью
+                    </strong>
+                    <p>
+                        ${article.doctor}
+                    </p>
+                </div>
+            `;
+        }
+
+        // ===== СКОЛЬКО ДОЛЖЕН ЕСТЬ МАЛЫШ =====
+        if (index === 3) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        🤱 При грудном вскармливании
+                    </strong>
+                    <p>
+                        ${article.breast}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🍼 При искусственном вскармливании
+                    </strong>
+                    <p>
+                        ${article.formula}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        📈 Когда увеличивать порцию
+                    </strong>
+                    <p>
+                        ${article.increase}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        😌 Как понять, что малыш наелся
+                    </strong>
+                    <p>
+                        ${article.full}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        ⚠️ Важно
+                    </strong>
+                    <p>
+                        ${article.important}
+                    </p>
+                </div>
+            `;
+        }
+
+        modalBody.innerHTML = `
+            <span class="age-badge">
+                🍼 КОРМЛЕНИЕ
+            </span>
+
+            <h2>
+                ${article.title}
+            </h2>
+
+            <p>
+                ${article.intro}
+            </p>
+
+            ${articleContent}
+
+            <button
+                class="btn"
+                onclick="toggleFavorite(
+                    'feeding-${index}',
+                    '${article.title}'
+                )"
+            >
+                ${
+                    favoritesList.some(
+                        item =>
+                            item.id ===
+                            "feeding-" + index
+                    )
+                    ? "❤️ В избранном"
+                    : "♡ Сохранить в избранное"
+                }
+            </button>
+
+            <p style="
+                margin-top:15px;
+                font-size:12px;
+                color:#7c6e70;
+            ">
+                Информация носит ознакомительный характер.
+                При вопросах о питании, наборе веса
+                или самочувствии малыша обратись к педиатру.
+            </p>
+        `;
+
+        modal.classList.remove("hidden");
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
