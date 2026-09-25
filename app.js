@@ -1,82 +1,928 @@
-const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand()}
-let baby=JSON.parse(localStorage.getItem("baby")||"null");
-let fav=JSON.parse(localStorage.getItem("fav")||"[]");
-let logs=JSON.parse(localStorage.getItem("logs")||"[]");
+/* =========================================
+   МАМА ЗНАЕТ
+   app.js
+   ========================================= */
 
-const sections={
-development:["🧠","Развитие","Навыки, движения, общение и познание.",["👀 Зрение и внимание","🤲 Руки и движения","😊 Общение","💪 Двигательное развитие"]],
-sleep:["😴","Сон","Сон, пробуждения и спокойное укладывание.",["🌙 Ночной сон","☀️ Дневной сон","⏰ Время бодрствования","🫶 Засыпание на руках"]],
-feeding:["🍼","Питание","Кормление, голод, насыщение и срыгивания.",["🍼 Сигналы голода","🤍 Сигналы насыщения","💧 Срыгивания","🫧 Газики"]],
-stool:["💩","Стул и животик","Цвет, консистенция и изменения стула.",["🟡 Жёлтый","🟢 Зелёный","🟤 Коричневый","⚪ Очень светлый","🔴 С кровью"]],
-skin:["🔴","Кожа","Визуальный справочник частых изменений кожи.",["⚪ Белые точки","🔴 Прыщики","🌡️ Потница","🩹 Опрелость","💧 Сухость"]],
-massage:["🤸","Массаж","Мягкие упражнения и видео по возрасту.",["🦶 Ножки","✋ Ручки","🧸 Время на животе","🫶 Расслабляющие прикосновения"]]
+/* ---------- TELEGRAM ---------- */
+
+const tg = window.Telegram?.WebApp;
+
+if (tg) {
+    tg.ready();
+    tg.expand();
+}
+
+
+/* ---------- ЭЛЕМЕНТЫ ---------- */
+
+const screen = document.getElementById("screen");
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modalBody");
+
+
+/* ---------- ДАННЫЕ ---------- */
+
+let baby = JSON.parse(
+    localStorage.getItem("baby") || "null"
+);
+
+let favoritesList = JSON.parse(
+    localStorage.getItem("favorites") || "[]"
+);
+
+let logs = JSON.parse(
+    localStorage.getItem("logs") || "[]"
+);
+
+
+/* ---------- СОХРАНЕНИЕ ---------- */
+
+function saveData() {
+
+    localStorage.setItem(
+        "baby",
+        JSON.stringify(baby)
+    );
+
+    localStorage.setItem(
+        "favorites",
+        JSON.stringify(favoritesList)
+    );
+
+    localStorage.setItem(
+        "logs",
+        JSON.stringify(logs)
+    );
+}
+
+
+/* =========================================
+   РАЗДЕЛЫ
+   ========================================= */
+
+const sections = {
+
+    development: {
+        icon: "🌱",
+        title: "Развитие малыша",
+        description:
+            "Навыки и развитие малыша от рождения до года.",
+
+        items: [
+            "0–1 месяц",
+            "1–2 месяца",
+            "2–3 месяца",
+            "3–4 месяца",
+            "4–5 месяцев",
+            "5–6 месяцев",
+            "6–7 месяцев",
+            "7–8 месяцев",
+            "8–9 месяцев",
+            "9–10 месяцев",
+            "10–11 месяцев",
+            "11–12 месяцев"
+        ]
+    },
+
+
+    feeding: {
+        icon: "🍼",
+        title: "Кормление",
+        description:
+            "Грудное, искусственное и смешанное вскармливание.",
+
+        items: [
+            "Грудное вскармливание",
+            "Искусственное вскармливание",
+            "Смешанное вскармливание",
+            "Сколько должен есть малыш",
+            "Сигналы голода",
+            "Сигналы насыщения",
+            "Срыгивания",
+            "Газики и колики"
+        ]
+    },
+
+
+    sleep: {
+        icon: "🌙",
+        title: "Сон малыша",
+        description:
+            "Сон, режим и бодрствование от рождения до года.",
+
+        items: [
+            "Нормы сна по возрасту",
+            "Окна бодрствования",
+            "Дневной сон",
+            "Ночной сон",
+            "Ранние пробуждения",
+            "Короткие дневные сны",
+            "Регресс сна",
+            "Как помочь малышу уснуть"
+        ]
+    },
+
+
+    health: {
+        icon: "🩺",
+        title: "Здоровье",
+        description:
+            "Частые симптомы и ориентиры для родителей.",
+
+        items: [
+            "Температура",
+            "Насморк",
+            "Кашель",
+            "Срыгивания и рвота",
+            "Стул малыша",
+            "Кожа и высыпания",
+            "Прорезывание зубов",
+            "Когда обращаться к врачу"
+        ]
+    },
+
+
+    complementary: {
+        icon: "🥣",
+        title: "Прикорм",
+        description:
+            "Понятное введение прикорма шаг за шагом.",
+
+        items: [
+            "Когда начинать",
+            "Признаки готовности",
+            "Первые продукты",
+            "Овощи",
+            "Каши",
+            "Мясо",
+            "Фрукты",
+            "Аллергены",
+            "Вода",
+            "Размер порций",
+            "Пример меню"
+        ]
+    },
+
+
+    care: {
+        icon: "🛁",
+        title: "Уход за малышом",
+        description:
+            "Ежедневный уход и гигиена.",
+
+        items: [
+            "Купание",
+            "Уход за кожей",
+            "Опрелости",
+            "Подгузники",
+            "Уход за ногтями",
+            "Уход за носиком",
+            "Уход за ушами",
+            "Одежда по погоде",
+            "Прогулки"
+        ]
+    },
+
+
+    postpartum: {
+        icon: "🌸",
+        title: "Восстановление после родов",
+        description:
+            "Бережное восстановление мамы после рождения малыша.",
+
+        items: [
+            "Первые недели после родов",
+            "Послеродовые выделения",
+            "Тазовое дно",
+            "Живот после родов",
+            "Возвращение к нагрузкам",
+            "Питание и восстановление",
+            "Сон и отдых",
+            "Когда обратиться к врачу"
+        ]
+    },
+
+
+    cesarean: {
+        icon: "🤍",
+        title: "Восстановление после КС",
+        description:
+            "Восстановление после кесарева сечения.",
+
+        items: [
+            "Первые дни после КС",
+            "Уход за швом",
+            "Что нельзя после операции",
+            "Подъём тяжестей",
+            "Движение и прогулки",
+            "Живот после КС",
+            "Возвращение к тренировкам",
+            "Когда нужен врач"
+        ]
+    },
+
+
+    breastfeeding: {
+        icon: "🤱",
+        title: "Грудное вскармливание",
+        description:
+            "Основы грудного вскармливания.",
+
+        items: [
+            "Правильное прикладывание",
+            "Позы для кормления",
+            "Как понять, хватает ли молока",
+            "Сцеживание",
+            "Хранение молока",
+            "Лактация",
+            "Нагрубание груди",
+            "Трещины сосков",
+            "Завершение ГВ"
+        ]
+    }
 };
 
-function save(){localStorage.setItem("baby",JSON.stringify(baby));localStorage.setItem("fav",JSON.stringify(fav));localStorage.setItem("logs",JSON.stringify(logs))}
-function age(d){if(!d)return"Добавьте дату рождения";let x=new Date(d+"T00:00:00"),n=new Date(),m=(n.getFullYear()-x.getFullYear())*12+n.getMonth()-x.getMonth();if(n.getDate()<x.getDate())m--;if(m<1)return Math.max(0,Math.floor((n-x)/86400000))+" дн.";return m+" мес."}
-function home(){screen.innerHTML=`<section class="hero"><div class="muted">МОЙ МАЛЫШ</div><h1>${baby?.name||"Добро пожаловать"} 👶</h1><div class="muted">${age(baby?.birth)}</div><button class="secondary" onclick="profile()">${baby?"Изменить профиль":"Добавить малыша →"}</button></section><h3>Что вас интересует?</h3><div class="grid">${Object.entries(sections).map(([k,v])=>`<button class="card" onclick="section('${k}')"><div class="ico">${v[0]}</div><b>${v[1]}</b><p>${v[2]}</p></button>`).join("")}</div><button class="alert" onclick="doctor()">🚨 <b>Когда обратиться к врачу</b><div class="muted">Тревожные симптомы и важные ориентиры.</div></button>`}
-function section(k){let v=sections[k];screen.innerHTML=`<button class="back" onclick="home()">← Назад</button><div class="title">${v[0]} ${v[1]}</div><p class="muted">${v[2]}</p>${v[3].map((x,i)=>`<button class="list" onclick="article('${k}',${i})"><span>${x}</span><b>›</b></button>`).join("")}`}
-function article(k,i){let v=sections[k],title=v[3][i].replace(/^\\S+ /,""),texts={
-"Зелёный":"Зелёный оттенок сам по себе не обязательно означает заболевание. Оценивайте его вместе с самочувствием ребёнка, питанием и другими симптомами.",
-"Очень светлый":"Белый, серый или практически обесцвеченный стул — повод обратиться к врачу.",
-"С кровью":"Кровь в подгузнике нельзя автоматически считать нормой. При повторении или плохом самочувствии нужна медицинская оценка.",
-"Срыгивания":"Небольшие срыгивания часто встречаются у младенцев. Важно отличать их от активной рвоты.",
-"Сигналы голода":"К ранним сигналам голода относятся поиск ртом, поворот головы, облизывание губ и повышение активности.",
-"Время бодрствования":"Ориентиры полезны, но не должны превращаться в жёсткое расписание. Учитывайте возраст и сигналы усталости.",
-"Время на животе":"Короткие периоды на животе во время бодрствования помогают двигательной активности. Ребёнок должен быть под наблюдением."
-}[title]||"Здесь будет расширенный материал с текстом, иллюстрациями, видео и блоком «Когда обратиться к врачу».";openModal(`<div class="title">${v[3][i]}</div><div class="box">${texts}</div><button class="primary" onclick="toggleFav('${k}:${i}','${title}')">${fav.some(x=>x.id==k+':'+i)?"♥ В избранном":"♡ Сохранить"}</button><p class="muted">Информация не заменяет индивидуальную медицинскую консультацию.</p>`)}
-function toggleFav(id,title){let i=fav.findIndex(x=>x.id===id);if(i>=0)fav.splice(i,1);else fav.push({id,title});save();closeModal()}
-function doctor(){screen.innerHTML=`<button class="back" onclick="home()">← Назад</button><div class="title">🚨 Когда к врачу</div><div class="box"><b>🚑 Срочно</b><br>Выраженное затруднение дыхания, посинение/серый цвет кожи или губ, потеря сознания, судорожный эпизод или ребёнка трудно разбудить.</div><div class="box"><b>🩺 Свяжитесь с врачом</b><br>Повторная сильная рвота, кровь в стуле, необычно светлый стул, выраженное ухудшение питания или другие новые симптомы.</div><div class="box"><b>🌡️ Температура</b><br>У младенца младше 3 месяцев температура 38,0 °C и выше требует срочной медицинской оценки.</div>`}
-function diary(){screen.innerHTML=`<div class="title">📔 Дневник</div><p class="muted">Записывайте события дня.</p><div class="grid"><button class="card" onclick="addLog('🍼','Кормление')"><div class="ico">🍼</div><b>Кормление</b></button><button class="card" onclick="addLog('😴','Сон')"><div class="ico">😴</div><b>Сон</b></button><button class="card" onclick="addLog('💩','Стул')"><div class="ico">💩</div><b>Стул</b></button><button class="card" onclick="addLog('🌡️','Температура')"><div class="ico">🌡️</div><b>Температура</b></button></div><h3>Последние записи</h3>${logs.slice().reverse().map(x=>`<div class="box"><b>${x.icon} ${x.type}</b><br>${x.text}<br><span class="muted">${x.time}</span></div>`).join("")||'<div class="box">Пока нет записей.</div>'}`}
-function addLog(icon,type){openModal(`<div class="title">${icon} ${type}</div><div class="field"><label>Заметка</label><input id="logText" placeholder="Например: 150 мл"></div><button class="primary" onclick="saveLog('${icon}','${type}')">Сохранить</button>`)}
-function saveLog(icon,type){logs.push({icon,type,text:document.getElementById("logText").value||"Без заметки",time:new Date().toLocaleString("ru-RU")});save();closeModal();diary()}
-function favorites(){screen.innerHTML=`<div class="title">❤️ Избранное</div>${fav.map(x=>`<div class="list"><span>❤️ ${x.title}</span></div>`).join("")||'<div class="box">Сохранённых материалов пока нет.</div>'}`}
-function premium(){screen.innerHTML=`<section class="premium"><div class="title">⭐ Premium</div><p>Полная библиотека «Мама знает».</p><div class="price">399 ⭐ <small>/ месяц</small></div><ul><li>0–12 месяцев</li><li>Полный справочник стула</li><li>Справочник кожи</li><li>Видео массажа</li><li>Прикорм</li><li>Расширенный дневник</li></ul><button class="primary" onclick="alert('Следующий этап — подключение серверной оплаты Telegram Stars.')">Получить Premium</button></section>`}
-function profile(){openModal(`<div class="title">👶 Мой малыш</div><div class="field"><label>Имя</label><input id="bn" value="${baby?.name||""}"></div><div class="field"><label>Дата рождения</label><input id="bd" type="date" value="${baby?.birth||""}"></div><button class="primary" onclick="saveProfile()">Сохранить</button>`)}
-function saveProfile(){let name=document.getElementById("bn").value.trim()||"Малыш",birth=document.getElementById("bd").value;if(!birth)return alert("Укажите дату рождения");baby={name,birth};save();closeModal();home()}
-function openModal(x){modalBody.innerHTML=x;modal.classList.remove("hidden")}function closeModal(){modal.classList.add("hidden")}
-home();
-// ===== НОВАЯ ГЛАВНАЯ: ПЕРЕХОДЫ В РАЗДЕЛЫ =====
+
+/* =========================================
+   ОТКРЫТИЕ РАЗДЕЛА
+   ========================================= */
 
 function openSection(sectionName) {
 
-    const oldSections = {
-        development: "development",
-        feeding: "feeding",
-        sleep: "sleep"
-    };
+    const data = sections[sectionName];
 
-    // Раздел уже есть во второй версии
-    if (oldSections[sectionName]) {
-        section(oldSections[sectionName]);
-        window.scrollTo(0, 0);
+    if (!data) {
         return;
     }
 
-    // Новые разделы — будем наполнять дальше
-    const titles = {
-        health: "🩺 Здоровье малыша",
-        complementary: "🥣 Прикорм",
-        care: "🛁 Уход за малышом",
-        postpartum: "🌸 Восстановление после родов",
-        cesarean: "🤍 Восстановление после кесарева",
-        breastfeeding: "🤱 Грудное вскармливание"
-    };
+    screen.innerHTML = `
 
-    const title = titles[sectionName] || "Раздел";
+        <button
+            class="back-button"
+            onclick="location.reload()"
+        >
+            ← На главную
+        </button>
+
+
+        <div class="content-page">
+
+            <span class="age-badge">
+                МАМА ЗНАЕТ
+            </span>
+
+            <h1>
+                ${data.icon} ${data.title}
+            </h1>
+
+            <p>
+                ${data.description}
+            </p>
+
+
+            <div class="checklist">
+
+                ${data.items.map((item, index) => `
+
+                    <button
+                        class="check-item"
+                        onclick="openArticle(
+                            '${sectionName}',
+                            ${index}
+                        )"
+                    >
+
+                        <span>
+                            ${item}
+                        </span>
+
+                        <strong>
+                            ›
+                        </strong>
+
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+    `;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   СТАТЬЯ
+   ========================================= */
+
+function openArticle(sectionName, index) {
+
+    const data = sections[sectionName];
+
+    if (!data) {
+        return;
+    }
+
+    const title = data.items[index];
+
+    const id =
+        sectionName + "-" + index;
+
+    const saved =
+        favoritesList.some(
+            item => item.id === id
+        );
+
+
+    modalBody.innerHTML = `
+
+        <span class="age-badge">
+            ${data.icon} ${data.title}
+        </span>
+
+        <h2>
+            ${title}
+        </h2>
+
+
+        <div class="info-box">
+
+            <strong>
+                Материал готовится
+            </strong>
+
+            <p>
+                Здесь будет подробная,
+                понятная инструкция по теме
+                «${title}».
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <strong>
+                Что добавим сюда
+            </strong>
+
+            <p>
+                Нормы, практические рекомендации,
+                фотографии, чек-листы и важные
+                признаки, на которые стоит
+                обратить внимание.
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="toggleFavorite(
+                '${id}',
+                '${escapeText(title)}'
+            )"
+        >
+
+            ${
+                saved
+                ? "❤️ В избранном"
+                : "♡ Сохранить в избранное"
+            }
+
+        </button>
+
+
+        <p
+            style="
+                margin-top:15px;
+                font-size:12px;
+                color:#7c6e70;
+            "
+        >
+            Информация носит справочный характер
+            и не заменяет консультацию врача.
+        </p>
+    `;
+
+    modal.classList.remove("hidden");
+}
+
+
+/* =========================================
+   МОДАЛЬНОЕ ОКНО
+   ========================================= */
+
+function closeModal() {
+
+    modal.classList.add("hidden");
+}
+
+
+/* =========================================
+   ИЗБРАННОЕ
+   ========================================= */
+
+function toggleFavorite(id, title) {
+
+    const index =
+        favoritesList.findIndex(
+            item => item.id === id
+        );
+
+    if (index >= 0) {
+
+        favoritesList.splice(
+            index,
+            1
+        );
+
+    } else {
+
+        favoritesList.push({
+            id,
+            title
+        });
+    }
+
+    saveData();
+
+    closeModal();
+}
+
+
+function favorites() {
 
     screen.innerHTML = `
-        <button class="back" onclick="home()">← Назад</button>
 
-        <div class="title">${title}</div>
+        <button
+            class="back-button"
+            onclick="location.reload()"
+        >
+            ← На главную
+        </button>
 
-        <div class="box">
+        <div class="content-page">
+
+            <h1>
+                ❤️ Избранное
+            </h1>
+
             <p>
-                Этот раздел мы сейчас наполним подробными
-                материалами, инструкциями и чек-листами.
+                Сохранённые материалы.
             </p>
+
+            ${
+                favoritesList.length
+
+                ? favoritesList.map(item => `
+
+                    <div class="info-box">
+                        ${item.title}
+                    </div>
+
+                `).join("")
+
+                : `
+
+                    <div class="info-box">
+
+                        Пока здесь пусто.
+
+                        <br><br>
+
+                        Нажимай
+                        «Сохранить в избранное»
+                        внутри материалов.
+
+                    </div>
+                `
+            }
+
         </div>
     `;
 
     window.scrollTo(0, 0);
+}
+
+
+/* =========================================
+   ДНЕВНИК
+   ========================================= */
+
+function diary() {
+
+    screen.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="location.reload()"
+        >
+            ← На главную
+        </button>
+
+
+        <div class="content-page">
+
+            <h1>
+                📔 Дневник малыша
+            </h1>
+
+            <p>
+                Записывай важные события дня.
+            </p>
+
+
+            <div class="cards">
+
+                <div
+                    class="card"
+                    onclick="addLog('🍼','Кормление')"
+                >
+
+                    <div class="card-icon">
+                        🍼
+                    </div>
+
+                    <h3>
+                        Кормление
+                    </h3>
+
+                </div>
+
+
+                <div
+                    class="card"
+                    onclick="addLog('🌙','Сон')"
+                >
+
+                    <div class="card-icon">
+                        🌙
+                    </div>
+
+                    <h3>
+                        Сон
+                    </h3>
+
+                </div>
+
+
+                <div
+                    class="card"
+                    onclick="addLog('💩','Стул')"
+                >
+
+                    <div class="card-icon">
+                        💩
+                    </div>
+
+                    <h3>
+                        Стул
+                    </h3>
+
+                </div>
+
+
+                <div
+                    class="card"
+                    onclick="addLog('🌡️','Температура')"
+                >
+
+                    <div class="card-icon">
+                        🌡️
+                    </div>
+
+                    <h3>
+                        Температура
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <h2 style="margin-top:25px;">
+                Последние записи
+            </h2>
+
+
+            <div id="logList">
+
+                ${renderLogs()}
+
+            </div>
+
+        </div>
+    `;
+
+    window.scrollTo(0, 0);
+}
+
+
+function addLog(icon, type) {
+
+    modalBody.innerHTML = `
+
+        <h2>
+            ${icon} ${type}
+        </h2>
+
+        <div class="info-box">
+
+            <input
+                id="logText"
+                placeholder="Например: 150 мл"
+                style="
+                    width:100%;
+                    padding:14px;
+                    border:1px solid #f1d9d7;
+                    border-radius:12px;
+                    font-size:16px;
+                "
+            >
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="saveLog(
+                '${icon}',
+                '${type}'
+            )"
+        >
+            Сохранить
+        </button>
+    `;
+
+    modal.classList.remove("hidden");
+}
+
+
+function saveLog(icon, type) {
+
+    const input =
+        document.getElementById(
+            "logText"
+        );
+
+    logs.push({
+
+        icon,
+
+        type,
+
+        text:
+            input.value.trim()
+            || "Без заметки",
+
+        time:
+            new Date()
+            .toLocaleString("ru-RU")
+
+    });
+
+    saveData();
+
+    closeModal();
+
+    diary();
+}
+
+
+function renderLogs() {
+
+    if (!logs.length) {
+
+        return `
+            <div class="info-box">
+                Пока нет записей.
+            </div>
+        `;
+    }
+
+
+    return logs
+        .slice()
+        .reverse()
+        .map(item => `
+
+            <div class="info-box">
+
+                <strong>
+                    ${item.icon}
+                    ${item.type}
+                </strong>
+
+                <p>
+                    ${item.text}
+                </p>
+
+                <small>
+                    ${item.time}
+                </small>
+
+            </div>
+
+        `)
+        .join("");
+}
+
+
+/* =========================================
+   ПРОФИЛЬ МАЛЫША
+   ========================================= */
+
+function profile() {
+
+    modalBody.innerHTML = `
+
+        <h2>
+            👶 Мой малыш
+        </h2>
+
+
+        <div class="info-box">
+
+            <p>
+                Имя малыша
+            </p>
+
+            <input
+                id="babyName"
+                value="${baby?.name || ""}"
+                placeholder="Имя"
+                style="
+                    width:100%;
+                    padding:13px;
+                    border:1px solid #f1d9d7;
+                    border-radius:12px;
+                    font-size:16px;
+                "
+            >
+
+        </div>
+
+
+        <div class="info-box">
+
+            <p>
+                Дата рождения
+            </p>
+
+            <input
+                id="babyBirth"
+                type="date"
+                value="${baby?.birth || ""}"
+                style="
+                    width:100%;
+                    padding:13px;
+                    border:1px solid #f1d9d7;
+                    border-radius:12px;
+                    font-size:16px;
+                "
+            >
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="saveProfile()"
+        >
+            Сохранить
+        </button>
+    `;
+
+    modal.classList.remove("hidden");
+}
+
+
+function saveProfile() {
+
+    const name =
+        document
+        .getElementById("babyName")
+        .value
+        .trim();
+
+    const birth =
+        document
+        .getElementById("babyBirth")
+        .value;
+
+
+    baby = {
+        name:
+            name || "Малыш",
+
+        birth
+    };
+
+    saveData();
+
+    closeModal();
+}
+
+
+/* =========================================
+   PREMIUM
+   ========================================= */
+
+function premium() {
+
+    screen.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="location.reload()"
+        >
+            ← На главную
+        </button>
+
+
+        <div class="content-page">
+
+            <span class="age-badge">
+                PREMIUM
+            </span>
+
+            <h1>
+                👑 МАМА ЗНАЕТ Premium
+            </h1>
+
+            <p>
+                Расширенная библиотека
+                для мамы и малыша.
+            </p>
+
+
+            <div class="info-box">
+
+                <strong>
+                    В Premium войдут:
+                </strong>
+
+                <br>
+
+                ✓ Полные материалы 0–12 месяцев
+
+                <br><br>
+
+                ✓ Чек-листы
+
+                <br><br>
+
+                ✓ Трекеры
+
+                <br><br>
+
+                ✓ Видео и инструкции
+
+                <br><br>
+
+                ✓ Расширенный дневник
+
+                <br><br>
+
+                ✓ Гайды по прикорму
+
+                <br><br>
+
+                ✓ Восстановление мамы
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="
+                    alert(
+                    'Оплату подключим следующим этапом'
+                    )
+                "
+            >
+                Получить Premium
+            </button>
+
+        </div>
+    `;
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =========================================
+   ЗАЩИТА ТЕКСТА
+   ========================================= */
+
+function escapeText(text) {
+
+    return String(text)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
 }
