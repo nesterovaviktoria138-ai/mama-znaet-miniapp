@@ -333,49 +333,5 @@
 <!-- НАША ЛОГИКА -->
 
 <script src="app.js"></script>
-
-
-<script>
-/*
-  Временно добавляем обработчик разделов.
-  Позже каждый раздел наполним полноценным содержанием.
-*/
-
-function openSection(section) {
-
-    const names = {
-
-        development: "🌱 Развитие малыша",
-        feeding: "🍼 Кормление",
-        sleep: "🌙 Сон малыша",
-        health: "🩺 Здоровье",
-        complementary: "🥣 Прикорм",
-        care: "🛁 Уход за малышом",
-
-        postpartum: "🌸 Восстановление после родов",
-        cesarean: "🤍 Восстановление после кесарева",
-        breastfeeding: "🤱 Грудное вскармливание"
-
-    };
-
-    const title = names[section] || "Раздел";
-
-    const modal = document.getElementById("modal");
-    const body = document.getElementById("modalBody");
-
-    if (modal && body) {
-
-        body.innerHTML =
-            "<h2>" + title + "</h2>" +
-            "<p>Скоро здесь появится подробный материал.</p>";
-
-        modal.classList.remove("hidden");
-
-    }
-
-}
-</script>
-
-
 </body>
 </html>
