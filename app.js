@@ -36,3 +36,47 @@ function profile(){openModal(`<div class="title">👶 Мой малыш</div><di
 function saveProfile(){let name=document.getElementById("bn").value.trim()||"Малыш",birth=document.getElementById("bd").value;if(!birth)return alert("Укажите дату рождения");baby={name,birth};save();closeModal();home()}
 function openModal(x){modalBody.innerHTML=x;modal.classList.remove("hidden")}function closeModal(){modal.classList.add("hidden")}
 home();
+// ===== НОВАЯ ГЛАВНАЯ: ПЕРЕХОДЫ В РАЗДЕЛЫ =====
+
+function openSection(sectionName) {
+
+    const oldSections = {
+        development: "development",
+        feeding: "feeding",
+        sleep: "sleep"
+    };
+
+    // Раздел уже есть во второй версии
+    if (oldSections[sectionName]) {
+        section(oldSections[sectionName]);
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    // Новые разделы — будем наполнять дальше
+    const titles = {
+        health: "🩺 Здоровье малыша",
+        complementary: "🥣 Прикорм",
+        care: "🛁 Уход за малышом",
+        postpartum: "🌸 Восстановление после родов",
+        cesarean: "🤍 Восстановление после кесарева",
+        breastfeeding: "🤱 Грудное вскармливание"
+    };
+
+    const title = titles[sectionName] || "Раздел";
+
+    screen.innerHTML = `
+        <button class="back" onclick="home()">← Назад</button>
+
+        <div class="title">${title}</div>
+
+        <div class="box">
+            <p>
+                Этот раздел мы сейчас наполним подробными
+                материалами, инструкциями и чек-листами.
+            </p>
+        </div>
+    `;
+
+    window.scrollTo(0, 0);
+}
