@@ -2210,6 +2210,228 @@ function openArticle(sectionName, index) {
         modal.classList.remove("hidden");
         return;
     }
+       // ===== КОРМЛЕНИЕ: ГОЛОД, НАСЫЩЕНИЕ, СРЫГИВАНИЯ, КОЛИКИ =====
+
+    if (
+        sectionName === "feeding" &&
+        index >= 4 &&
+        index <= 7 &&
+        feedingArticles[index]
+    ) {
+        const article = feedingArticles[index];
+
+        let articleContent = "";
+
+        // ===== СИГНАЛЫ ГОЛОДА =====
+        if (index === 4) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        👶 Ранние сигналы голода
+                    </strong>
+                    <p>
+                        ${article.early}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        😢 Плач — поздний сигнал
+                    </strong>
+                    <p>
+                        ${article.late}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        💡 Важно помнить
+                    </strong>
+                    <p>
+                        ${article.important}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🤍 Что поможет
+                    </strong>
+                    <p>
+                        ${article.tips}
+                    </p>
+                </div>
+            `;
+        }
+
+        // ===== СИГНАЛЫ НАСЫЩЕНИЯ =====
+        if (index === 5) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        😌 Как понять, что малыш наелся
+                    </strong>
+                    <p>
+                        ${article.signs}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🍼 Если малыш не допил бутылочку
+                    </strong>
+                    <p>
+                        ${article.bottle}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        💡 Важно помнить
+                    </strong>
+                    <p>
+                        ${article.important}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🩺 Когда обратиться к врачу
+                    </strong>
+                    <p>
+                        ${article.doctor}
+                    </p>
+                </div>
+            `;
+        }
+
+        // ===== СРЫГИВАНИЯ =====
+        if (index === 6) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        👶 Когда срыгивания могут быть нормой
+                    </strong>
+                    <p>
+                        ${article.normal}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🤍 Что можно сделать
+                    </strong>
+                    <p>
+                        ${article.help}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🌙 Как укладывать спать
+                    </strong>
+                    <p>
+                        ${article.sleep}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🩺 Когда обратиться за помощью
+                    </strong>
+                    <p>
+                        ${article.doctor}
+                    </p>
+                </div>
+            `;
+        }
+
+        // ===== ГАЗИКИ И КОЛИКИ =====
+        if (index === 7) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>
+                        👶 Что называют коликами
+                    </strong>
+                    <p>
+                        ${article.colic}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🤍 Как помочь малышу успокоиться
+                    </strong>
+                    <p>
+                        ${article.help}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        ⚠️ Чего не стоит делать самостоятельно
+                    </strong>
+                    <p>
+                        ${article.dont}
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <strong>
+                        🩺 Когда нужен врач
+                    </strong>
+                    <p>
+                        ${article.doctor}
+                    </p>
+                </div>
+            `;
+        }
+
+        modalBody.innerHTML = `
+            <span class="age-badge">
+                🍼 КОРМЛЕНИЕ
+            </span>
+
+            <h2>
+                ${article.title}
+            </h2>
+
+            <p>
+                ${article.intro}
+            </p>
+
+            ${articleContent}
+
+            <button
+                class="btn"
+                onclick="toggleFavorite(
+                    'feeding-${index}',
+                    '${article.title}'
+                )"
+            >
+                ${
+                    favoritesList.some(
+                        item =>
+                            item.id ===
+                            "feeding-" + index
+                    )
+                    ? "❤️ В избранном"
+                    : "♡ Сохранить в избранное"
+                }
+            </button>
+
+            <p style="
+                margin-top:15px;
+                font-size:12px;
+                color:#7c6e70;
+            ">
+                Материал носит информационный характер
+                и не заменяет консультацию педиатра.
+            </p>
+        `;
+
+        modal.classList.remove("hidden");
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
