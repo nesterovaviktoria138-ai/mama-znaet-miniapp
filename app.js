@@ -648,6 +648,7 @@ renderHomeBaby();
 renderTodayContent();
 renderWeekContent();
 renderNextContent();
+
 /* ---------- СОХРАНЕНИЕ ---------- */
 
 function saveData() {
