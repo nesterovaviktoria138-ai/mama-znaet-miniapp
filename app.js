@@ -469,6 +469,7 @@ function renderWeekContent() {
    ========================================= */
 
 function renderNextContent() {
+   alert("renderNextContent работает");
 
     const ageElement =
         document.getElementById("nextAge");
