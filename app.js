@@ -131,7 +131,8 @@ items: [
     "Безопасный сон малыша",
     "Как понять: перегул или недогул",
     "Что делать, если режим полностью сбился",
-    "Когда проблемы со сном требуют врача"
+    "Когда проблемы со сном требуют врача",
+   "🌙Анализ сна малыша"
 ]
     },
 
@@ -4031,6 +4032,139 @@ function openSection(sectionName) {
 
 function openArticle(sectionName, index) {
 
+       // =========================================
+    // 🌙 АНАЛИЗ СНА МАЛЫША
+    // =========================================
+
+    if (sectionName === "sleep" && index === 21) {
+
+        modalBody.innerHTML = `
+            <span class="age-badge">
+                🌙 АНАЛИЗ СНА
+            </span>
+
+            <h2>Анализ сна малыша</h2>
+
+            <p>
+                Внеси данные за один день, а «МАМА ЗНАЕТ»
+                автоматически посчитает сон и окна бодрствования
+                и подскажет, на что стоит обратить внимание.
+            </p>
+
+            <div class="info-box">
+                <strong>👶 Возраст малыша</strong>
+
+                <p style="margin-top:10px;">
+                    <select
+                        id="sleepAge"
+                        style="
+                            width:100%;
+                            padding:12px;
+                            border:1px solid #eadbd7;
+                            border-radius:12px;
+                            font-size:16px;
+                            background:white;
+                        "
+                    >
+                        <option value="">Выбери возраст</option>
+                        <option value="0">0–1 месяц</option>
+                        <option value="1">1–2 месяца</option>
+                        <option value="2">2–3 месяца</option>
+                        <option value="3">3–4 месяца</option>
+                        <option value="4">4–5 месяцев</option>
+                        <option value="5">5–6 месяцев</option>
+                        <option value="6">6–8 месяцев</option>
+                        <option value="8">8–10 месяцев</option>
+                        <option value="10">10–12 месяцев</option>
+                    </select>
+                </p>
+            </div>
+
+            <div class="info-box">
+                <strong>☀️ Подъём утром</strong>
+
+                <p style="margin-top:10px;">
+                    <input
+                        id="wakeTime"
+                        type="time"
+                        style="
+                            width:100%;
+                            box-sizing:border-box;
+                            padding:12px;
+                            border:1px solid #eadbd7;
+                            border-radius:12px;
+                            font-size:16px;
+                            background:white;
+                        "
+                    >
+                </p>
+            </div>
+
+            <div class="info-box">
+                <strong>😴 Дневные сны</strong>
+
+                <p>
+                    Добавь каждый сон малыша по очереди.
+                </p>
+
+                <div id="sleepNaps"></div>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="addSleepNap()"
+                >
+                    + Добавить дневной сон
+                </button>
+            </div>
+
+            <div class="info-box">
+                <strong>🌙 Уход в ночной сон</strong>
+
+                <p style="margin-top:10px;">
+                    <input
+                        id="bedTime"
+                        type="time"
+                        style="
+                            width:100%;
+                            box-sizing:border-box;
+                            padding:12px;
+                            border:1px solid #eadbd7;
+                            border-radius:12px;
+                            font-size:16px;
+                            background:white;
+                        "
+                    >
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="btn"
+                onclick="analyzeBabySleep()"
+            >
+                🌙 Проанализировать сон
+            </button>
+
+            <p style="
+                margin-top:15px;
+                font-size:12px;
+                color:#7c6e70;
+            ">
+                Анализ носит справочный характер.
+                Сон детей индивидуален, а ориентиры по возрасту
+                не являются строгим расписанием.
+            </p>
+        `;
+
+        modal.classList.remove("hidden");
+
+        setTimeout(() => {
+            addSleepNap();
+        }, 0);
+
+        return;
+    }
        // ===== РАЗВИТИЕ: 0–1 МЕСЯЦ =====
 
     if (sectionName === "development" && index === 0) {
@@ -5849,7 +5983,378 @@ function closeModal() {
 
     modal.classList.add("hidden");
 }
+/* =========================================
+   АНАЛИЗ СНА — ДНЕВНЫЕ СНЫ
+   ========================================= */
 
+let sleepNapCounter = 0;
+
+function addSleepNap() {
+    const container = document.getElementById("sleepNaps");
+
+    if (!container) {
+        return;
+    }
+
+    sleepNapCounter++;
+
+    const nap = document.createElement("div");
+    nap.className = "info-box";
+    nap.id = `sleepNap-${sleepNapCounter}`;
+
+    nap.innerHTML = `
+        <strong>
+            😴 Дневной сон ${sleepNapCounter}
+        </strong>
+
+        <div style="
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-top:12px;
+        ">
+            <label>
+                Заснул
+                <input
+                    type="time"
+                    class="sleep-nap-start"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:5px;
+                        border:1px solid #eadbd7;
+                        border-radius:12px;
+                        font-size:16px;
+                        background:white;
+                    "
+                >
+            </label>
+
+            <label>
+                Проснулся
+                <input
+                    type="time"
+                    class="sleep-nap-end"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:5px;
+                        border:1px solid #eadbd7;
+                        border-radius:12px;
+                        font-size:16px;
+                        background:white;
+                    "
+                >
+            </label>
+        </div>
+
+        <button
+            type="button"
+            onclick="removeSleepNap(${sleepNapCounter})"
+            style="
+                margin-top:10px;
+                border:none;
+                background:none;
+                color:#a56f73;
+                font-size:14px;
+            "
+        >
+            ✕ Удалить этот сон
+        </button>
+    `;
+
+    container.appendChild(nap);
+}
+
+function removeSleepNap(id) {
+    const nap = document.getElementById(
+        `sleepNap-${id}`
+    );
+
+    if (nap) {
+        nap.remove();
+    }
+}
+function analyzeBabySleep() {
+
+    const ageInput = document.getElementById("sleepAge");
+    const wakeInput = document.getElementById("wakeTime");
+    const nightInput = document.getElementById("nightSleep");
+
+    if (!ageInput || !wakeInput || !nightInput) {
+        return;
+    }
+
+    const age = Number(ageInput.value);
+    const wakeTime = wakeInput.value;
+    const nightSleep = nightInput.value;
+
+    if (!wakeTime || !nightSleep || isNaN(age)) {
+        alert("Заполни возраст малыша, время подъёма и время ухода в ночной сон.");
+        return;
+    }
+
+    // Переводим время в минуты
+    function timeToMinutes(time) {
+        const parts = time.split(":");
+        return Number(parts[0]) * 60 + Number(parts[1]);
+    }
+
+    function minutesToText(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = Math.round(minutes % 60);
+
+        if (hours === 0) {
+            return `${mins} мин`;
+        }
+
+        if (mins === 0) {
+            return `${hours} ч`;
+        }
+
+        return `${hours} ч ${mins} мин`;
+    }
+
+    const wakeMinutes = timeToMinutes(wakeTime);
+    let nightMinutes = timeToMinutes(nightSleep);
+
+    if (nightMinutes <= wakeMinutes) {
+        nightMinutes += 24 * 60;
+    }
+
+    // Собираем дневные сны
+    const napBlocks = document.querySelectorAll(".sleep-nap");
+    const naps = [];
+
+    napBlocks.forEach(block => {
+
+        const inputs = block.querySelectorAll('input[type="time"]');
+
+        if (inputs.length < 2) {
+            return;
+        }
+
+        const start = inputs[0].value;
+        const end = inputs[1].value;
+
+        if (!start || !end) {
+            return;
+        }
+
+        let startMinutes = timeToMinutes(start);
+        let endMinutes = timeToMinutes(end);
+
+        if (endMinutes <= startMinutes) {
+            endMinutes += 24 * 60;
+        }
+
+        naps.push({
+            start: startMinutes,
+            end: endMinutes,
+            duration: endMinutes - startMinutes
+        });
+    });
+
+    naps.sort((a, b) => a.start - b.start);
+
+    let totalDaySleep = 0;
+
+    naps.forEach(nap => {
+        totalDaySleep += nap.duration;
+    });
+
+    // Ориентиры окон бодрствования
+    let minWake = 60;
+    let maxWake = 120;
+
+    if (age < 1) {
+        minWake = 30;
+        maxWake = 60;
+    } else if (age < 2) {
+        minWake = 45;
+        maxWake = 75;
+    } else if (age < 3) {
+        minWake = 60;
+        maxWake = 90;
+    } else if (age < 4) {
+        minWake = 60;
+        maxWake = 120;
+    } else if (age < 5) {
+        minWake = 90;
+        maxWake = 150;
+    } else if (age < 6) {
+        minWake = 120;
+        maxWake = 180;
+    } else if (age < 8) {
+        minWake = 120;
+        maxWake = 210;
+    } else if (age < 10) {
+        minWake = 150;
+        maxWake = 240;
+    } else {
+        minWake = 180;
+        maxWake = 270;
+    }
+
+    // Считаем окна бодрствования
+    const wakeWindows = [];
+
+    let previousEnd = wakeMinutes;
+
+    naps.forEach((nap, index) => {
+
+        let start = nap.start;
+
+        if (start < previousEnd) {
+            start += 24 * 60;
+        }
+
+        wakeWindows.push({
+            name: `Бодрствование ${index + 1}`,
+            duration: start - previousEnd
+        });
+
+        previousEnd = nap.end;
+    });
+
+    wakeWindows.push({
+        name: "Последнее бодрствование перед ночью",
+        duration: nightMinutes - previousEnd
+    });
+
+    // Формируем результат
+    let result = `
+        <div class="info-box">
+            <strong>📊 Разбор режима</strong>
+
+            <p>
+                Возраст малыша: ${age} мес.<br><br>
+                Дневных снов: ${naps.length}<br><br>
+                Всего дневного сна: ${minutesToText(totalDaySleep)}
+            </p>
+        </div>
+    `;
+
+    result += `
+        <div class="info-box">
+            <strong>⏰ Окна бодрствования</strong>
+            <p>
+    `;
+
+    wakeWindows.forEach(window => {
+
+        let status = "✓ выглядит подходящим";
+
+        if (window.duration > maxWake) {
+            status = "⚠️ длиннее возрастного ориентира";
+        }
+
+        if (window.duration < minWake) {
+            status = "ℹ️ короче возрастного ориентира";
+        }
+
+        result += `
+            ${window.name}: 
+            <strong>${minutesToText(window.duration)}</strong><br>
+            ${status}<br><br>
+        `;
+    });
+
+    result += `
+            </p>
+        </div>
+    `;
+
+    // Ищем возможные сложности
+    const longWindows = wakeWindows.filter(
+        window => window.duration > maxWake
+    );
+
+    const shortWindows = wakeWindows.filter(
+        window => window.duration < minWake
+    );
+
+    let conclusion = "";
+
+    if (longWindows.length > 0) {
+        conclusion += `
+            ⚠️ Есть длинные периоды бодрствования.
+            Если малыш к концу такого окна становится очень беспокойным
+            или тяжело засыпает, можно попробовать начать подготовку
+            ко сну немного раньше.<br><br>
+        `;
+    }
+
+    if (shortWindows.length > 0) {
+        conclusion += `
+            ℹ️ Есть короткие периоды бодрствования.
+            Это не обязательно проблема: ориентируйся также
+            на состояние и сигналы усталости малыша.<br><br>
+        `;
+    }
+
+    if (
+        longWindows.length === 0 &&
+        shortWindows.length === 0
+    ) {
+        conclusion += `
+            ✅ Все введённые окна бодрствования находятся
+            примерно в выбранных возрастных ориентирах.<br><br>
+        `;
+    }
+
+    conclusion += `
+        💡 Оценивай режим не только по часам.
+        Важны настроение малыша, лёгкость засыпания,
+        качество бодрствования и общее количество сна.
+    `;
+
+    result += `
+        <div class="info-box">
+            <strong>🤍 Что можно попробовать</strong>
+            <p>
+                ${conclusion}
+            </p>
+        </div>
+
+        <p style="
+            margin-top:15px;
+            font-size:12px;
+            color:#7c6e70;
+        ">
+            Анализ является ориентировочным и не заменяет
+            консультацию педиатра. Окна бодрствования не являются
+            строгими медицинскими нормативами.
+        </p>
+    `;
+
+    let resultBox = document.getElementById("sleepAnalysisResult");
+
+    if (!resultBox) {
+        resultBox = document.createElement("div");
+        resultBox.id = "sleepAnalysisResult";
+
+        const button = document.querySelector(
+            'button[onclick="analyzeBabySleep()"]'
+        );
+
+        if (button) {
+            button.insertAdjacentElement(
+                "afterend",
+                resultBox
+            );
+        }
+    }
+
+    if (resultBox) {
+        resultBox.innerHTML = result;
+
+        resultBox.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+}
 
 /* =========================================
    ИЗБРАННОЕ
