@@ -33,8 +33,94 @@ let favoritesList = JSON.parse(
 let logs = JSON.parse(
     localStorage.getItem("logs") || "[]"
 );
+/* =========================================
+   ГЛАВНАЯ — ВОЗРАСТ МАЛЫША
+   ========================================= */
 
+function renderHomeBaby() {
 
+    const ageElement =
+        document.getElementById("homeBabyAge");
+
+    const hintElement =
+        document.getElementById("homeBabyHint");
+
+    if (!ageElement || !hintElement) {
+        return;
+    }
+
+    if (!baby || !baby.birth) {
+
+        ageElement.textContent =
+            "Укажите дату рождения";
+
+        hintElement.textContent =
+            "И мы покажем, что актуально именно сейчас";
+
+        return;
+    }
+
+    const birth = new Date(
+        baby.birth + "T00:00:00"
+    );
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const diff =
+        today.getTime() - birth.getTime();
+
+    if (diff < 0) {
+        ageElement.textContent =
+            baby.name || "Малыш";
+
+        hintElement.textContent =
+            "Проверьте дату рождения в профиле";
+
+        return;
+    }
+
+    const totalDays =
+        Math.floor(diff / 86400000);
+
+    const weeks =
+        Math.floor(totalDays / 7);
+
+    const days =
+        totalDays % 7;
+
+    const months =
+        Math.floor(totalDays / 30.4375);
+
+    const name =
+        baby.name || "Малыш";
+
+    ageElement.textContent = name;
+
+    if (totalDays < 7) {
+
+        hintElement.textContent =
+            `${totalDays} дн. · первая неделя жизни`;
+
+    } else if (months < 1) {
+
+        hintElement.textContent =
+            `${weeks} нед. ${days} дн.`;
+
+    } else if (months < 12) {
+
+        hintElement.textContent =
+            `${months} мес. · ${weeks} нед. ${days} дн.`;
+
+    } else {
+
+        hintElement.textContent =
+            `${months} мес.`;
+
+    }
+}
+renderHomeBaby();
 /* ---------- СОХРАНЕНИЕ ---------- */
 
 function saveData() {
