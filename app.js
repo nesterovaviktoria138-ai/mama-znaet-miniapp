@@ -3254,7 +3254,169 @@ wakeTable: `
             Удобнее ориентироваться на возраст, поведение ребёнка,
             количество дневных снов и его индивидуальный ритм.
         `,
+        sleepTable: `
+            <div style="overflow-x:auto; margin-top:10px;">
+                <table style="
+                    width:100%;
+                    min-width:650px;
+                    border-collapse:collapse;
+                    font-size:13px;
+                    line-height:1.4;
+                ">
+                    <tr>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Возраст
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Сон за сутки
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Дневные сны
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Бодрствование
+                        </th>
+                    </tr>
 
+                    <tr>
+                        <td style="padding:10px;">0–2 мес</td>
+                        <td style="padding:10px;">≈ 14–17 ч</td>
+                        <td style="padding:10px;">много эпизодов сна</td>
+                        <td style="padding:10px;">≈ 30–75 мин</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;">2–4 мес</td>
+                        <td style="padding:10px;">≈ 14–17 ч</td>
+                        <td style="padding:10px;">обычно 4–5</td>
+                        <td style="padding:10px;">≈ 1–2 ч</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;">4–6 мес</td>
+                        <td style="padding:10px;">≈ 12–16 ч</td>
+                        <td style="padding:10px;">обычно 3–4</td>
+                        <td style="padding:10px;">≈ 1,5–3 ч</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;">6–9 мес</td>
+                        <td style="padding:10px;">≈ 12–16 ч</td>
+                        <td style="padding:10px;">обычно 2–3</td>
+                        <td style="padding:10px;">≈ 2–4 ч</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;">9–12 мес</td>
+                        <td style="padding:10px;">≈ 12–16 ч</td>
+                        <td style="padding:10px;">обычно 2</td>
+                        <td style="padding:10px;">≈ 3–4,5 ч</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="
+                margin-top:12px;
+                font-size:12px;
+                color:#7c6e70;
+            ">
+                Это ориентиры, а не расписание по минутам.
+                Потребность во сне и комфортное время бодрствования
+                индивидуальны и могут меняться от дня к дню.
+            </p>
+        `,
+                  dayExamples: `
+            <div style="overflow-x:auto; margin-top:10px;">
+                <table style="
+                    width:100%;
+                    min-width:700px;
+                    border-collapse:collapse;
+                    font-size:13px;
+                    line-height:1.4;
+                ">
+                    <tr>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Возраст
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Подъём
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Дневные сны
+                        </th>
+                        <th style="padding:10px; text-align:left; border-bottom:1px solid #eadbd7;">
+                            Ночной сон
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;"><strong>4 мес</strong></td>
+                        <td style="padding:10px;">7:00</td>
+                        <td style="padding:10px;">
+                            ≈ 8:30–9:30<br>
+                            ≈ 11:30–13:00<br>
+                            ≈ 15:15–16:15<br>
+                            иногда короткий 4-й сон
+                        </td>
+                        <td style="padding:10px;">≈ 19:30–20:30</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;"><strong>6 мес</strong></td>
+                        <td style="padding:10px;">7:00</td>
+                        <td style="padding:10px;">
+                            ≈ 9:00–10:00<br>
+                            ≈ 12:30–14:00<br>
+                            ≈ 16:30–17:00
+                        </td>
+                        <td style="padding:10px;">≈ 19:30–20:30</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;"><strong>8 мес</strong></td>
+                        <td style="padding:10px;">7:00</td>
+                        <td style="padding:10px;">
+                            ≈ 9:30–11:00<br>
+                            ≈ 14:00–15:30
+                        </td>
+                        <td style="padding:10px;">≈ 19:30–20:30</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;"><strong>10 мес</strong></td>
+                        <td style="padding:10px;">7:00</td>
+                        <td style="padding:10px;">
+                            ≈ 10:00–11:15<br>
+                            ≈ 14:30–16:00
+                        </td>
+                        <td style="padding:10px;">≈ 20:00</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:10px;"><strong>12 мес</strong></td>
+                        <td style="padding:10px;">7:00</td>
+                        <td style="padding:10px;">
+                            часто ещё 2 сна:<br>
+                            ≈ 10:00–11:00<br>
+                            ≈ 14:30–15:30
+                        </td>
+                        <td style="padding:10px;">≈ 19:30–20:30</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="
+                margin-top:12px;
+                font-size:12px;
+                color:#7c6e70;
+            ">
+                Это примеры, а не готовое расписание для каждого ребёнка.
+                Время сна следует сдвигать под фактическое время подъёма,
+                продолжительность предыдущего сна и состояние малыша.
+                Переход на меньшее количество дневных снов происходит
+                индивидуально.
+            </p>
+        `,
         newborn: `
             <strong>0–2 месяца</strong><br><br>
 
@@ -5366,6 +5528,24 @@ function openArticle(sectionName, index) {
                // ===== РЕЖИМ СНА ПО ВОЗРАСТАМ 0–12 МЕСЯЦЕВ =====
         if (index === 13) {
             articleContent = `
+                            <div class="info-box">
+                    <strong>📊 Режим сна по возрастам — быстрый ориентир</strong>
+
+                    ${article.sleepTable}
+                </div>
+                                <div class="info-box">
+                    <strong>🕐 Примеры режима дня по возрастам</strong>
+
+                    <p style="
+                        margin-top:8px;
+                        margin-bottom:10px;
+                    ">
+                        Ниже — примеры, от которых можно отталкиваться
+                        при составлении режима малыша.
+                    </p>
+
+                    ${article.dayExamples}
+                </div>
                 <div class="info-box">
                     <strong>👶 0–2 месяца</strong>
                     <p>${article.newborn}</p>
