@@ -464,9 +464,190 @@ function renderWeekContent() {
     tipElement.textContent =
         "Сохраняйте безопасную среду, много разговаривайте и поддерживайте самостоятельное исследование мира.";
 }
+/* =========================================
+   ГЛАВНАЯ — БЛИЖАЙШЕЕ ДЛЯ МАЛЫША
+   ========================================= */
+
+function renderNextContent() {
+
+    const ageElement =
+        document.getElementById("nextAge");
+
+    const descriptionElement =
+        document.getElementById("nextDescription");
+
+    const vaccineElement =
+        document.getElementById("nextVaccine");
+
+    const vaccineTextElement =
+        document.getElementById("nextVaccineText");
+
+    const doctorElement =
+        document.getElementById("nextDoctor");
+
+    const doctorTextElement =
+        document.getElementById("nextDoctorText");
+
+    const developmentElement =
+        document.getElementById("nextDevelopment");
+
+    const developmentTextElement =
+        document.getElementById("nextDevelopmentText");
+
+
+    if (
+        !ageElement ||
+        !descriptionElement ||
+        !vaccineElement ||
+        !vaccineTextElement ||
+        !doctorElement ||
+        !doctorTextElement ||
+        !developmentElement ||
+        !developmentTextElement
+    ) {
+        return;
+    }
+
+
+    /* ЕСЛИ ДАТА РОЖДЕНИЯ ЕЩЁ НЕ УКАЗАНА */
+
+    if (!baby || !baby.birth) {
+
+        ageElement.textContent =
+            "По возрасту";
+
+        descriptionElement.textContent =
+            "Укажите дату рождения малыша — и мы рассчитаем ближайшие события.";
+
+        return;
+    }
+
+
+    const birth =
+        new Date(baby.birth + "T00:00:00");
+
+    const today =
+        new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+
+    const totalDays =
+        Math.floor(
+            (today.getTime() - birth.getTime())
+            / 86400000
+        );
+
+
+    if (totalDays < 0) {
+
+        ageElement.textContent =
+            "Проверьте дату";
+
+        descriptionElement.textContent =
+            "Дата рождения малыша указана позже сегодняшней.";
+
+        return;
+    }
+
+
+    const weeks =
+        Math.floor(totalDays / 7);
+
+    const months =
+        Math.floor(totalDays / 30.4375);
+
+
+    /* ВОЗРАСТ */
+
+    if (totalDays < 28) {
+
+        ageElement.textContent =
+            `${weeks} нед.`;
+
+    } else {
+
+        ageElement.textContent =
+            `${months} мес.`;
+    }
+
+
+    descriptionElement.textContent =
+        `Показываем ближайшие ориентиры для возраста ${baby.name || "малыша"}.`;
+
+
+    /* ВРЕМЕННЫЕ ТЕКСТЫ.
+       ДАЛЬШЕ ЗАМЕНИМ ИХ НА КАЛЕНДАРЬ РФ */
+
+    vaccineElement.textContent =
+        "Календарь прививок";
+
+    vaccineTextElement.textContent =
+        "Подбираем ближайшую вакцинацию по возрасту малыша";
+
+
+    doctorElement.textContent =
+        "Профилактические осмотры";
+
+    doctorTextElement.textContent =
+        "Подбираем ближайшие осмотры по возрасту малыша";
+
+
+    /* БЛИЖАЙШИЙ ВОЗРАСТНОЙ ЭТАП */
+
+    if (months < 1) {
+
+        developmentElement.textContent =
+            "Первый месяц";
+
+        developmentTextElement.textContent =
+            "Адаптация, контакт с родителями и первые реакции.";
+
+    } else if (months < 3) {
+
+        developmentElement.textContent =
+            "Больше общения";
+
+        developmentTextElement.textContent =
+            "Малыш постепенно становится активнее и внимательнее к людям и предметам.";
+
+    } else if (months < 6) {
+
+        developmentElement.textContent =
+            "Новые движения";
+
+        developmentTextElement.textContent =
+            "Интерес к игрушкам, рукам, переворотам и исследованию пространства.";
+
+    } else if (months < 9) {
+
+        developmentElement.textContent =
+            "Больше самостоятельности";
+
+        developmentTextElement.textContent =
+            "Движение, прикорм и активное исследование окружающего мира.";
+
+    } else if (months < 12) {
+
+        developmentElement.textContent =
+            "К первому дню рождения";
+
+        developmentTextElement.textContent =
+            "Общение, жесты, движения и всё больше самостоятельных действий.";
+
+    } else {
+
+        developmentElement.textContent =
+            "Первый год позади 🎉";
+
+        developmentTextElement.textContent =
+            "Навыки продолжают развиваться в индивидуальном темпе.";
+    }
+}
 renderHomeBaby();
 renderTodayContent();
 renderWeekContent();
+renderNextContent();
 /* ---------- СОХРАНЕНИЕ ---------- */
 
 function saveData() {
