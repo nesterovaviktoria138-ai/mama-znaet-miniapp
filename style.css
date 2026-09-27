@@ -1078,6 +1078,195 @@ input:focus-visible {
         font-size: 10px;
     }
 }
+/* =========================================
+   БЛИЖАЙШЕЕ ДЛЯ МАЛЫША
+   ========================================= */
+
+.next-section {
+    margin: 0 0 32px;
+}
+
+
+/* СПИСОК СОБЫТИЙ */
+
+.next-list {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* ВЕРТИКАЛЬНАЯ ЛИНИЯ */
+
+.next-list::before {
+    content: "";
+
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 22px;
+
+    width: 2px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--pink-light),
+            var(--peach-light)
+        );
+
+    border-radius: 10px;
+}
+
+
+/* ОДНО СОБЫТИЕ */
+
+.next-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px rgba(116, 70, 76, 0.055);
+}
+
+
+/* ИКОНКА */
+
+.next-item-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--bg-soft);
+
+    border: 4px solid var(--white);
+    border-radius: 15px;
+
+    font-size: 19px;
+
+    box-shadow:
+        0 3px 10px rgba(116, 70, 76, 0.06);
+}
+
+
+/* ТЕКСТ */
+
+.next-item-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.next-item-type {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--pink-dark);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+}
+
+.next-item-content strong {
+    display: block;
+
+    color: var(--text);
+
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.next-item-content p {
+    margin: 4px 0 0;
+
+    color: var(--text-light);
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* СТРЕЛКА */
+
+.next-item-arrow {
+    flex-shrink: 0;
+
+    color: var(--pink-dark);
+
+    font-size: 24px;
+    line-height: 1;
+
+    opacity: 0.75;
+}
+
+
+/* ЛЁГКИЙ АКЦЕНТ НА ПЕРВОМ СОБЫТИИ */
+
+.next-item:first-child {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #fff8f6 100%
+        );
+
+    border-color: #f0d2d3;
+}
+
+
+/* НАЖАТИЕ */
+
+.next-item:active {
+    transform: scale(0.985);
+}
+
+
+/* МАЛЕНЬКИЕ ЭКРАНЫ */
+
+@media (max-width: 420px) {
+
+    .next-item {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .next-item-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+    }
+
+    .next-item-content strong {
+        font-size: 13px;
+    }
+
+    .next-item-content p {
+        font-size: 10px;
+    }
+}
 /* ================================
    DARK MODE
    ================================ */
