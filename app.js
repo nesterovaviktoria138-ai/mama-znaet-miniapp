@@ -120,7 +120,149 @@ function renderHomeBaby() {
 
     }
 }
+/* =========================================
+   ГЛАВНАЯ — СЕЙЧАС АКТУАЛЬНО
+   ========================================= */
+
+function renderTodayContent() {
+
+    const ageElement =
+        document.getElementById("todayAge");
+
+    const descriptionElement =
+        document.getElementById("todayDescription");
+
+    const cardsElement =
+        document.getElementById("todayCards");
+
+    if (
+        !ageElement ||
+        !descriptionElement ||
+        !cardsElement
+    ) {
+        return;
+    }
+
+    if (!baby || !baby.birth) {
+
+        ageElement.textContent = "0–12 мес.";
+
+        descriptionElement.textContent =
+            "Укажите дату рождения малыша — и рекомендации будут меняться вместе с ним.";
+
+        return;
+    }
+
+    const birth =
+        new Date(baby.birth + "T00:00:00");
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const totalDays =
+        Math.floor(
+            (today.getTime() - birth.getTime())
+            / 86400000
+        );
+
+    if (totalDays < 0) {
+        return;
+    }
+
+    const weeks =
+        Math.floor(totalDays / 7);
+
+    const month =
+        Math.min(
+            11,
+            Math.floor(totalDays / 30.4375)
+        );
+
+    const monthFrom = month;
+    const monthTo = month + 1;
+
+    if (totalDays < 28) {
+
+        ageElement.textContent =
+            `${weeks} нед.`;
+
+        descriptionElement.textContent =
+            "Подобрали темы, которые особенно полезны в первые недели жизни.";
+
+    } else {
+
+        ageElement.textContent =
+            `${month} мес.`;
+
+        descriptionElement.textContent =
+            "Подобрали материалы с учётом текущего возраста малыша.";
+    }
+
+    cardsElement.innerHTML = `
+
+        <button class="today-card"
+                onclick="openArticle('development', ${month})">
+
+            <span class="today-card-icon">🌱</span>
+
+            <span class="today-card-content">
+                <strong>
+                    Развитие · ${monthFrom}–${monthTo} мес.
+                </strong>
+
+                <small>
+                    Навыки, игры и возрастные ориентиры
+                </small>
+            </span>
+
+            <span class="today-card-arrow">›</span>
+
+        </button>
+
+
+        <button class="today-card"
+                onclick="openSection('sleep')">
+
+            <span class="today-card-icon">🌙</span>
+
+            <span class="today-card-content">
+                <strong>
+                    Сон малыша
+                </strong>
+
+                <small>
+                    Сон и бодрствование в этом возрасте
+                </small>
+            </span>
+
+            <span class="today-card-arrow">›</span>
+
+        </button>
+
+
+        <button class="today-card"
+                onclick="openSection('feeding')">
+
+            <span class="today-card-icon">🍼</span>
+
+            <span class="today-card-content">
+                <strong>
+                    Кормление
+                </strong>
+
+                <small>
+                    Питание и сигналы малыша
+                </small>
+            </span>
+
+            <span class="today-card-arrow">›</span>
+
+        </button>
+    `;
+}
 renderHomeBaby();
+renderTodayContent();
 /* ---------- СОХРАНЕНИЕ ---------- */
 
 function saveData() {
