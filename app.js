@@ -5999,7 +5999,7 @@ function addSleepNap() {
     sleepNapCounter++;
 
     const nap = document.createElement("div");
-    nap.className = "info-box";
+    nap.className = "info-box sleep-nap";
     nap.id = `sleepNap-${sleepNapCounter}`;
 
     nap.innerHTML = `
