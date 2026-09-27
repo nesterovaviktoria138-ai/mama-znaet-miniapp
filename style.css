@@ -730,6 +730,141 @@ input:focus-visible {
         font-size: 10px;
     }
 }
+/* =========================================
+   СЕЙЧАС АКТУАЛЬНО
+   ========================================= */
+
+.today-section {
+    margin-top: 26px;
+    margin-bottom: 30px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.section-kicker {
+    display: block;
+    margin-bottom: 4px;
+
+    color: var(--pink-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: var(--text);
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.today-age {
+    flex-shrink: 0;
+
+    padding: 6px 10px;
+
+    background: var(--pink-light);
+    border-radius: 20px;
+
+    color: var(--pink-dark);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.today-description {
+    margin: 0 0 14px;
+
+    color: var(--text-light);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* КАРТОЧКИ */
+
+.today-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.today-card {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--white);
+
+    box-shadow:
+        0 6px 20px rgba(116, 70, 76, 0.06);
+
+    text-align: left;
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.today-card:active {
+    transform: scale(0.985);
+}
+
+.today-card-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: var(--bg-soft);
+
+    font-size: 22px;
+}
+
+.today-card-content {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.today-card-content strong {
+    color: var(--text);
+    font-size: 15px;
+}
+
+.today-card-content small {
+    color: var(--text-light);
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.today-card-arrow {
+    flex-shrink: 0;
+
+    color: var(--pink-dark);
+    font-size: 25px;
+    line-height: 1;
+}
 /* ================================
    DARK MODE
    ================================ */
