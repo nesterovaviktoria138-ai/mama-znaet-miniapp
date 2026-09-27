@@ -261,8 +261,212 @@ function renderTodayContent() {
         </button>
     `;
 }
+/* =========================================
+   ГЛАВНАЯ — ЧТО НОВОГО НА ЭТОЙ НЕДЕЛЕ
+   ========================================= */
+
+function renderWeekContent() {
+
+    const ageElement =
+        document.getElementById("weekAge");
+
+    const introElement =
+        document.getElementById("weekIntro");
+
+    const developmentElement =
+        document.getElementById("weekDevelopment");
+
+    const sleepElement =
+        document.getElementById("weekSleep");
+
+    const tipElement =
+        document.getElementById("weekTip");
+
+    if (
+        !ageElement ||
+        !introElement ||
+        !developmentElement ||
+        !sleepElement ||
+        !tipElement
+    ) {
+        return;
+    }
+
+    if (!baby || !baby.birth) {
+
+        ageElement.textContent = "👶";
+
+        introElement.textContent =
+            "Укажите дату рождения малыша в профиле — и здесь появятся подсказки по его возрасту.";
+
+        return;
+    }
+
+    const birth =
+        new Date(baby.birth + "T00:00:00");
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const totalDays =
+        Math.floor(
+            (today.getTime() - birth.getTime())
+            / 86400000
+        );
+
+    if (totalDays < 0) {
+        return;
+    }
+
+    const weeks =
+        Math.floor(totalDays / 7);
+
+    const months =
+        Math.floor(totalDays / 30.4375);
+
+    ageElement.textContent =
+        `${weeks} нед.`;
+
+    introElement.textContent =
+        `${baby.name || "Малыш"} растёт, и интересы, сон и способы общения постепенно меняются. Вот несколько ориентиров для этого периода.`;
+
+
+    /* 0–1 МЕСЯЦ */
+
+    if (months < 1) {
+
+        developmentElement.textContent =
+            "Малыш адаптируется к жизни вне животика, много спит и постепенно становится внимательнее к голосу и лицу взрослого.";
+
+        sleepElement.textContent =
+            "Сон пока распределён по всему дню и ночи, а устойчивого режима обычно ещё нет.";
+
+        tipElement.textContent =
+            "Больше спокойного контакта, разговоров и коротких выкладываний на живот во время бодрствования под присмотром.";
+
+        return;
+    }
+
+
+    /* 1–2 МЕСЯЦА */
+
+    if (months < 2) {
+
+        developmentElement.textContent =
+            "Малыш может дольше рассматривать лица, активнее реагировать на голос и постепенно лучше удерживать голову.";
+
+        sleepElement.textContent =
+            "Периоды бодрствования становятся заметнее, но продолжительность снов всё ещё может сильно различаться.";
+
+        tipElement.textContent =
+            "Разговаривайте, улыбайтесь малышу и предлагайте несколько коротких периодов игры в течение дня.";
+
+        return;
+    }
+
+
+    /* 2–3 МЕСЯЦА */
+
+    if (months < 3) {
+
+        developmentElement.textContent =
+            "Интерес к игрушкам и людям растёт: малыш может следить взглядом, улыбаться и активнее двигать руками и ногами.";
+
+        sleepElement.textContent =
+            "День постепенно становится более предсказуемым, хотя короткие дневные сны всё ещё обычны.";
+
+        tipElement.textContent =
+            "Полезны общение лицом к лицу, безопасные игрушки для рассматривания и ежедневное время на животе.";
+
+        return;
+    }
+
+
+    /* 3–4 МЕСЯЦА */
+
+    if (months < 4) {
+
+        developmentElement.textContent =
+            "Малыш всё активнее изучает свои руки, игрушки и окружающее пространство, может пытаться поворачиваться на бок.";
+
+        sleepElement.textContent =
+            "Структура сна развивается, поэтому привычный режим иногда временно меняется, а пробуждений может стать больше.";
+
+        tipElement.textContent =
+            "Давайте больше безопасного пространства для движения и наблюдайте за новыми попытками малыша.";
+
+        return;
+    }
+
+
+    /* 4–6 МЕСЯЦЕВ */
+
+    if (months < 6) {
+
+        developmentElement.textContent =
+            "Движения становятся увереннее: малыш может тянуться к предметам, захватывать их и осваивать перевороты.";
+
+        sleepElement.textContent =
+            "Постепенно формируется более понятный ритм дня, но количество и продолжительность дневных снов индивидуальны.";
+
+        tipElement.textContent =
+            "Предлагайте игрушки на разном расстоянии, игры на полу и следите за признаками готовности к прикорму ближе к подходящему возрасту.";
+
+        return;
+    }
+
+
+    /* 6–9 МЕСЯЦЕВ */
+
+    if (months < 9) {
+
+        developmentElement.textContent =
+            "Малыш становится всё мобильнее, активно исследует предметы и может осваивать сидение, перемещения и новые способы общения.";
+
+        sleepElement.textContent =
+            "Режим обычно становится устойчивее, но новые навыки и впечатления иногда отражаются на засыпании и пробуждениях.";
+
+        tipElement.textContent =
+            "Особенно важны безопасное пространство для движения, разнообразные текстуры пищи и защита дома от новых рисков.";
+
+        return;
+    }
+
+
+    /* 9–12 МЕСЯЦЕВ */
+
+    if (months < 12) {
+
+        developmentElement.textContent =
+            "Малыш всё активнее общается жестами и звуками, исследует пространство и осваивает более сложные движения.";
+
+        sleepElement.textContent =
+            "Режим может постепенно перестраиваться, а потребность в дневном сне со временем меняется.";
+
+        tipElement.textContent =
+            "Разговаривайте, читайте вместе, поддерживайте самостоятельное движение и продолжайте адаптировать дом под растущую активность.";
+
+        return;
+    }
+
+
+    /* 12+ МЕСЯЦЕВ */
+
+    ageElement.textContent = "12+ мес.";
+
+    developmentElement.textContent =
+        "Первый год уже позади — навыки малыша продолжают развиваться в индивидуальном темпе.";
+
+    sleepElement.textContent =
+        "Потребность во сне продолжает постепенно меняться вместе с режимом дня.";
+
+    tipElement.textContent =
+        "Сохраняйте безопасную среду, много разговаривайте и поддерживайте самостоятельное исследование мира.";
+}
 renderHomeBaby();
 renderTodayContent();
+renderWeekContent();
 /* ---------- СОХРАНЕНИЕ ---------- */
 
 function saveData() {
