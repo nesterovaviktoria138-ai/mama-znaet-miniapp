@@ -599,6 +599,137 @@ input:focus-visible {
         transform: translateY(0) scale(1);
     }
 }
+/* =========================================
+   МАМА ЗНАЕТ 2.0 — ГЛАВНАЯ
+   ========================================= */
+
+.hero-new {
+    padding-bottom: 22px;
+}
+
+.hero-new h1 {
+    max-width: 430px;
+}
+
+/* КАРТОЧКА МАЛЫША */
+
+.baby-home-card {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 20px;
+    padding: 14px;
+
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 24px rgba(116, 70, 76, 0.08);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.baby-home-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--pink-light);
+    border-radius: 16px;
+
+    font-size: 25px;
+}
+
+.baby-home-info {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.baby-home-label {
+    margin-bottom: 2px;
+
+    color: var(--text-light);
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.baby-home-info strong {
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+#homeBabyHint {
+    margin-top: 3px;
+
+    color: var(--text-light);
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.baby-home-button {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--pink-light);
+    color: var(--pink-dark);
+
+    font-size: 25px;
+    line-height: 1;
+}
+
+.baby-home-button:active {
+    transform: scale(0.94);
+}
+
+
+/* МАЛЕНЬКИЕ ЭКРАНЫ */
+
+@media (max-width: 420px) {
+
+    .baby-home-card {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .baby-home-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    .baby-home-info strong {
+        font-size: 15px;
+    }
+
+    #homeBabyHint {
+        font-size: 10px;
+    }
+}
 /* ================================
    DARK MODE
    ================================ */
