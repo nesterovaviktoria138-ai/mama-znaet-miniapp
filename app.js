@@ -5295,7 +5295,7 @@ function openArticle(sectionName, index) {
     if (
         sectionName === "sleep" &&
         index >= 0 &&
-        index <= 16 &&
+        index <= 20 &&
         sleepArticles[index]
     ) {
         const article = sleepArticles[index];
@@ -6126,6 +6126,136 @@ function openArticle(sectionName, index) {
                 </div>
             `;
         }
+
+              // ===== БЕЛЫЙ ШУМ =====
+        if (index === 17) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>🌧️ Что такое белый шум</strong>
+                    <p>${article.what}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>😴 Чем может помочь</strong>
+                    <p>${article.help}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🔊 Громкость</strong>
+                    <p>${article.volume}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>📱 Где разместить источник звука</strong>
+                    <p>${article.distance}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🌙 Как использовать</strong>
+                    <p>${article.use}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Важно помнить</strong>
+                    <p>${article.important}</p>
+                </div>
+            `;
+        }
+
+        // ===== ПУСТЫШКА И СОН =====
+        if (index === 18) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>👶 Пустышка перед сном</strong>
+                    <p>${article.about}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🌙 Пустышка во время сна</strong>
+                    <p>${article.sleep}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🛏️ Безопасность</strong>
+                    <p>${article.safety}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>😴 Если пустышка выпала</strong>
+                    <p>${article.falls}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Полезно знать</strong>
+                    <p>${article.tips}</p>
+                </div>
+            `;
+        }
+
+        // ===== СОН В КОЛЯСКЕ И АВТОКРЕСЛЕ =====
+        if (index === 19) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>🚼 Сон в коляске</strong>
+                    <p>${article.stroller}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🚗 Сон в автокресле</strong>
+                    <p>${article.car}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🛏️ Основное место для сна</strong>
+                    <p>${article.mainSleep}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>⚠️ На что обратить внимание</strong>
+                    <p>${article.safety}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Практические советы</strong>
+                    <p>${article.tips}</p>
+                </div>
+            `;
+        }
+
+        // ===== КОГДА ПРОБЛЕМЫ СО СНОМ НУЖНО ОБСУДИТЬ С ВРАЧОМ =====
+        if (index === 20) {
+            articleContent = `
+                <div class="info-box">
+                    <strong>🩺 Когда стоит обратиться к педиатру</strong>
+                    <p>${article.doctor}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🫁 Дыхание во сне</strong>
+                    <p>${article.breathing}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>😴 Необычная сонливость</strong>
+                    <p>${article.sleepiness}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🍼 Сон и кормление</strong>
+                    <p>${article.feeding}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🚑 Когда нужна срочная помощь</strong>
+                    <p>${article.emergency}</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🤍 Главное</strong>
+                    <p>${article.remember}</p>
+                </div>
+            `;
+        } 
         modalBody.innerHTML = `
             <span class="age-badge">
                 🌙 СОН МАЛЫША
