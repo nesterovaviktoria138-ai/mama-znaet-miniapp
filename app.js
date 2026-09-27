@@ -4123,7 +4123,7 @@ function openArticle(sectionName, index) {
 
                 <p style="margin-top:10px;">
                     <input
-                        id="bedTime"
+                        id="nightSleep"
                         type="time"
                         style="
                             width:100%;
