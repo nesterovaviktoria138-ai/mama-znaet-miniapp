@@ -751,11 +751,19 @@ function renderNextContent() {
     /* ВРЕМЕННЫЕ ТЕКСТЫ.
        ДАЛЬШЕ ЗАМЕНИМ ИХ НА КАЛЕНДАРЬ РФ */
 
+    const nextVaccine = getNextNationalVaccine(baby.birth);
+
+if (nextVaccine) {
     vaccineElement.textContent =
-        "Календарь прививок";
+        `${nextVaccine.title} · ${nextVaccine.dose}`;
 
     vaccineTextElement.textContent =
-        "Подбираем ближайшую вакцинацию по возрасту малыша";
+        `По Национальному календарю РФ — ${nextVaccine.ageLabel}`;
+} else {
+    vaccineElement.textContent = "Календарь прививок";
+    vaccineTextElement.textContent =
+        "Посмотрите полный календарь вакцинации и дополнительные прививки.";
+}
 
 
     doctorElement.textContent =
