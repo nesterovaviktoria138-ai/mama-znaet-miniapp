@@ -5082,6 +5082,11 @@ wakeTable: `
    ========================================= */
 
 function openSection(sectionName) {    
+       // ===== РАЗВИТИЕ V2.0 =====
+    if (sectionName === "development" && typeof openDevelopmentV2 === "function") {
+        openDevelopmentV2();
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
