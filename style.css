@@ -1927,6 +1927,1134 @@ input:focus-visible {
 .dev-v2-media-card {
     animation: devV2FadeUp 0.28s ease both;
 }
+/* =========================================================
+   МАМА ЗНАЕТ V2.0 — СОН МАЛЫША
+   ЧАСТЬ 1
+   ========================================================= */
+
+.sleep-v2-page {
+    padding: 18px 16px 110px;
+    animation: sleepV2FadeUp .35s ease;
+}
+
+.sleep-v2-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.sleep-v2-top h1 {
+    margin: 8px 0 6px;
+    font-size: 30px;
+    line-height: 1.05;
+}
+
+.sleep-v2-top p {
+    margin: 0;
+    opacity: .7;
+    line-height: 1.45;
+}
+
+.sleep-v2-back {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 5px 18px rgba(0,0,0,.07);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/* ===== ТЕКУЩИЙ ВОЗРАСТ ===== */
+
+.sleep-v2-current {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    margin: 16px 0;
+    border-radius: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            #fff7fb,
+            #f4f1ff
+        );
+    box-shadow: 0 8px 28px rgba(83,63,110,.08);
+}
+
+.sleep-v2-current-label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    opacity: .55;
+}
+
+.sleep-v2-current-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.sleep-v2-current-main > span {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.8);
+    font-size: 28px;
+}
+
+.sleep-v2-current-main strong {
+    display: block;
+    font-size: 20px;
+}
+
+.sleep-v2-current-main p {
+    margin: 3px 0 0;
+    opacity: .68;
+}
+
+.sleep-v2-current > button {
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 16px;
+    background: rgba(255,255,255,.86);
+    font-weight: 750;
+    cursor: pointer;
+}
+
+
+/* ===== АНАЛИЗАТОР — HERO ===== */
+
+.sleep-v2-analyzer-hero {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    padding: 18px;
+    margin: 18px 0 28px;
+    border: 0;
+    border-radius: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            #29243f,
+            #5b4d7c
+        );
+    color: white;
+    box-shadow: 0 12px 30px rgba(48,39,75,.18);
+    cursor: pointer;
+}
+
+.sleep-v2-analyzer-hero-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.13);
+    font-size: 26px;
+}
+
+.sleep-v2-analyzer-hero span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    opacity: .65;
+}
+
+.sleep-v2-analyzer-hero strong {
+    display: block;
+    font-size: 19px;
+}
+
+.sleep-v2-analyzer-hero p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: .78;
+}
+
+.sleep-v2-analyzer-hero > b {
+    font-size: 22px;
+}
+
+
+/* ===== ЗАГОЛОВКИ ===== */
+
+.sleep-v2-heading {
+    margin: 27px 2px 14px;
+    font-size: 21px;
+}
+
+
+/* ===== БЫСТРЫЕ ПРОБЛЕМЫ ===== */
+
+.sleep-v2-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.sleep-v2-quick-grid button {
+    min-height: 132px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    text-align: left;
+    border: 1px solid rgba(60,45,80,.06);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(54,42,72,.055);
+    cursor: pointer;
+}
+
+.sleep-v2-quick-grid button > span {
+    font-size: 25px;
+    margin-bottom: 11px;
+}
+
+.sleep-v2-quick-grid strong {
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.sleep-v2-quick-grid small {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 1.35;
+    opacity: .58;
+}
+
+
+/* ===== ВОЗРАСТ ===== */
+
+.sleep-v2-age-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.sleep-v2-age-card {
+    position: relative;
+    min-height: 156px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    text-align: left;
+    border: 1px solid rgba(60,45,80,.06);
+    border-radius: 21px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(54,42,72,.05);
+    cursor: pointer;
+}
+
+.sleep-v2-age-card.active {
+    background:
+        linear-gradient(
+            145deg,
+            #fff7fb,
+            #f3efff
+        );
+    border-color: rgba(111,83,148,.17);
+}
+
+.sleep-v2-now {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 7px;
+    border-radius: 20px;
+    background: rgba(96,72,128,.09);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .07em;
+}
+
+.sleep-v2-age-icon {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.sleep-v2-age-card strong {
+    font-size: 15px;
+}
+
+.sleep-v2-age-card small {
+    margin: 5px 0 12px;
+    line-height: 1.3;
+    opacity: .6;
+}
+
+.sleep-v2-age-card b {
+    margin-top: auto;
+    font-size: 11px;
+}
+
+
+/* ===== БЕЗОПАСНЫЙ СОН ===== */
+
+.sleep-v2-safety-card {
+    display: flex;
+    gap: 14px;
+    padding: 19px;
+    margin-top: 25px;
+    border-radius: 23px;
+    background: #f5f8ff;
+}
+
+.sleep-v2-safety-icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 16px;
+    background: #fff;
+    font-size: 24px;
+}
+
+.sleep-v2-safety-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .08em;
+    opacity: .55;
+}
+
+.sleep-v2-safety-card h3 {
+    margin: 5px 0 6px;
+}
+
+.sleep-v2-safety-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    opacity: .72;
+}
+
+.sleep-v2-safety-card button {
+    margin-top: 12px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.sleep-v2-note {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    margin-top: 14px;
+    border-radius: 18px;
+    background: rgba(255,248,231,.75);
+}
+
+.sleep-v2-note p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+
+/* ===== СТРАНИЦА ВОЗРАСТА ===== */
+
+.sleep-v2-article h2,
+.sleep-v2-analyzer h2,
+.sleep-v2-result h2,
+.sleep-v2-safety-page h2 {
+    margin: 10px 0 7px;
+    font-size: 27px;
+    line-height: 1.1;
+}
+
+.sleep-v2-subtitle {
+    margin: 0 0 17px;
+    opacity: .62;
+}
+
+.sleep-v2-intro {
+    padding: 17px;
+    margin: 14px 0;
+    border-radius: 19px;
+    background: #faf8fc;
+    line-height: 1.55;
+}
+
+.sleep-v2-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.sleep-v2-info-grid > div {
+    padding: 15px;
+    border-radius: 18px;
+    background: #fff8fb;
+}
+
+.sleep-v2-info-grid span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 23px;
+}
+
+.sleep-v2-info-grid strong {
+    display: block;
+    font-size: 13px;
+}
+
+.sleep-v2-info-grid p {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    opacity: .7;
+}
+
+.sleep-v2-article-card {
+    padding: 17px;
+    margin: 12px 0;
+    border: 1px solid rgba(60,45,80,.06);
+    border-radius: 20px;
+}
+
+.sleep-v2-article-card h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.sleep-v2-list {
+    display: grid;
+    gap: 9px;
+}
+
+.sleep-v2-list-item {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+}
+
+.sleep-v2-list-item > span {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    background: #f3edf9;
+    font-size: 11px;
+}
+
+.sleep-v2-list-item p {
+    margin: 1px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.sleep-v2-today {
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 20px;
+    background: #fff8e9;
+}
+
+.sleep-v2-today span {
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .08em;
+    opacity: .55;
+}
+
+.sleep-v2-today p {
+    margin: 7px 0 0;
+    line-height: 1.5;
+}
+
+
+/* ===== ВИЗУАЛЬНЫЙ ГИД ===== */
+
+.sleep-v2-video-card {
+    display: flex;
+    gap: 13px;
+    padding: 17px;
+    margin: 15px 0;
+    border-radius: 20px;
+    background: #f7f4fb;
+}
+
+.sleep-v2-video-card > div {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 18px;
+}
+
+.sleep-v2-video-card section span {
+    display: block;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .08em;
+    opacity: .55;
+}
+
+.sleep-v2-video-card section strong {
+    display: block;
+    margin-top: 3px;
+}
+
+.sleep-v2-video-card section p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: .67;
+}
+
+.sleep-v2-close-button {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+/* =========================================================
+   МАМА ЗНАЕТ V2.0 — АНАЛИЗАТОР СНА
+   ЧАСТЬ 2
+   ========================================================= */
+
+.sleep-v2-analyzer,
+.sleep-v2-result,
+.sleep-v2-safety-page {
+    padding-bottom: 20px;
+}
+
+.sleep-v2-analyzer-intro {
+    margin: 0 0 16px;
+    line-height: 1.5;
+    opacity: .72;
+}
+
+.sleep-v2-analyzer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    margin-bottom: 18px;
+    border-radius: 18px;
+    background: #fff8e9;
+}
+
+.sleep-v2-analyzer-note > span {
+    font-size: 20px;
+}
+
+.sleep-v2-analyzer-note p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+
+/* ===== КАРТОЧКИ ФОРМЫ ===== */
+
+.sleep-v2-form-card {
+    padding: 17px;
+    margin: 12px 0;
+    border: 1px solid rgba(60,45,80,.07);
+    border-radius: 21px;
+    background: #fff;
+}
+
+.sleep-v2-step {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .09em;
+    opacity: .45;
+}
+
+.sleep-v2-form-card h3 {
+    margin: 0 0 14px;
+    font-size: 17px;
+}
+
+.sleep-v2-field {
+    display: block;
+    margin-top: 12px;
+}
+
+.sleep-v2-field > span,
+.sleep-v2-nap-row label > span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 750;
+    opacity: .65;
+}
+
+.sleep-v2-field input,
+.sleep-v2-field select,
+.sleep-v2-nap-row input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid rgba(60,45,80,.12);
+    border-radius: 14px;
+    background: #faf9fb;
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+}
+
+.sleep-v2-field input:focus,
+.sleep-v2-field select:focus,
+.sleep-v2-nap-row input:focus {
+    border-color: rgba(100,75,135,.35);
+    background: #fff;
+}
+
+.sleep-v2-field-help {
+    margin: -4px 0 13px;
+    font-size: 11px;
+    line-height: 1.45;
+    opacity: .58;
+}
+
+
+/* ===== ДНЕВНЫЕ СНЫ ===== */
+
+.sleep-v2-nap-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 18px 1fr;
+    align-items: end;
+    gap: 7px;
+    margin: 10px 0;
+}
+
+.sleep-v2-nap-number {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 42px;
+    border-radius: 10px;
+    background: #f5f1f8;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.sleep-v2-nap-arrow {
+    padding-bottom: 12px;
+    text-align: center;
+    opacity: .4;
+}
+
+
+/* ===== ВЫБОР ПРОБЛЕМЫ ===== */
+
+.sleep-v2-problems {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.sleep-v2-problem {
+    min-height: 96px;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid rgba(60,45,80,.08);
+    border-radius: 16px;
+    background: #faf9fb;
+    cursor: pointer;
+}
+
+.sleep-v2-problem > span {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 21px;
+}
+
+.sleep-v2-problem strong {
+    display: block;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.sleep-v2-problem.active {
+    border-color: rgba(105,78,140,.35);
+    background: #f4eef9;
+    box-shadow: inset 0 0 0 1px rgba(105,78,140,.08);
+}
+
+
+/* ===== ВАЛИДАЦИЯ ===== */
+
+.sleep-v2-validation:not(:empty) {
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 17px;
+    background: #fff0ef;
+}
+
+.sleep-v2-validation strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sleep-v2-validation p {
+    margin: 3px 0;
+    font-size: 12px;
+}
+
+
+/* ===== КНОПКИ ===== */
+
+.sleep-v2-analyze-button {
+    width: 100%;
+    padding: 15px 17px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 17px;
+    background:
+        linear-gradient(
+            135deg,
+            #38304d,
+            #65547f
+        );
+    color: #fff;
+    font-weight: 850;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sleep-v2-clear-button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 15px;
+    background: #f6f4f7;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.sleep-v2-privacy {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.4;
+    opacity: .5;
+}
+
+
+/* =========================================================
+   РЕЗУЛЬТАТ АНАЛИЗА
+   ========================================================= */
+
+.sleep-v2-result-age {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 19px;
+    background: #f7f4fb;
+}
+
+.sleep-v2-result-age > span {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 15px;
+    background: #fff;
+    font-size: 24px;
+}
+
+.sleep-v2-result-age small {
+    display: block;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .08em;
+    opacity: .45;
+}
+
+.sleep-v2-result-age strong {
+    display: block;
+    margin-top: 2px;
+}
+
+.sleep-v2-result-age p {
+    margin: 3px 0 0;
+    font-size: 11px;
+    opacity: .62;
+}
+
+
+/* ===== ЦИФРЫ ===== */
+
+.sleep-v2-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 14px 0;
+}
+
+.sleep-v2-summary-grid > div {
+    min-height: 91px;
+    padding: 13px;
+    border-radius: 17px;
+    background: #faf9fb;
+}
+
+.sleep-v2-summary-grid span {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 19px;
+}
+
+.sleep-v2-summary-grid small {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .07em;
+    opacity: .45;
+}
+
+.sleep-v2-summary-grid strong {
+    font-size: 14px;
+}
+
+
+/* ===== КАРТОЧКИ РАЗБОРА ===== */
+
+.sleep-v2-result-card {
+    padding: 17px;
+    margin: 11px 0;
+    border: 1px solid rgba(60,45,80,.06);
+    border-radius: 20px;
+}
+
+.sleep-v2-result-label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    opacity: .5;
+}
+
+.sleep-v2-result-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: 9px 0;
+}
+
+.sleep-v2-result-line > span {
+    min-width: 21px;
+}
+
+.sleep-v2-result-line p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ===== ПЛАН ===== */
+
+.sleep-v2-actions {
+    padding: 18px;
+    margin: 14px 0;
+    border-radius: 21px;
+    background: #f8f5fb;
+}
+
+.sleep-v2-actions > span {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    opacity: .5;
+}
+
+.sleep-v2-actions h3 {
+    margin: 5px 0 13px;
+}
+
+.sleep-v2-action {
+    display: grid;
+    grid-template-columns: 29px 1fr;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.sleep-v2-action b {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 11px;
+}
+
+.sleep-v2-action p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+
+/* ===== БЕЗОПАСНОСТЬ В РЕЗУЛЬТАТЕ ===== */
+
+.sleep-v2-safe-sleep {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    margin: 13px 0;
+    border-radius: 20px;
+    background: #eef7f6;
+}
+
+.sleep-v2-safe-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 20px;
+}
+
+.sleep-v2-safe-sleep strong {
+    display: block;
+    font-size: 13px;
+}
+
+.sleep-v2-safe-sleep p {
+    margin: 5px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .7;
+}
+
+.sleep-v2-medical-note {
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 19px;
+    background: #fff5f3;
+}
+
+.sleep-v2-medical-note strong {
+    font-size: 13px;
+}
+
+.sleep-v2-medical-note p {
+    margin: 6px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.sleep-v2-disclaimer {
+    margin: 13px 4px 0;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.4;
+    opacity: .45;
+}
+
+
+/* =========================================================
+   ПАМЯТКА БЕЗОПАСНОГО СНА
+   ========================================================= */
+
+.sleep-v2-safety-lead {
+    margin: 0 0 15px;
+    line-height: 1.5;
+    opacity: .7;
+}
+
+.sleep-v2-safe-visual {
+    padding: 21px;
+    margin: 14px 0 18px;
+    text-align: center;
+    border-radius: 23px;
+    background: #eef7f6;
+}
+
+.sleep-v2-safe-bed {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 12px;
+    border-radius: 24px;
+    background: #fff;
+    font-size: 36px;
+}
+
+.sleep-v2-safe-visual strong {
+    display: block;
+}
+
+.sleep-v2-safe-visual p {
+    margin: 5px auto 0;
+    max-width: 260px;
+    font-size: 12px;
+    line-height: 1.45;
+    opacity: .67;
+}
+
+.sleep-v2-safe-rule {
+    display: flex;
+    gap: 11px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(60,45,80,.07);
+}
+
+.sleep-v2-safe-rule > span {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    min-width: 27px;
+    border-radius: 50%;
+    background: #eef7f6;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.sleep-v2-safe-rule strong {
+    font-size: 13px;
+}
+
+.sleep-v2-safe-rule p {
+    margin: 4px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    opacity: .68;
+}
+
+.sleep-v2-safe-warning {
+    padding: 15px;
+    margin: 16px 0;
+    border-radius: 18px;
+    background: #fff3ef;
+}
+
+.sleep-v2-safe-warning strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sleep-v2-safe-warning p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 390px) {
+
+    .sleep-v2-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .sleep-v2-top h1 {
+        font-size: 27px;
+    }
+
+    .sleep-v2-analyzer-hero {
+        grid-template-columns: 48px 1fr auto;
+        padding: 15px;
+    }
+
+    .sleep-v2-analyzer-hero-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .sleep-v2-quick-grid,
+    .sleep-v2-age-grid {
+        gap: 8px;
+    }
+
+    .sleep-v2-quick-grid button {
+        min-height: 125px;
+        padding: 13px;
+    }
+
+    .sleep-v2-age-card {
+        min-height: 150px;
+        padding: 14px;
+    }
+
+    .sleep-v2-nap-row {
+        grid-template-columns: 25px 1fr 12px 1fr;
+        gap: 5px;
+    }
+
+    .sleep-v2-nap-row input {
+        padding-left: 7px;
+        padding-right: 7px;
+        font-size: 13px;
+    }
+
+    .sleep-v2-problems {
+        gap: 6px;
+    }
+
+    .sleep-v2-problem {
+        padding: 10px;
+    }
+}
+
+
+/* ===== АНИМАЦИЯ ===== */
+
+@keyframes sleepV2FadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* ================================
    DARK MODE
    ================================ */
