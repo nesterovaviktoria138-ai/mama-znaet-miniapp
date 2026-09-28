@@ -791,6 +791,12 @@ function renderNextContent() {
        ДАЛЬШЕ ЗАМЕНИМ ИХ НА КАЛЕНДАРЬ РФ */
 
     const nextVaccine = getNextNationalVaccine(baby.birth);
+   alert(
+    nextVaccine
+        ? "Найдена: " + nextVaccine.title +
+          "\nВозраст: " + nextVaccine.ageLabel
+        : "Следующая прививка не найдена"
+);
 
 if (nextVaccine) {
     vaccineElement.textContent =
