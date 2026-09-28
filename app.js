@@ -5087,6 +5087,11 @@ function openSection(sectionName) {
         openDevelopmentV2();
         return;
     }
+       // ===== СОН МАЛЫША V2.0 =====
+    if (sectionName === "sleep" && typeof openSleepV2 === "function") {
+        openSleepV2();
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
