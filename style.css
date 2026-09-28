@@ -1267,6 +1267,666 @@ input:focus-visible {
         font-size: 10px;
     }
 }
+/* =========================================================
+   МАМА ЗНАЕТ V2.0
+   РАЗВИТИЕ МАЛЫША 0–12 МЕСЯЦЕВ
+   ========================================================= */
+
+.dev-v2-page {
+    padding: 8px 0 110px;
+}
+
+.dev-v2-top {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.dev-v2-top h1 {
+    margin: 8px 0 5px;
+    font-size: 29px;
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+}
+
+.dev-v2-top p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.dev-v2-back {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(74, 54, 54, 0.08);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* ===== ТЕКУЩИЙ ВОЗРАСТ ===== */
+
+.dev-v2-current-card {
+    position: relative;
+    overflow: hidden;
+    margin: 18px 0 14px;
+    padding: 20px;
+    border-radius: 25px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 232, 230, 0.96),
+            rgba(255, 244, 235, 0.98)
+        );
+    border: 1px solid rgba(232, 164, 164, 0.24);
+    box-shadow: 0 10px 30px rgba(110, 72, 72, 0.08);
+}
+
+.dev-v2-current-card::after {
+    content: "🌱";
+    position: absolute;
+    right: -8px;
+    top: -14px;
+    font-size: 92px;
+    opacity: 0.08;
+    transform: rotate(12deg);
+}
+
+.dev-v2-current-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #b27070;
+}
+
+.dev-v2-current-card strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-size: 21px;
+    line-height: 1.25;
+}
+
+.dev-v2-current-card p {
+    position: relative;
+    z-index: 1;
+    margin: 8px 0 15px;
+    max-width: 420px;
+    color: #755f5f;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.dev-v2-current-card button {
+    position: relative;
+    z-index: 2;
+    border: 0;
+    border-radius: 14px;
+    padding: 11px 15px;
+    background: #fff;
+    color: #5e4545;
+    font-weight: 750;
+    font-size: 13px;
+    box-shadow: 0 4px 15px rgba(88, 55, 55, 0.08);
+    cursor: pointer;
+}
+
+
+/* ===== ВАЖНОЕ ПОЯСНЕНИЕ ===== */
+
+.dev-v2-note {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    margin: 13px 0 22px;
+    padding: 14px 15px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(120, 94, 94, 0.08);
+}
+
+.dev-v2-note > span {
+    font-size: 20px;
+}
+
+.dev-v2-note p {
+    margin: 0;
+    color: #786969;
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+
+.dev-v2-heading {
+    margin: 6px 2px 13px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* ===== СЕТКА МЕСЯЦЕВ ===== */
+
+.dev-v2-month-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.dev-v2-month-card {
+    position: relative;
+    min-height: 166px;
+    padding: 16px 13px 14px;
+    border: 1px solid rgba(109, 83, 83, 0.08);
+    border-radius: 21px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 7px 22px rgba(84, 58, 58, 0.055);
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dev-v2-month-card.active {
+    border: 1.5px solid rgba(218, 142, 142, 0.65);
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #fff3f1
+        );
+    box-shadow: 0 9px 25px rgba(181, 112, 112, 0.13);
+}
+
+.dev-v2-month-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    margin-bottom: 11px;
+    border-radius: 14px;
+    background: #fff5f2;
+    font-size: 22px;
+}
+
+.dev-v2-month-card strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    line-height: 1.25;
+}
+
+.dev-v2-month-card > span:not(.dev-v2-month-icon):not(.dev-v2-you-are-here) {
+    display: block;
+    min-height: 36px;
+    color: #847272;
+    font-size: 11.5px;
+    line-height: 1.4;
+}
+
+.dev-v2-month-card b {
+    display: block;
+    margin-top: 9px;
+    color: #ba7777;
+    font-size: 11px;
+}
+
+.dev-v2-you-are-here {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 7px;
+    border-radius: 8px;
+    background: #f2cccc;
+    color: #694949;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+}
+
+
+/* ===== ОБЩЕЕ ПРЕДУПРЕЖДЕНИЕ ===== */
+
+.dev-v2-safety {
+    margin-top: 18px;
+    padding: 17px;
+    border-radius: 20px;
+    background: #fff6f1;
+    border: 1px solid rgba(215, 157, 123, 0.2);
+}
+
+.dev-v2-safety strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.dev-v2-safety p {
+    margin: 0;
+    color: #775f56;
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   СТАТЬЯ ВОЗРАСТА
+   ========================================================= */
+
+.dev-v2-article {
+    padding-bottom: 10px;
+}
+
+.dev-v2-article h2 {
+    margin: 10px 0 4px;
+    font-size: 25px;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+}
+
+.dev-v2-subtitle {
+    margin: 0 0 16px;
+    color: #9a7777;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.dev-v2-intro {
+    margin: 14px 0;
+    padding: 16px;
+    border-radius: 19px;
+    background: #fff8f6;
+    color: #675656;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* ===== ВИЗУАЛЬНАЯ КАРТОЧКА ===== */
+
+.dev-v2-visual {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 15px 0 18px;
+    padding: 17px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            #f8eeee,
+            #fff6ed
+        );
+}
+
+.dev-v2-visual-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 67px;
+    width: 67px;
+    height: 67px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 34px;
+    box-shadow: 0 5px 17px rgba(89, 59, 59, 0.06);
+}
+
+.dev-v2-visual > div:last-child > span {
+    display: block;
+    margin-bottom: 3px;
+    color: #b27a7a;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 0.8px;
+}
+
+.dev-v2-visual strong {
+    display: block;
+    font-size: 17px;
+}
+
+.dev-v2-visual p {
+    margin: 5px 0 0;
+    color: #7b6868;
+    font-size: 11.5px;
+    line-height: 1.45;
+}
+
+
+/* ===== ИНФОРМАЦИОННЫЕ БЛОКИ ===== */
+
+.dev-v2-block {
+    margin: 13px 0;
+    padding: 17px;
+    border-radius: 21px;
+    background: #fff;
+    border: 1px solid rgba(98, 75, 75, 0.07);
+    box-shadow: 0 6px 20px rgba(70, 49, 49, 0.045);
+}
+
+.dev-v2-block h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.dev-v2-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.dev-v2-list-item {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    color: #675959;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.dev-v2-list-icon {
+    flex: 0 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    background: #fff1ef;
+    color: #bb7777;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* ===== ВИДЕО ===== */
+
+.dev-v2-media-card {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    margin: 14px 0;
+    padding: 13px;
+    border-radius: 21px;
+    background: #f5f0eb;
+}
+
+.dev-v2-media-preview {
+    display: flex;
+    flex: 0 0 85px;
+    width: 85px;
+    height: 78px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    background:
+        linear-gradient(
+            145deg,
+            #e9d6cf,
+            #f8e9e3
+        );
+}
+
+.dev-v2-media-preview span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding-left: 2px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(75, 52, 52, 0.09);
+    font-size: 14px;
+}
+
+.dev-v2-media-label {
+    display: block;
+    margin-bottom: 3px;
+    color: #b17b70;
+    font-size: 8.5px;
+    font-weight: 850;
+    letter-spacing: 0.7px;
+}
+
+.dev-v2-media-card strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.dev-v2-media-card p {
+    margin: 5px 0 0;
+    color: #796d69;
+    font-size: 10.5px;
+    line-height: 1.4;
+}
+
+
+/* ===== ПОПРОБУЙТЕ СЕГОДНЯ ===== */
+
+.dev-v2-today {
+    position: relative;
+    overflow: hidden;
+    margin: 15px 0;
+    padding: 18px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            #f8dedd,
+            #fdebe0
+        );
+}
+
+.dev-v2-today::after {
+    content: "♡";
+    position: absolute;
+    right: -5px;
+    bottom: -28px;
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 100px;
+}
+
+.dev-v2-today > span {
+    position: relative;
+    z-index: 1;
+    color: #a96868;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.dev-v2-today h3 {
+    position: relative;
+    z-index: 1;
+    margin: 5px 0 7px;
+    font-size: 17px;
+}
+
+.dev-v2-today p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #6f5757;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* ===== ЧЕК-ЛИСТ ===== */
+
+.dev-v2-small {
+    margin: -4px 0 12px;
+    color: #9b8a8a;
+    font-size: 10.5px;
+}
+
+.dev-v2-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dev-v2-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px;
+    border-radius: 14px;
+    background: #fff8f6;
+    color: #625555;
+    font-size: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.dev-v2-check input {
+    flex: 0 0 auto;
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    accent-color: #d89494;
+}
+
+.dev-v2-check:has(input:checked) {
+    opacity: 0.72;
+    background: #f7f3ef;
+}
+
+.dev-v2-check:has(input:checked) span {
+    text-decoration: line-through;
+}
+
+
+/* ===== КРАСНЫЕ ФЛАГИ ===== */
+
+.dev-v2-warning {
+    margin: 15px 0;
+    padding: 16px;
+    border-radius: 19px;
+    background: #fff0ed;
+    border: 1px solid rgba(196, 102, 90, 0.17);
+}
+
+.dev-v2-warning strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #9e554f;
+    font-size: 13px;
+}
+
+.dev-v2-warning p {
+    margin: 0;
+    color: #745b58;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* ===== ДИСКЛЕЙМЕР ===== */
+
+.dev-v2-info {
+    margin: 15px 0;
+    padding: 14px 15px;
+    border-radius: 17px;
+    background: #f5f4f1;
+}
+
+.dev-v2-info strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+}
+
+.dev-v2-info p {
+    margin: 0;
+    color: #817a74;
+    font-size: 10.5px;
+    line-height: 1.5;
+}
+
+
+/* ===== КНОПКА ===== */
+
+.dev-v2-close-button {
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px 16px;
+    border: 0;
+    border-radius: 17px;
+    background:
+        linear-gradient(
+            135deg,
+            #e7aaaa,
+            #d99191
+        );
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 7px 20px rgba(178, 111, 111, 0.18);
+    cursor: pointer;
+}
+
+
+/* ===== МАЛЕНЬКИЕ ЭКРАНЫ ===== */
+
+@media (max-width: 390px) {
+
+    .dev-v2-month-grid {
+        gap: 9px;
+    }
+
+    .dev-v2-month-card {
+        min-height: 158px;
+        padding: 14px 11px;
+    }
+
+    .dev-v2-month-card strong {
+        font-size: 14px;
+    }
+
+    .dev-v2-media-preview {
+        flex-basis: 72px;
+        width: 72px;
+    }
+
+}
+
+
+/* ===== АНИМАЦИЯ ===== */
+
+@keyframes devV2FadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.dev-v2-current-card,
+.dev-v2-note,
+.dev-v2-month-card,
+.dev-v2-block,
+.dev-v2-today,
+.dev-v2-media-card {
+    animation: devV2FadeUp 0.28s ease both;
+}
 /* ================================
    DARK MODE
    ================================ */
