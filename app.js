@@ -5092,6 +5092,11 @@ function openSection(sectionName) {
         openSleepV2();
         return;
     }
+       // ===== КОРМЛЕНИЕ МАЛЫША V2.0 =====
+    if (sectionName === "feeding" && typeof openFeedingV2 === "function") {
+        openFeedingV2();
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
