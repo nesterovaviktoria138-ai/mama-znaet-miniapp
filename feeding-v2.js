@@ -2705,9 +2705,9 @@ function openFeedingV2() {
             <!-- АНАЛИЗАТОР -->
 
             <button
-                class="feeding-v2-analyzer-hero"
-                onclick="openFeedingV2Analyzer()"
-            >
+    class="feeding-v2-analyzer-hero"
+    data-feeding-action="analyzer"
+>
 
                 <div class="feeding-v2-analyzer-hero-icon">
                     ✨
@@ -2761,10 +2761,9 @@ function openFeedingV2() {
             <div class="feeding-v2-type-buttons">
 
                 <button
-                    onclick="
-                        openFeedingV2Type('breast')
-                    "
-                >
+    data-feeding-action="type"
+    data-feeding-value="breast"
+>
                     <span>🤱</span>
                     <strong>ГВ</strong>
                     <small>Грудное</small>
@@ -2772,10 +2771,9 @@ function openFeedingV2() {
 
 
                 <button
-                    onclick="
-                        openFeedingV2Type('formula')
-                    "
-                >
+    data-feeding-action="type"
+    data-feeding-value="formula"
+>
                     <span>🍼</span>
                     <strong>ИВ</strong>
                     <small>Смесь</small>
@@ -2783,10 +2781,9 @@ function openFeedingV2() {
 
 
                 <button
-                    onclick="
-                        openFeedingV2Type('mixed')
-                    "
-                >
+    data-feeding-action="type"
+    data-feeding-value="mixed"
+>
                     <span>🤱🍼</span>
                     <strong>СВ</strong>
                     <small>Смешанное</small>
@@ -3286,3 +3283,40 @@ window.openFeedingV2Common =
 console.log(
     "МАМА ЗНАЕТ V2.0: модуль кормления загружен"
 );
+/* =========================================================
+   FIX: КЛИКАБЕЛЬНЫЕ КНОПКИ КОРМЛЕНИЯ
+   ========================================================= */
+
+document.addEventListener("click", function(event) {
+
+    const button = event.target.closest(
+        "[data-feeding-action]"
+    );
+
+    if (!button) return;
+
+    const action =
+        button.dataset.feedingAction;
+
+    const value =
+        button.dataset.feedingValue || "";
+
+
+    if (action === "analyzer") {
+        openFeedingV2Analyzer();
+        return;
+    }
+
+
+    if (action === "type") {
+        openFeedingV2Type(value);
+        return;
+    }
+
+
+    if (action === "common") {
+        openFeedingV2Common(value);
+        return;
+    }
+
+});
