@@ -640,6 +640,45 @@ const vaccineCalendar = [
         note: "Минимальный возраст зависит от конкретной вакцины."
     }
 ];
+function getNextNationalVaccine(birthDate) {
+    const birth = new Date(birthDate + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const vaccines = vaccineCalendar
+        .filter(vaccine => vaccine.type === "national")
+        .map(vaccine => {
+            const date = new Date(birth);
+
+            if (vaccine.ageDays !== undefined) {
+                date.setDate(date.getDate() + vaccine.ageDays);
+            }
+
+            if (vaccine.ageWeeks !== undefined) {
+                date.setDate(date.getDate() + vaccine.ageWeeks * 7);
+            }
+
+            if (vaccine.ageMonths !== undefined) {
+                const wholeMonths = Math.floor(vaccine.ageMonths);
+                const halfMonth = vaccine.ageMonths % 1 !== 0;
+
+                date.setMonth(date.getMonth() + wholeMonths);
+
+                if (halfMonth) {
+                    date.setDate(date.getDate() + 15);
+                }
+            }
+
+            return {
+                ...vaccine,
+                date
+            };
+        })
+        .filter(vaccine => vaccine.date >= today)
+        .sort((a, b) => a.date - b.date);
+
+    return vaccines[0] || null;
+}
 function renderNextContent() {
    
     const ageElement =
