@@ -469,19 +469,7 @@ function renderWeekContent() {
    ========================================= */
 
 function renderNextContent() {
-   setTimeout(() => {
-    alert(
-        "nextAge: " + !!document.getElementById("nextAge") +
-        "\nnextDescription: " + !!document.getElementById("nextDescription") +
-        "\nnextVaccine: " + !!document.getElementById("nextVaccine") +
-        "\nnextVaccineText: " + !!document.getElementById("nextVaccineText") +
-        "\nnextDoctor: " + !!document.getElementById("nextDoctor") +
-        "\nnextDoctorText: " + !!document.getElementById("nextDoctorText") +
-        "\nnextDevelopment: " + !!document.getElementById("nextDevelopment") +
-        "\nnextDevelopmentText: " + !!document.getElementById("nextDevelopmentText")
-    );
-}, 500);
-
+   
     const ageElement =
         document.getElementById("nextAge");
 
