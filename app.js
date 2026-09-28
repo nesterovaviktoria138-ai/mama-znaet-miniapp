@@ -467,7 +467,179 @@ function renderWeekContent() {
 /* =========================================
    ГЛАВНАЯ — БЛИЖАЙШЕЕ ДЛЯ МАЛЫША
    ========================================= */
+const vaccineCalendar = [
+    // Национальный календарь РФ
+    {
+        id: "hepb1",
+        ageDays: 0,
+        type: "national",
+        title: "Гепатит B",
+        dose: "1-я вакцинация",
+        ageLabel: "В первые 24 часа жизни"
+    },
+    {
+        id: "bcg",
+        ageDays: 3,
+        type: "national",
+        title: "Туберкулёз (БЦЖ/БЦЖ-М)",
+        dose: "Вакцинация",
+        ageLabel: "На 3–7 день жизни"
+    },
+    {
+        id: "hepb2",
+        ageMonths: 1,
+        type: "national",
+        title: "Гепатит B",
+        dose: "2-я вакцинация",
+        ageLabel: "1 месяц"
+    },
+    {
+        id: "pneumo1",
+        ageMonths: 2,
+        type: "national",
+        title: "Пневмококковая инфекция",
+        dose: "1-я вакцинация",
+        ageLabel: "2 месяца"
+    },
+    {
+        id: "dtp1",
+        ageMonths: 3,
+        type: "national",
+        title: "Коклюш, дифтерия, столбняк",
+        dose: "1-я вакцинация",
+        ageLabel: "3 месяца"
+    },
+    {
+        id: "polio1",
+        ageMonths: 3,
+        type: "national",
+        title: "Полиомиелит",
+        dose: "1-я вакцинация",
+        ageLabel: "3 месяца"
+    },
+    {
+        id: "hib1",
+        ageMonths: 3,
+        type: "national",
+        title: "Гемофильная инфекция типа b",
+        dose: "1-я вакцинация",
+        ageLabel: "3 месяца"
+    },
+    {
+        id: "dtp2",
+        ageMonths: 4.5,
+        type: "national",
+        title: "Коклюш, дифтерия, столбняк",
+        dose: "2-я вакцинация",
+        ageLabel: "4,5 месяца"
+    },
+    {
+        id: "polio2",
+        ageMonths: 4.5,
+        type: "national",
+        title: "Полиомиелит",
+        dose: "2-я вакцинация",
+        ageLabel: "4,5 месяца"
+    },
+    {
+        id: "hib2",
+        ageMonths: 4.5,
+        type: "national",
+        title: "Гемофильная инфекция типа b",
+        dose: "2-я вакцинация",
+        ageLabel: "4,5 месяца"
+    },
+    {
+        id: "pneumo2",
+        ageMonths: 4.5,
+        type: "national",
+        title: "Пневмококковая инфекция",
+        dose: "2-я вакцинация",
+        ageLabel: "4,5 месяца"
+    },
+    {
+        id: "dtp3",
+        ageMonths: 6,
+        type: "national",
+        title: "Коклюш, дифтерия, столбняк",
+        dose: "3-я вакцинация",
+        ageLabel: "6 месяцев"
+    },
+    {
+        id: "polio3",
+        ageMonths: 6,
+        type: "national",
+        title: "Полиомиелит",
+        dose: "3-я вакцинация",
+        ageLabel: "6 месяцев"
+    },
+    {
+        id: "hib3",
+        ageMonths: 6,
+        type: "national",
+        title: "Гемофильная инфекция типа b",
+        dose: "3-я вакцинация",
+        ageLabel: "6 месяцев"
+    },
+    {
+        id: "hepb3",
+        ageMonths: 6,
+        type: "national",
+        title: "Гепатит B",
+        dose: "3-я вакцинация",
+        ageLabel: "6 месяцев"
+    },
+    {
+        id: "mmr1",
+        ageMonths: 12,
+        type: "national",
+        title: "Корь, краснуха, паротит",
+        dose: "Вакцинация",
+        ageLabel: "12 месяцев"
+    },
 
+    // Дополнительная защита
+    {
+        id: "rotavirus",
+        ageWeeks: 6,
+        type: "additional",
+        title: "Ротавирусная инфекция",
+        dose: "Начало вакцинации",
+        ageLabel: "С 6 недель",
+        note: "Схема и предельный возраст зависят от конкретной вакцины."
+    },
+    {
+        id: "meningococcus",
+        type: "additional",
+        title: "Менингококковая инфекция",
+        dose: "Дополнительная вакцинация",
+        ageLabel: "Возраст начала зависит от используемой вакцины",
+        note: "Схему подбирают с учётом возраста ребёнка и конкретного препарата."
+    },
+    {
+        id: "varicella",
+        type: "additional",
+        title: "Ветряная оспа",
+        dose: "Дополнительная вакцинация",
+        ageLabel: "По возрасту, разрешённому для конкретной вакцины",
+        note: "Может входить в отдельные региональные программы вакцинации."
+    },
+    {
+        id: "hepa",
+        type: "additional",
+        title: "Гепатит A",
+        dose: "Дополнительная вакцинация",
+        ageLabel: "По возрасту, разрешённому для конкретной вакцины"
+    },
+    {
+        id: "tick",
+        type: "additional",
+        title: "Клещевой энцефалит",
+        dose: "По эпидемическим показаниям",
+        ageLabel: "Для детей из групп риска и эндемичных территорий",
+        note: "Минимальный возраст зависит от конкретной вакцины."
+    }
+];
 function renderNextContent() {
    
     const ageElement =
