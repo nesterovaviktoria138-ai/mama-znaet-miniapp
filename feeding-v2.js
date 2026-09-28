@@ -1901,7 +1901,7 @@ function openFeedingV2Analyzer() {
         </div>
     `;
 
-    modal.classList.add("open");
+    modal.classList.remove("hidden");
 }
 /* =========================================================
    АНАЛИЗАТОР КОРМЛЕНИЯ — V2.0
@@ -3107,7 +3107,7 @@ function openFeedingV2Type(type) {
     `;
 
 
-    modal.classList.add("open");
+    modal.classList.remove("hidden");
 }
 
 
@@ -3250,7 +3250,7 @@ function openFeedingV2Common(topic) {
     }
 
 
-    modal.classList.add("open");
+    modal.classList.remove("hidden");
 }
 
 
