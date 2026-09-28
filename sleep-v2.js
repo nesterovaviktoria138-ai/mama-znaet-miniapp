@@ -1869,7 +1869,13 @@ function openSleepV2() {
                 </button>
 
             </div>
+            <!-- ВРЕМЯ БОДРСТВОВАНИЯ -->
 
+            <h2 class="sleep-v2-heading">
+                Ориентиры бодрствования
+            </h2>
+
+            ${sleepV2WakeWindowTable()}
 
             <!-- ПО ВОЗРАСТУ -->
 
@@ -2352,3 +2358,255 @@ window.selectSleepV2Problem = selectSleepV2Problem;
 window.sleepV2ClearAnalyzerData = sleepV2ClearAnalyzerData;
 
 console.log("МАМА ЗНАЕТ V2.0: модуль сна загружен");
+/* =========================================================
+   МАМА ЗНАЕТ V2.0 — ОРИЕНТИРЫ ВРЕМЕНИ БОДРСТВОВАНИЯ
+   Это практические диапазоны, а не строгие медицинские нормы
+   ========================================================= */
+
+const sleepV2WakeWindows = [
+    {
+        month: 0,
+        age: "0–1 мес",
+        min: 35,
+        max: 60
+    },
+    {
+        month: 1,
+        age: "1–2 мес",
+        min: 45,
+        max: 75
+    },
+    {
+        month: 2,
+        age: "2–3 мес",
+        min: 60,
+        max: 90
+    },
+    {
+        month: 3,
+        age: "3–4 мес",
+        min: 75,
+        max: 105
+    },
+    {
+        month: 4,
+        age: "4–5 мес",
+        min: 90,
+        max: 120
+    },
+    {
+        month: 5,
+        age: "5–6 мес",
+        min: 105,
+        max: 150
+    },
+    {
+        month: 6,
+        age: "6–7 мес",
+        min: 120,
+        max: 180
+    },
+    {
+        month: 7,
+        age: "7–8 мес",
+        min: 135,
+        max: 195
+    },
+    {
+        month: 8,
+        age: "8–9 мес",
+        min: 150,
+        max: 210
+    },
+    {
+        month: 9,
+        age: "9–10 мес",
+        min: 165,
+        max: 225
+    },
+    {
+        month: 10,
+        age: "10–11 мес",
+        min: 180,
+        max: 240
+    },
+    {
+        month: 11,
+        age: "11–12 мес",
+        min: 180,
+        max: 270
+    }
+];
+
+
+/* ===== ТОЧНЫЙ ВОЗРАСТ В МЕСЯЦАХ ===== */
+
+function getSleepV2BabyMonth() {
+    if (!baby || !baby.birth) return null;
+
+    const birth =
+        new Date(baby.birth + "T00:00:00");
+
+    const today =
+        new Date();
+
+    if (Number.isNaN(birth.getTime())) {
+        return null;
+    }
+
+    let months =
+        (today.getFullYear() - birth.getFullYear()) * 12 +
+        (today.getMonth() - birth.getMonth());
+
+    if (today.getDate() < birth.getDate()) {
+        months--;
+    }
+
+    if (months < 0) months = 0;
+    if (months > 11) months = 11;
+
+    return months;
+}
+
+
+/* ===== ФОРМАТИРУЕМ ВБ ===== */
+
+function sleepV2FormatWakeWindow(minutes) {
+    const hours =
+        Math.floor(minutes / 60);
+
+    const rest =
+        minutes % 60;
+
+    if (hours === 0) {
+        return `${rest} мин`;
+    }
+
+    if (rest === 0) {
+        return `${hours} ч`;
+    }
+
+    return `${hours} ч ${rest} мин`;
+}
+
+
+/* ===== РИСУЕМ ТАБЛИЦУ ===== */
+
+function sleepV2WakeWindowTable() {
+    const currentMonth =
+        getSleepV2BabyMonth();
+
+    return `
+        <div class="sleep-v2-wb-card">
+
+            <div class="sleep-v2-wb-head">
+
+                <div>
+                    <span>
+                        ОРИЕНТИРЫ 0–12 МЕСЯЦЕВ
+                    </span>
+
+                    <h2>
+                        ⏰ Время бодрствования
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <p class="sleep-v2-wb-intro">
+                Примерные диапазоны времени между снами.
+                Это не строгая норма и не таймер для
+                укладывания малыша.
+            </p>
+
+
+            <div class="sleep-v2-wb-table">
+
+                <div class="sleep-v2-wb-row sleep-v2-wb-title">
+
+                    <span>
+                        Возраст
+                    </span>
+
+                    <span>
+                        Примерное ВБ
+                    </span>
+
+                </div>
+
+
+                ${sleepV2WakeWindows
+                    .map(item => {
+
+                        const active =
+                            currentMonth === item.month;
+
+                        return `
+                            <div
+                                class="sleep-v2-wb-row ${
+                                    active ? "active" : ""
+                                }"
+                            >
+
+                                <span>
+                                    ${active
+                                        ? "👶 "
+                                        : ""
+                                    }
+
+                                    ${item.age}
+
+                                    ${active
+                                        ? `<small>Сейчас</small>`
+                                        : ""
+                                    }
+                                </span>
+
+
+                                <strong>
+                                    ${sleepV2FormatWakeWindow(item.min)}
+                                    –
+                                    ${sleepV2FormatWakeWindow(item.max)}
+                                </strong>
+
+                            </div>
+                        `;
+                    })
+                    .join("")}
+
+            </div>
+
+
+            <div class="sleep-v2-wb-tip">
+
+                <span>💡</span>
+
+                <p>
+                    ВБ у одного малыша может различаться
+                    в течение дня. Смотрите не только на часы,
+                    но и на поведение, качество предыдущего сна
+                    и признаки усталости.
+                </p>
+
+            </div>
+
+
+            <div class="sleep-v2-wb-warning">
+
+                <strong>
+                    Важно
+                </strong>
+
+                <p>
+                    Эти диапазоны — практический ориентир,
+                    а не медицинская норма. Не нужно специально
+                    удерживать уставшего малыша без сна,
+                    чтобы «дотянуть» до цифры из таблицы.
+                </p>
+
+            </div>
+
+        </div>
+    `;
+}
