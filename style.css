@@ -4126,6 +4126,85 @@ input:focus-visible {
 .feeding-v2-volume-note > span {
     font-size: 22px;
 }
+/* =========================================================
+   FEEDING V2 — MOBILE TEXT FIX
+   ========================================================= */
+
+.feeding-v2-page,
+.feeding-v2-page * {
+    min-width: 0;
+}
+
+.feeding-v2-page p,
+.feeding-v2-page span,
+.feeding-v2-page strong,
+.feeding-v2-page small,
+.feeding-v2-page h1,
+.feeding-v2-page h2,
+.feeding-v2-page h3 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.feeding-v2-type-buttons {
+    width: 100%;
+}
+
+.feeding-v2-type-buttons button {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.feeding-v2-type-buttons button strong,
+.feeding-v2-type-buttons button small {
+    display: block;
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+}
+
+.feeding-v2-list-item {
+    min-width: 0;
+}
+
+.feeding-v2-list-item > span:last-child {
+    min-width: 0;
+    flex: 1;
+}
+
+.feeding-v2-signal-box,
+.feeding-v2-signal-stage,
+.feeding-v2-mini-card,
+.feeding-v2-age-card,
+.feeding-v2-quick-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+@media (max-width: 420px) {
+
+    .feeding-v2-type-buttons {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .feeding-v2-type-buttons button {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .feeding-v2-type-buttons button strong {
+        font-size: 14px;
+    }
+
+    .feeding-v2-type-buttons button small {
+        font-size: 10px;
+        line-height: 1.25;
+    }
+}
 
 .feeding-v2-volume-note strong {
     display: block;
