@@ -652,6 +652,46 @@ const developmentV2 = {
 
 };
 
+
+const developmentV2Videos = {
+    0: {
+        label: "ВИДЕО · 0–3 МЕСЯЦА",
+        title: "Развитие малыша в первые 3 месяца",
+        text: "Врач-педиатр разбирает реакции, тонус, удержание головы и асимметрию.",
+        source: "Доктор Нагорская · Помощник мамы",
+        note: "Удержание головы — с 06:15",
+        url: "https://rutube.ru/video/8a5e097eaa54522931cf0a156564ce19/"
+    },
+    1: {
+        label: "ВИДЕО · 3–6 МЕСЯЦЕВ",
+        title: "Перевороты без спешки",
+        text: "Практика через игру, время на животе и свободное движение без принуждения.",
+        source: "Astra Mir",
+        note: "Этап освоения переворотов",
+        url: "https://rutube.ru/video/4a596cc0b4cf2317acab2f5418e4bcce/"
+    }
+};
+
+function developmentV2VideoForAge(index) {
+    return index <= 2 ? developmentV2Videos[0] : developmentV2Videos[1];
+}
+
+function developmentV2VideoCard(index) {
+    const item = developmentV2VideoForAge(index);
+    return `
+        <div class="dev-v2-media-card">
+            <div class="dev-v2-media-preview"><span>▶</span></div>
+            <div>
+                <span class="dev-v2-media-label">${developmentV2Escape(item.label)}</span>
+                <strong>${developmentV2Escape(item.title)}</strong>
+                <p>${developmentV2Escape(item.text)}</p>
+                <small>${developmentV2Escape(item.source)} · ${developmentV2Escape(item.note)}</small>
+                <p><a href="${developmentV2Escape(item.url)}" target="_blank" rel="noopener noreferrer">▶ Смотреть видео</a></p>
+            </div>
+        </div>
+    `;
+}
+
 /* =========================================================
    ДВИЖОК РАЗДЕЛА «РАЗВИТИЕ V2.0»
    ========================================================= */
@@ -970,29 +1010,7 @@ function openDevelopmentV2Age(index) {
             </div>
 
 
-            <div class="dev-v2-media-card">
-
-                <div class="dev-v2-media-preview">
-                    <span>▶</span>
-                </div>
-
-                <div>
-                    <span class="dev-v2-media-label">
-                        ВИДЕО · ГОТОВИМ К V2.0
-                    </span>
-
-                    <strong>
-                        Практика для этого возраста
-                    </strong>
-
-                    <p>
-                        Здесь будет короткое проверенное видео:
-                        упражнение или игра, где движение лучше
-                        показать, чем описывать текстом.
-                    </p>
-                </div>
-
-            </div>
+            ${developmentV2VideoCard(index)}
 
 
             <div class="dev-v2-today">
