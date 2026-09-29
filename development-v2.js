@@ -996,6 +996,22 @@ function openDevelopmentV2() {
 }
 
 
+
+function developmentV2OpenInfographic() {
+    const overlay = document.createElement("div");
+    overlay.className = "dev-v2-infographic-overlay";
+    overlay.innerHTML = `
+        <button class="dev-v2-infographic-close" type="button" aria-label="Закрыть">×</button>
+        <img src="development_0_12_v2.jpg" alt="Развитие малыша от 0 до 12 месяцев">
+    `;
+    overlay.addEventListener("click", event => {
+        if (event.target === overlay || event.target.closest(".dev-v2-infographic-close")) {
+            overlay.remove();
+        }
+    });
+    document.body.appendChild(overlay);
+}
+
 function openDevelopmentV2Age(index) {
     const article = developmentV2[index];
 
@@ -1041,6 +1057,21 @@ function openDevelopmentV2Age(index) {
                     </p>
                 </div>
 
+            </div>
+
+
+            <div class="dev-v2-infographic-section">
+                <div class="dev-v2-infographic-heading">
+                    <span>🖼️</span>
+                    <div>
+                        <small>ВИЗУАЛЬНАЯ ШПАРГАЛКА</small>
+                        <strong>Развитие малыша от 0 до 12 месяцев</strong>
+                    </div>
+                </div>
+                <button class="dev-v2-infographic-button" type="button" onclick="developmentV2OpenInfographic()">
+                    <img src="development_0_12_v2.jpg" alt="Развитие малыша от 0 до 12 месяцев: навыки, игры и лайфхаки" loading="lazy">
+                    <span>Нажмите, чтобы увеличить</span>
+                </button>
             </div>
 
 
