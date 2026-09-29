@@ -4565,3 +4565,17 @@ input:focus-visible {
 .sleep-v2-infographic-overlay { position:fixed; inset:0; z-index:99999; overflow:auto; padding:48px 10px 20px; background:rgba(20,20,24,.94); }
 .sleep-v2-infographic-overlay img { display:block; width:min(1200px,100%); height:auto; margin:0 auto; border-radius:12px; }
 .sleep-v2-infographic-close { position:fixed; top:10px; right:12px; z-index:100000; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:#fff; font-size:28px; line-height:1; cursor:pointer; }
+
+
+/* SLEEP V2 — PRACTICAL GUIDES */
+.sleep-v2-practical-guides { margin-top:18px; }
+.sleep-v2-practical-title { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+.sleep-v2-practical-title > span { font-size:26px; }
+.sleep-v2-practical-title small, .sleep-v2-practical-title strong { display:block; }
+.sleep-v2-practical-title small { font-size:11px; font-weight:800; letter-spacing:.06em; opacity:.62; }
+.sleep-v2-practical-title strong { margin-top:2px; }
+.sleep-v2-guide-card { display:flex; gap:12px; align-items:flex-start; margin-top:10px; padding:14px; border-radius:17px; background:rgba(255,255,255,.76); box-shadow:0 5px 18px rgba(0,0,0,.045); }
+.sleep-v2-guide-icon { flex:0 0 32px; font-size:25px; line-height:1.2; text-align:center; }
+.sleep-v2-guide-card strong { display:block; margin-bottom:5px; }
+.sleep-v2-guide-card p { margin:0; line-height:1.45; }
+.sleep-v2-guide-note { margin-top:10px; padding:13px 14px; border-radius:16px; background:rgba(232,225,255,.7); line-height:1.45; }
