@@ -4392,3 +4392,115 @@ input:focus-visible {
     opacity: .6;
     overflow-wrap: anywhere;
 }
+
+
+/* =========================================================
+   FEEDING V2 — INFOGRAPHICS
+   ========================================================= */
+
+.feeding-v2-image-section {
+    margin-top: 22px;
+}
+
+.feeding-v2-image-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.feeding-v2-image-card {
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+.feeding-v2-image-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.feeding-v2-image-button img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.feeding-v2-image-card figcaption {
+    padding: 11px 12px 13px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.feeding-v2-image-card figcaption small {
+    display: block;
+    margin-top: 4px;
+    font-weight: 400;
+    opacity: .62;
+}
+
+.feeding-v2-media-note {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 13px 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.7);
+}
+
+.feeding-v2-media-note p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.feeding-v2-image-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(20,20,20,.88);
+}
+
+.feeding-v2-image-overlay img {
+    display: block;
+    max-width: 100%;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+.feeding-v2-image-overlay-close {
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 1;
+    background: rgba(255,255,255,.95);
+    cursor: pointer;
+}
+
+@media (max-width: 520px) {
+    .feeding-v2-image-list {
+        grid-template-columns: 1fr;
+    }
+
+    .feeding-v2-image-button img {
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+}
