@@ -3038,6 +3038,13 @@ function openFeedingV2Type(type) {
 
 
             ${
+                typeof feedingMediaV2Render === "function"
+                    ? feedingMediaV2Render(type)
+                    : ""
+            }
+
+
+            ${
                 type === "formula"
                     ? feedingV2FormulaBlock()
                     : ""
