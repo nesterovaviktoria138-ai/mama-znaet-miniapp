@@ -5097,6 +5097,11 @@ function openSection(sectionName) {
         openFeedingV2();
         return;
     }
+    // ===== ПРИКОРМ V2.0 =====
+    if (sectionName === "complementary" && typeof openComplementaryV2 === "function") {
+        openComplementaryV2();
+        return;
+    }
     const data = sections[sectionName];
 
     if (!data) {
