@@ -4294,3 +4294,101 @@ input:focus-visible {
 /* ================================
    DARK MODE
    ================================ */
+
+
+/* =========================================================
+   FEEDING V2 — MEDIA CARDS
+   ========================================================= */
+
+.feeding-v2-media-section {
+    margin-top: 22px;
+}
+
+.feeding-v2-media-section .feeding-v2-section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.feeding-v2-media-section .feeding-v2-section-head > span {
+    font-size: 28px;
+}
+
+.feeding-v2-media-section .feeding-v2-section-head h2 {
+    margin: 2px 0 0;
+}
+
+.feeding-v2-media-section .feeding-v2-section-head small {
+    opacity: .65;
+}
+
+.feeding-v2-media-list {
+    display: grid;
+    gap: 12px;
+}
+
+.feeding-v2-media-card {
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    overflow: hidden;
+}
+
+.feeding-v2-media-top,
+.feeding-v2-media-source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.feeding-v2-media-badge,
+.feeding-v2-media-time {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.85);
+    font-size: 12px;
+}
+
+.feeding-v2-media-card h3 {
+    margin: 12px 0 7px;
+    font-size: 17px;
+}
+
+.feeding-v2-media-card p {
+    margin: 0 0 12px;
+    line-height: 1.45;
+}
+
+.feeding-v2-media-source {
+    margin-bottom: 12px;
+    font-size: 12px;
+    opacity: .7;
+}
+
+.feeding-v2-media-button {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    background: rgba(255,255,255,.95);
+    color: inherit;
+}
+
+.feeding-v2-media-checked {
+    display: block;
+    margin-top: 9px;
+    text-align: center;
+    opacity: .6;
+    overflow-wrap: anywhere;
+}
