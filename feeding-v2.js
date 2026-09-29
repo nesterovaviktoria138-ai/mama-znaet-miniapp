@@ -1102,72 +1102,7 @@ function feedingV2BreastBlock() {
             </div>
 
 
-            <!-- ПОЗЫ -->
-
-            <div class="feeding-v2-subsection">
-
-                <div class="feeding-v2-subsection-title">
-
-                    <span>🎥</span>
-
-                    <div>
-                        <small>
-                            ВИЗУАЛЬНО
-                        </small>
-
-                        <h3>
-                            Позы для кормления
-                        </h3>
-                    </div>
-
-                </div>
-
-
-                <div class="feeding-v2-position-grid">
-
-                    ${feedingV2BreastPositions.map(position => `
-
-                        <article class="feeding-v2-position-card">
-
-                            <div class="feeding-v2-position-preview">
-
-                                <span>
-                                    ${position.icon}
-                                </span>
-
-                                <small>
-                                    ФОТО / ВИДЕО
-                                </small>
-
-                            </div>
-
-
-                            <h4>
-                                ${feedingV2Escape(position.title)}
-                            </h4>
-
-                            <p>
-                                ${feedingV2Escape(position.text)}
-                            </p>
-
-
-                            <div class="feeding-v2-media-placeholder">
-
-                                🎬
-
-                                <span>
-                                    ${feedingV2Escape(position.media)}
-                                </span>
-
-                            </div>
-
-                        </article>
-
-                    `).join("")}
-
-                </div>
-
-            </div>
+            <!-- ПОЗЫ ПОКАЗАНЫ В ИНФОГРАФИКЕ ВЫШЕ -->
 
 
             <!-- ЧАСТЫЕ СИТУАЦИИ -->
