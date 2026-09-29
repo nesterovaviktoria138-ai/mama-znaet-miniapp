@@ -2107,6 +2107,61 @@ function openSleepV2Age(index) {
             </button>
 
 
+            <div class="sleep-v2-practical-guides">
+                <div class="sleep-v2-practical-title">
+                    <span>💡</span>
+                    <div>
+                        <small>БЫСТРЫЕ ШПАРГАЛКИ</small>
+                        <strong>Что делать прямо сегодня</strong>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-card">
+                    <div class="sleep-v2-guide-icon">🌙</div>
+                    <div>
+                        <strong>Ритуал 15–30 минут</strong>
+                        <p>Приглушите свет → спокойный уход → кормление при необходимости → короткий контакт, песенка или книжка → укладывание. Важнее повторяемость, чем точное время по минутам.</p>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-card">
+                    <div class="sleep-v2-guide-icon">⏱️</div>
+                    <div>
+                        <strong>Сон закончился через 30–40 минут</strong>
+                        <p>Не считайте один короткий сон проблемой. Посмотрите на настроение малыша, остальные сны и весь день. Если ребёнок явно ещё сонный — спокойно попробуйте помочь продлить сон.</p>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-card">
+                    <div class="sleep-v2-guide-icon">🛏️</div>
+                    <div>
+                        <strong>Проснулся после перекладывания</strong>
+                        <p>Заранее подготовьте место сна и уменьшите количество изменений после засыпания. Не используйте подушки, позиционеры, бортики или мягкие предметы, чтобы удержать малыша в положении.</p>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-card">
+                    <div class="sleep-v2-guide-icon">🌅</div>
+                    <div>
+                        <strong>Очень ранний подъём</strong>
+                        <p>Несколько дней отмечайте время подъёма, дневные сны и вечернее засыпание. Утром сохраняйте темноту и спокойную обстановку, если ещё ночь, а изменения режима делайте небольшими шагами.</p>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-card">
+                    <div class="sleep-v2-guide-icon">🌜</div>
+                    <div>
+                        <strong>Часто просыпается ночью</strong>
+                        <p>Сначала проверьте базовые причины: голод, подгузник, температуру, болезнь или дискомфорт, прорезывание зубов и новые навыки. Ночные пробуждения сами по себе не означают, что сон «испорчен».</p>
+                    </div>
+                </div>
+
+                <div class="sleep-v2-guide-note">
+                    <strong>Лайфхак:</strong> меняйте только одну вещь за раз и наблюдайте несколько дней. Так гораздо легче понять, что действительно повлияло на сон.
+                </div>
+            </div>
+
+
             <div class="sleep-v2-infographic-section">
                 <div class="sleep-v2-infographic-heading">
                     <span>🌙</span>
