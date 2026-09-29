@@ -669,11 +669,30 @@ const developmentV2Videos = {
         source: "Astra Mir",
         note: "Этап освоения переворотов",
         url: "https://rutube.ru/video/4a596cc0b4cf2317acab2f5418e4bcce/"
+    },
+    2: {
+        label: "ВИДЕО · 6–9 МЕСЯЦЕВ",
+        title: "Движение и подготовка к ползанию",
+        text: "Видео о свободном движении малыша и поддержке новых способов перемещения.",
+        source: "Astra Mir",
+        note: "Период активного освоения пространства",
+        url: "https://rutube.ru/video/249feb66dc6506df264ef0c1d341f981/"
+    },
+    3: {
+        label: "ВИДЕО · 9–12 МЕСЯЦЕВ",
+        title: "Развитие ближе к году",
+        text: "Обзор навыков второй половины первого года: общение, перемещения, опора и первые шаги.",
+        source: "MAMAKO",
+        note: "Брендированный источник",
+        url: "https://rutube.ru/video/cd9c56e5763b24e2b9a57b899738ca75/"
     }
 };
 
 function developmentV2VideoForAge(index) {
-    return index <= 2 ? developmentV2Videos[0] : developmentV2Videos[1];
+    if (index <= 2) return developmentV2Videos[0];
+    if (index <= 5) return developmentV2Videos[1];
+    if (index <= 8) return developmentV2Videos[2];
+    return developmentV2Videos[3];
 }
 
 function developmentV2VideoCard(index) {
