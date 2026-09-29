@@ -500,6 +500,13 @@ function feedingV2SignalsBlock() {
             </div>
 
 
+            ${
+                typeof feedingImagesV2Render === "function"
+                    ? feedingImagesV2Render("common")
+                    : ""
+            }
+
+
             <div class="feeding-v2-signal-box">
 
                 <h3>
@@ -3035,6 +3042,13 @@ function openFeedingV2Type(type) {
 
 
             ${feedingV2TypeCards(type)}
+
+
+            ${
+                typeof feedingImagesV2Render === "function"
+                    ? feedingImagesV2Render(type)
+                    : ""
+            }
 
 
             ${
