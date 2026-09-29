@@ -2107,30 +2107,19 @@ function openSleepV2Age(index) {
             </button>
 
 
-            <div class="sleep-v2-video-card">
-
-                <div>
-                    ▶
+            <div class="sleep-v2-infographic-section">
+                <div class="sleep-v2-infographic-heading">
+                    <span>🌙</span>
+                    <div>
+                        <small>ВИЗУАЛЬНЫЙ ГИД</small>
+                        <strong>Сон малыша: безопасность, ритуал и пробуждения</strong>
+                    </div>
                 </div>
 
-                <section>
-
-                    <span>
-                        ВИЗУАЛЬНЫЙ ГИД
-                    </span>
-
-                    <strong>
-                        Ритуал перед сном
-                    </strong>
-
-                    <p>
-                        Здесь в финальной V2.0 будет короткий
-                        визуальный материал с безопасной
-                        последовательностью подготовки ко сну.
-                    </p>
-
-                </section>
-
+                <button class="sleep-v2-infographic-button" type="button" onclick="sleepV2OpenInfographic()">
+                    <img src="B0F5C316-F970-4F57-B84E-B90258CEE0EE.png" alt="Визуальный гид по сну малыша" loading="lazy">
+                    <span>Нажмите, чтобы увеличить</span>
+                </button>
             </div>
 
 
@@ -2152,6 +2141,22 @@ function openSleepV2Age(index) {
     if (modalContent) {
         modalContent.scrollTop = 0;
     }
+}
+
+
+function sleepV2OpenInfographic() {
+    const overlay = document.createElement("div");
+    overlay.className = "sleep-v2-infographic-overlay";
+    overlay.innerHTML = `
+        <button class="sleep-v2-infographic-close" type="button" aria-label="Закрыть">×</button>
+        <img src="B0F5C316-F970-4F57-B84E-B90258CEE0EE.png" alt="Визуальный гид по сну малыша">
+    `;
+    overlay.addEventListener("click", event => {
+        if (event.target === overlay || event.target.closest(".sleep-v2-infographic-close")) {
+            overlay.remove();
+        }
+    });
+    document.body.appendChild(overlay);
 }
 
 
