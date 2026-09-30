@@ -89,6 +89,14 @@ function openComplementaryV2() {
         </button>
       </div>
 
+      <div class="comp-v2-infographic-section">
+        <div class="comp-v2-infographic-heading"><span>🆘</span><div><small>ВИЗУАЛЬНАЯ ШПАРГАЛКА</small><strong>Рвотный рефлекс или удушье?</strong></div></div>
+        <button class="comp-v2-infographic-button" type="button" onclick="complementaryV2OpenChokingInfographic()">
+          <img src="1AE34325-05C4-43F2-92BB-28BAA4EDCD5D.png" alt="Рвотный рефлекс или удушье — памятка для родителей" loading="lazy">
+          <span>Нажмите, чтобы увеличить</span>
+        </button>
+      </div>
+
       <div class="comp-v2-lifehacks">
         <div class="comp-v2-lifehacks-title"><span>💡</span><div><small>ЛАЙФХАКИ МАМЕ</small><strong>Мелочи, которые сильно упрощают прикорм</strong></div></div>
         <div class="comp-v2-lifehack"><span>🧊</span><div><strong>Замораживайте мини-порции</strong><p>Знакомые овощи, кашу или мясное пюре удобно заранее делить на небольшие порции. Так не приходится готовить полноценную кастрюлю ради нескольких ложек.</p></div></div>
@@ -159,6 +167,17 @@ function complementaryV2OpenAllergensInfographic() {
   const overlay=document.createElement("div");
   overlay.className="comp-v2-infographic-overlay";
   overlay.innerHTML='<button class="comp-v2-infographic-close" type="button" aria-label="Закрыть">×</button><img src="00644CCF-A028-452C-BD28-396CC9ECB5E6.png" alt="Аллергены в прикорме — безопасное знакомство">';
+  overlay.addEventListener("click",event=>{
+    if(event.target===overlay || event.target.closest(".comp-v2-infographic-close")) overlay.remove();
+  });
+  document.body.appendChild(overlay);
+}
+
+
+function complementaryV2OpenChokingInfographic() {
+  const overlay=document.createElement("div");
+  overlay.className="comp-v2-infographic-overlay";
+  overlay.innerHTML='<button class="comp-v2-infographic-close" type="button" aria-label="Закрыть">×</button><img src="1AE34325-05C4-43F2-92BB-28BAA4EDCD5D.png" alt="Рвотный рефлекс или удушье — памятка для родителей">';
   overlay.addEventListener("click",event=>{
     if(event.target===overlay || event.target.closest(".comp-v2-infographic-close")) overlay.remove();
   });
