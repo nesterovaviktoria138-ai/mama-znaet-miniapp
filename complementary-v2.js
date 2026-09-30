@@ -73,6 +73,14 @@ function openComplementaryV2() {
       <div class="comp-v2-hero"><span>🥣</span><div><small>МАМА ЗНАЕТ · V2.0</small><h1>Прикорм без хаоса</h1><p>Пошаговый навигатор: готовность, первые продукты, текстуры, вода, безопасность и план первых 30 дней.</p></div></div>
       <div class="comp-v2-important"><strong>Главная мысль</strong><p>Прикорм — знакомство с едой и новыми навыками. Начинаем с небольших количеств, постепенно расширяем разнообразие и сохраняем молочное питание.</p></div>
       ${complementaryV2Cards(complementaryV2Basics)}
+      <div class="comp-v2-infographic-section">
+        <div class="comp-v2-infographic-heading"><span>🥕</span><div><small>ВИЗУАЛЬНАЯ ШПАРГАЛКА</small><strong>Текстуры и безопасная подача</strong></div></div>
+        <button class="comp-v2-infographic-button" type="button" onclick="complementaryV2OpenInfographic()">
+          <img src="A1581C46-3DF9-4645-A727-998B800ECE5E.png" alt="Текстуры и безопасная подача прикорма" loading="lazy">
+          <span>Нажмите, чтобы увеличить</span>
+        </button>
+      </div>
+
       <div class="comp-v2-lifehacks">
         <div class="comp-v2-lifehacks-title"><span>💡</span><div><small>ЛАЙФХАКИ МАМЕ</small><strong>Мелочи, которые сильно упрощают прикорм</strong></div></div>
         <div class="comp-v2-lifehack"><span>🧊</span><div><strong>Замораживайте мини-порции</strong><p>Знакомые овощи, кашу или мясное пюре удобно заранее делить на небольшие порции. Так не приходится готовить полноценную кастрюлю ради нескольких ложек.</p></div></div>
@@ -125,4 +133,15 @@ function complementaryV2RenderTracker() {
 function complementaryV2DeleteFood(i) {
   const items=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]"); items.splice(i,1);
   localStorage.setItem("mamaZnaetComplementaryFoods",JSON.stringify(items)); complementaryV2RenderTracker();
+}
+
+
+function complementaryV2OpenInfographic() {
+  const overlay=document.createElement("div");
+  overlay.className="comp-v2-infographic-overlay";
+  overlay.innerHTML='<button class="comp-v2-infographic-close" type="button" aria-label="Закрыть">×</button><img src="A1581C46-3DF9-4645-A727-998B800ECE5E.png" alt="Текстуры и безопасная подача прикорма">';
+  overlay.addEventListener("click",event=>{
+    if(event.target===overlay || event.target.closest(".comp-v2-infographic-close")) overlay.remove();
+  });
+  document.body.appendChild(overlay);
 }
