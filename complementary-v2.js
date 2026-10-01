@@ -57,6 +57,7 @@ function complementaryV2Open(topic) {
     avoid:["Что нельзя или опасно",complementaryV2Cards([["🍯","Мёд до 12 месяцев","Не даём мёд ребёнку младше года."],["🥜","Цельные орехи","Опасны из-за риска удушья. Орехи дают только в безопасной по возрасту форме."],["🍇","Круглые твёрдые продукты","Цельный виноград, черри, твёрдые куски моркови и похожие продукты требуют изменения формы и текстуры."],["🧂","Лишние соль и сахар","Не добавляем их специально в еду малыша."],["🥛","Коровье молоко как основной напиток","До года не заменяем им грудное молоко или адаптированную смесь."]])],
     tracker:["Трекер продуктов",'<p>Отмечайте только то, что действительно пригодится потом: продукт, дату первого знакомства и реакцию.</p><div class="comp-v2-tracker"><label>🥦 Продукт<input id="compTrackerFood" placeholder="Например, брокколи"></label><label>📅 Дата<input id="compTrackerDate" type="date"></label><label>🙂 Реакция<select id="compTrackerReaction"><option>Без особенностей</option><option>Понравилось</option><option>Не понравилось</option><option>Нужно наблюдать</option></select></label><button type="button" onclick="complementaryV2SaveFood()">＋ Добавить продукт</button><div id="compTrackerList"></div></div>'],
     menu:["Меню на день",complementaryV2MenuBuilder()],
+    recipes:["Что приготовить?",complementaryV2RecipeBuilder()],
     safety:["Безопасность",complementaryV2Cards(complementaryV2Safety)]
   };
   const t=topics[topic]; if(!t)return;
@@ -133,6 +134,7 @@ function openComplementaryV2() {
         <button onclick="complementaryV2Open('allergens')"><span>🥚</span><div><strong>Аллергены</strong><small>Как знакомить безопаснее</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('gagging')"><span>😮</span><div><strong>Рвотный рефлекс vs удушье</strong><small>Что важно различать</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('avoid')"><span>⛔</span><div><strong>Что нельзя и опасно</strong><small>Короткая шпаргалка</small></div><b>›</b></button>
+        <button onclick="complementaryV2Open('recipes')"><span>👩‍🍳</span><div><strong>Что приготовить?</strong><p>Выберите знакомые продукты — получите идеи блюд и подходящую текстуру.</p></div><b>›</b></button>
         <button onclick="complementaryV2Open('menu')"><span>🍽️</span><div><strong>Меню на день</strong><p>Возраст + уже введённые продукты → идеи завтрака, обеда и ужина.</p></div><b>›</b></button>
         <button onclick="complementaryV2Open('tracker')"><span>✅</span><div><strong>Трекер продуктов</strong><small>Что уже попробовал малыш</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('safety')"><span>🛡️</span><div><strong>Безопасность</strong><small>Что важно знать до первой ложки</small></div><b>›</b></button>
@@ -226,4 +228,33 @@ function complementaryV2GenerateMenu(){
   ];
   const html=meals.map(x=>'<div class="comp-v2-menu-meal"><b>'+x[0]+'</b><strong>'+x[1]+'</strong></div>').join("");
   document.getElementById("compMenuResult").innerHTML='<div class="comp-v2-menu-result"><strong>🍽️ Вариант на день</strong>'+html+'<p><b>Текстура:</b> '+texture+'.</p><p>Молочное питание сохраняйте в привычном режиме. Воду предлагайте с едой небольшими глотками. Следуйте сигналам голода и насыщения.</p><div class="comp-v2-note">Новый продукт не обязан появляться каждый день. Если добавляете новый, удобнее не смешивать его сразу с несколькими незнакомыми продуктами.</div></div>';
+}
+
+function complementaryV2RecipeBuilder(){
+  const saved=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]").map(x=>x.food).filter(Boolean);
+  const chips=saved.length?saved.slice(0,24).map((x,i)=>'<label class="comp-v2-pick"><input type="checkbox" value="'+x.replace(/"/g,"&quot;")+'" checked><span>'+x+'</span></label>').join(""):'<span class="comp-v2-muted">Сначала добавьте продукты в трекер или впишите их ниже.</span>';
+  return '<div class="comp-v2-builder"><p>Отметьте продукты, которые уже знакомы малышу. Можно добавить ингредиенты вручную.</p><label>Возраст малыша<select id="compRecipeAge"><option value="6">6–8 месяцев</option><option value="9">9–11 месяцев</option><option value="12">12+ месяцев</option></select></label><div class="comp-v2-builder-known"><strong>Продукты из трекера</strong><div class="comp-v2-picks">'+chips+'</div></div><label>Ещё знакомые продукты<input id="compRecipeFoods" placeholder="Например: брокколи, индейка, гречка"></label><button type="button" onclick="complementaryV2GenerateRecipes()">👩‍🍳 Подобрать блюда</button><div id="compRecipeResult"></div></div>';
+}
+function complementaryV2GenerateRecipes(){
+  const age=Number(document.getElementById("compRecipeAge")?.value||6);
+  const checked=[...document.querySelectorAll(".comp-v2-pick input:checked")].map(x=>x.value);
+  const typed=(document.getElementById("compRecipeFoods")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  const foods=[...new Set([...checked,...typed])];
+  const find=(keys)=>foods.find(x=>keys.some(k=>x.toLowerCase().includes(k)));
+  const veg=find(["кабач","брок","капуст","тыкв","морков","картоф"]);
+  const cereal=find(["греч","овся","рис","кукуруз","пшен","каш"]);
+  const meat=find(["индей","крол","говяд","кур","мяс"]);
+  const fish=find(["рыб","лосос","треск","минтай"]);
+  const egg=find(["яйц"]);
+  const fruit=find(["яблок","груш","банан","перс","слив","ягод"]);
+  const ideas=[];
+  if(veg&&meat) ideas.push(["🥦","Овощи с мясом",veg+" + "+meat]);
+  if(veg&&fish) ideas.push(["🐟","Овощи с рыбой",veg+" + "+fish]);
+  if(cereal&&fruit) ideas.push(["🥣","Каша с фруктом",cereal+" + "+fruit]);
+  if(veg&&egg) ideas.push(["🥚","Овощи с яйцом",veg+" + "+egg]);
+  if(cereal&&veg) ideas.push(["🌾","Несладкая каша с овощем",cereal+" + "+veg]);
+  if(!ideas.length&&foods.length>=2) ideas.push(["🍽️","Простое сочетание",foods.slice(0,2).join(" + ")]);
+  if(!ideas.length){document.getElementById("compRecipeResult").innerHTML='<div class="comp-v2-note">Добавьте хотя бы два знакомых продукта — и я предложу сочетания.</div>';return;}
+  const texture=age<9?"измельчите или мягко разомните до текстуры, с которой малыш уверенно справляется":age<12?"разомните вилкой или предложите мягкими безопасными кусочками по навыкам малыша":"оставляйте мягкую семейную текстуру и подходящие безопасные кусочки";
+  document.getElementById("compRecipeResult").innerHTML='<div class="comp-v2-menu-result"><strong>👩‍🍳 Идеи из ваших продуктов</strong>'+ideas.slice(0,5).map(x=>'<div class="comp-v2-recipe"><span>'+x[0]+'</span><div><b>'+x[1]+'</b><p>'+x[2]+'</p></div></div>').join("")+'<p><b>Как подать:</b> '+texture+'.</p><div class="comp-v2-note">Используйте только уже подходящие ребёнку продукты и безопасную форму подачи. Не заставляйте доедать.</div></div>';
 }
