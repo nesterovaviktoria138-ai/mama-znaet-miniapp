@@ -5097,7 +5097,12 @@ function openSection(sectionName) {
         openFeedingV2();
         return;
     }
-    // ===== ПРИКОРМ V2.0 =====
+    // ===== ЗДОРОВЬЕ МАЛЫША V2.0 =====
+    if (sectionName === "health" && typeof openHealthV2 === "function") {
+        openHealthV2();
+        return;
+    }
+        // ===== ПРИКОРМ V2.0 =====
     if (sectionName === "complementary" && typeof openComplementaryV2 === "function") {
         openComplementaryV2();
         return;
