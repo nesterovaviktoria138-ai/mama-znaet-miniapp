@@ -112,6 +112,14 @@ function openComplementaryV2() {
         <div class="comp-v2-note"><strong>Важно:</strong> это ориентиры, а не обязательный объём порции. Останавливаем кормление по сигналам насыщения: малыш отворачивается, закрывает рот, отталкивает еду или теряет интерес.</div>
       </div>
 
+      <div class="comp-v2-infographic-section">
+        <div class="comp-v2-infographic-heading"><span>🍽️</span><div><small>ВИЗУАЛЬНАЯ ШПАРГАЛКА</small><strong>Порции прикорма глазами мамы</strong></div></div>
+        <button class="comp-v2-infographic-button" type="button" onclick="complementaryV2OpenPortionsInfographic()">
+          <img src="3E7FA5C0-39AC-4289-AB06-CF5E132D2C0D.png" alt="Порции прикорма глазами мамы" loading="lazy">
+          <span>Нажмите, чтобы увеличить</span>
+        </button>
+      </div>
+
       <div class="comp-v2-lifehacks">
         <div class="comp-v2-lifehacks-title"><span>💡</span><div><small>ЛАЙФХАКИ МАМЕ</small><strong>Мелочи, которые сильно упрощают прикорм</strong></div></div>
         <div class="comp-v2-lifehack"><span>🧊</span><div><strong>Замораживайте мини-порции</strong><p>Знакомые овощи, кашу или мясное пюре удобно заранее делить на небольшие порции. Так не приходится готовить полноценную кастрюлю ради нескольких ложек.</p></div></div>
@@ -268,4 +276,14 @@ function complementaryV2BackToMenu(){
       scroller.scrollTo({top:Math.max(0,menu.offsetTop-18),behavior:"auto"});
     }
   });
+}
+
+function complementaryV2OpenPortionsInfographic(){
+  const overlay=document.createElement("div");
+  overlay.className="comp-v2-infographic-overlay";
+  overlay.innerHTML='<button class="comp-v2-infographic-close" type="button" aria-label="Закрыть">×</button><img src="3E7FA5C0-39AC-4289-AB06-CF5E132D2C0D.png" alt="Порции прикорма глазами мамы">';
+  overlay.addEventListener("click",event=>{
+    if(event.target===overlay || event.target.closest(".comp-v2-infographic-close")) overlay.remove();
+  });
+  document.body.appendChild(overlay);
 }
