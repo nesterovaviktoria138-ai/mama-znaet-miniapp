@@ -4669,3 +4669,10 @@ input:focus-visible {
 
 /* COMPLEMENTARY V2 RECIPE BUILDER */
 .comp-v2-picks{display:flex;flex-wrap:wrap;gap:7px}.comp-v2-pick{display:inline-flex!important;position:relative}.comp-v2-pick input{position:absolute;opacity:0;pointer-events:none}.comp-v2-pick span{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.08);font-size:12px;font-weight:600}.comp-v2-pick input:checked+span{background:#e8f4e5;border-color:#b8d9b2}.comp-v2-recipe{display:grid;grid-template-columns:36px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06)}.comp-v2-recipe>span{font-size:24px}.comp-v2-recipe b{display:block}.comp-v2-recipe p{margin:3px 0 0}
+
+/* COMPLEMENTARY V2 SOLID SURFACES */
+.comp-v2-modal{background:#fffdf9!important}
+.comp-v2-card,.comp-v2-menu button,.comp-v2-list-item,.comp-v2-plan-row,.comp-v2-schedule,.comp-v2-lifehack,.comp-v2-tracker-item{background:#fff!important}
+.comp-v2-important,.comp-v2-coming{background:#fff4da!important}
+.comp-v2-note{background:#eee9ff!important}
+.comp-v2-danger{background:#ffe5e5!important}
