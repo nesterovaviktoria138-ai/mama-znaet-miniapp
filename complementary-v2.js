@@ -97,6 +97,19 @@ function openComplementaryV2() {
         </button>
       </div>
 
+      <div class="comp-v2-daily-tools">
+        <div class="comp-v2-lifehacks-title"><span>🍽️</span><div><small>НА КАЖДЫЙ ДЕНЬ</small><strong>Порции, вода и конструктор тарелки</strong></div></div>
+        <div class="comp-v2-daily-grid">
+          <div class="comp-v2-daily-card"><b>6–8 мес</b><strong>2–3 приёма прикорма</strong><p>Начинайте с небольшого количества и увеличивайте по аппетиту. Не добивайтесь фиксированных граммов любой ценой.</p></div>
+          <div class="comp-v2-daily-card"><b>9–11 мес</b><strong>3–4 приёма пищи</strong><p>Рацион становится разнообразнее, а текстура — сложнее по навыкам малыша. Молочное питание сохраняется.</p></div>
+          <div class="comp-v2-daily-card"><b>Вода</b><strong>Предлагайте с едой</strong><p>Небольшими глотками из чашки. Жажда зависит от рациона, температуры и состояния — не заставляйте допивать норму.</p></div>
+        </div>
+        <div class="comp-v2-plate"><strong>🧩 Конструктор приёма пищи</strong><p>Сочетайте знакомые продукты, а новый продукт удобно предлагать отдельно, чтобы было проще наблюдать реакцию.</p>
+          <div class="comp-v2-plate-grid"><span>🥦 <b>Овощ или фрукт</b><small>мягкая подходящая текстура</small></span><span>🥣 <b>Крупа или картофель</b><small>источник энергии</small></span><span>🥚 <b>Белок и железо</b><small>мясо, рыба, яйцо, бобовые</small></span><span>🥑 <b>Разнообразие</b><small>чередуйте вкусы и продукты</small></span></div>
+        </div>
+        <div class="comp-v2-note"><strong>Важно:</strong> это ориентиры, а не обязательный объём порции. Останавливаем кормление по сигналам насыщения: малыш отворачивается, закрывает рот, отталкивает еду или теряет интерес.</div>
+      </div>
+
       <div class="comp-v2-lifehacks">
         <div class="comp-v2-lifehacks-title"><span>💡</span><div><small>ЛАЙФХАКИ МАМЕ</small><strong>Мелочи, которые сильно упрощают прикорм</strong></div></div>
         <div class="comp-v2-lifehack"><span>🧊</span><div><strong>Замораживайте мини-порции</strong><p>Знакомые овощи, кашу или мясное пюре удобно заранее делить на небольшие порции. Так не приходится готовить полноценную кастрюлю ради нескольких ложек.</p></div></div>
