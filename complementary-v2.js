@@ -44,7 +44,8 @@ function complementaryV2Cards(items) {
 }
 function complementaryV2Open(topic) {
   const modal=document.getElementById("modal");
-  if(!modal) return;
+  const modalBody=document.getElementById("modalBody");
+  if(!modal || !modalBody) return;
   const topics={
     readiness:["Когда начинать и готовность",'<p>Для большинства детей ориентир начала прикорма — около 6 месяцев. Важен не один отдельный навык, а сочетание возраста и признаков готовности.</p>'+complementaryV2List(complementaryV2Readiness)+'<div class="comp-v2-note">Если ребёнок родился раньше срока, имеет проблемы с ростом, глотанием, выраженную аллергию или другие медицинские особенности — старт лучше обсудить с педиатром.</div>'],
     first:["Первые продукты",complementaryV2Cards([["🥦","Овощи","Мягкая безопасная текстура; можно начать с кабачка, брокколи или цветной капусты."],["🥣","Каши","Подходящая по возрасту каша без добавленного сахара."],["🥩","Мясо","Важный питательный продукт; вводим в безопасной текстуре."],["🍐","Фрукты","Знакомим с разными вкусами, не превращая фруктовое пюре в обязательный десерт."]])],
@@ -61,16 +62,19 @@ function complementaryV2Open(topic) {
     safety:["Безопасность",complementaryV2Cards(complementaryV2Safety)]
   };
   const t=topics[topic]; if(!t)return;
-  modal.innerHTML='<div class="modal-content comp-v2-modal"><button class="back-button" onclick="openComplementaryV2()">← К прикорму</button><h2>'+t[0]+'</h2>'+t[1]+'<button class="sleep-v2-close-button" onclick="closeModal()">Готово</button></div>';
+  modalBody.innerHTML='<div class="comp-v2-modal"><button class="back-button" onclick="complementaryV2BackToMenu()">← К списку прикорма</button><h2>'+t[0]+'</h2>'+t[1]+'<button class="sleep-v2-close-button" onclick="complementaryV2BackToMenu()">Готово</button></div>';
   modal.classList.remove("hidden");
-  modal.querySelector(".modal-content").scrollTop=0;
+  const scroller=modal.querySelector(".modal");
+  if(scroller) scroller.scrollTop=0;
   if(topic==="tracker") complementaryV2RenderTracker();
 }
 
 function openComplementaryV2() {
-  const modal=document.getElementById("modal"); if(!modal)return;
-  modal.innerHTML=`
-    <div class="modal-content comp-v2-modal">
+  const modal=document.getElementById("modal");
+  const modalBody=document.getElementById("modalBody");
+  if(!modal || !modalBody)return;
+  modalBody.innerHTML=`
+    <div class="comp-v2-modal">
       <button class="back-button" onclick="closeModal()">← Назад</button>
       <div class="comp-v2-hero"><span>🥣</span><div><small>МАМА ЗНАЕТ · V2.0</small><h1>Прикорм без хаоса</h1><p>Пошаговый навигатор: готовность, первые продукты, текстуры, вода, безопасность и план первых 30 дней.</p></div></div>
       <div class="comp-v2-important"><strong>Главная мысль</strong><p>Прикорм — знакомство с едой и новыми навыками. Начинаем с небольших количеств, постепенно расширяем разнообразие и сохраняем молочное питание.</p></div>
@@ -151,7 +155,8 @@ function openComplementaryV2() {
       <button class="sleep-v2-close-button" onclick="closeModal()">Готово</button>
     </div>`;
   modal.classList.remove("hidden");
-  modal.querySelector(".modal-content").scrollTop=0;
+  const scroller=modal.querySelector(".modal");
+  if(scroller) scroller.scrollTop=0;
 }
 
 
@@ -271,7 +276,7 @@ function complementaryV2BackToMenu(){
   openComplementaryV2();
   requestAnimationFrame(()=>{
     const menu=document.querySelector(".comp-v2-menu");
-    const scroller=document.querySelector("#modal .modal-content");
+    const scroller=document.querySelector("#modal .modal");
     if(menu&&scroller){
       scroller.scrollTo({top:Math.max(0,menu.offsetTop-18),behavior:"auto"});
     }
