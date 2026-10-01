@@ -258,3 +258,14 @@ function complementaryV2GenerateRecipes(){
   const texture=age<9?"измельчите или мягко разомните до текстуры, с которой малыш уверенно справляется":age<12?"разомните вилкой или предложите мягкими безопасными кусочками по навыкам малыша":"оставляйте мягкую семейную текстуру и подходящие безопасные кусочки";
   document.getElementById("compRecipeResult").innerHTML='<div class="comp-v2-menu-result"><strong>👩‍🍳 Идеи из ваших продуктов</strong>'+ideas.slice(0,5).map(x=>'<div class="comp-v2-recipe"><span>'+x[0]+'</span><div><b>'+x[1]+'</b><p>'+x[2]+'</p></div></div>').join("")+'<p><b>Как подать:</b> '+texture+'.</p><div class="comp-v2-note">Используйте только уже подходящие ребёнку продукты и безопасную форму подачи. Не заставляйте доедать.</div></div>';
 }
+
+function complementaryV2BackToMenu(){
+  openComplementaryV2();
+  requestAnimationFrame(()=>{
+    const menu=document.querySelector(".comp-v2-menu");
+    const scroller=document.querySelector("#modal .modal-content");
+    if(menu&&scroller){
+      scroller.scrollTo({top:Math.max(0,menu.offsetTop-18),behavior:"auto"});
+    }
+  });
+}
