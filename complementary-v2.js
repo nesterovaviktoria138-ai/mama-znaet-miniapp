@@ -56,6 +56,7 @@ function complementaryV2Open(topic) {
     gagging:["Рвотный рефлекс или удушье",complementaryV2Cards([["😮","Рвотный рефлекс","Малыш может шуметь, кашлять, краснеть, выталкивать пищу языком. Это защитный механизм при обучении текстурам."],["🚨","Удушье","Ребёнок может не издавать звук и не может нормально дышать или кашлять. Это экстренная ситуация."],["📚","Подготовьтесь заранее","До начала кусочков взрослым полезно освоить актуальный алгоритм первой помощи младенцу при удушье на очном курсе или у надёжного медицинского источника."]])+'<div class="comp-v2-danger"><strong>Срочно:</strong> если ребёнок не может дышать, кашлять или издавать звуки, синеет или теряет сознание — вызывайте экстренную помощь и начинайте соответствующую возрасту первую помощь.</div>'],
     avoid:["Что нельзя или опасно",complementaryV2Cards([["🍯","Мёд до 12 месяцев","Не даём мёд ребёнку младше года."],["🥜","Цельные орехи","Опасны из-за риска удушья. Орехи дают только в безопасной по возрасту форме."],["🍇","Круглые твёрдые продукты","Цельный виноград, черри, твёрдые куски моркови и похожие продукты требуют изменения формы и текстуры."],["🧂","Лишние соль и сахар","Не добавляем их специально в еду малыша."],["🥛","Коровье молоко как основной напиток","До года не заменяем им грудное молоко или адаптированную смесь."]])],
     tracker:["Трекер продуктов",'<p>Отмечайте только то, что действительно пригодится потом: продукт, дату первого знакомства и реакцию.</p><div class="comp-v2-tracker"><label>🥦 Продукт<input id="compTrackerFood" placeholder="Например, брокколи"></label><label>📅 Дата<input id="compTrackerDate" type="date"></label><label>🙂 Реакция<select id="compTrackerReaction"><option>Без особенностей</option><option>Понравилось</option><option>Не понравилось</option><option>Нужно наблюдать</option></select></label><button type="button" onclick="complementaryV2SaveFood()">＋ Добавить продукт</button><div id="compTrackerList"></div></div>'],
+    menu:["Меню на день",complementaryV2MenuBuilder()],
     safety:["Безопасность",complementaryV2Cards(complementaryV2Safety)]
   };
   const t=topics[topic]; if(!t)return;
@@ -132,6 +133,7 @@ function openComplementaryV2() {
         <button onclick="complementaryV2Open('allergens')"><span>🥚</span><div><strong>Аллергены</strong><small>Как знакомить безопаснее</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('gagging')"><span>😮</span><div><strong>Рвотный рефлекс vs удушье</strong><small>Что важно различать</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('avoid')"><span>⛔</span><div><strong>Что нельзя и опасно</strong><small>Короткая шпаргалка</small></div><b>›</b></button>
+        <button onclick="complementaryV2Open('menu')"><span>🍽️</span><div><strong>Меню на день</strong><p>Возраст + уже введённые продукты → идеи завтрака, обеда и ужина.</p></div><b>›</b></button>
         <button onclick="complementaryV2Open('tracker')"><span>✅</span><div><strong>Трекер продуктов</strong><small>Что уже попробовал малыш</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('safety')"><span>🛡️</span><div><strong>Безопасность</strong><small>Что важно знать до первой ложки</small></div><b>›</b></button>
       </div>
@@ -195,4 +197,33 @@ function complementaryV2OpenChokingInfographic() {
     if(event.target===overlay || event.target.closest(".comp-v2-infographic-close")) overlay.remove();
   });
   document.body.appendChild(overlay);
+}
+
+function complementaryV2MenuBuilder(){
+  const saved=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]");
+  const foods=saved.map(x=>x.food).filter(Boolean);
+  const chips=foods.length?foods.slice(0,18).map(x=>'<span class="comp-v2-food-chip">'+x+'</span>').join(""):'<span class="comp-v2-muted">В трекере пока нет продуктов — можно добавить их вручную ниже.</span>';
+  return '<div class="comp-v2-builder"><p>Выберите возраст и отметьте знакомые продукты. Генератор даст несколько идей, а не жёсткое меню.</p><label>Возраст малыша<select id="compMenuAge"><option value="6">6–8 месяцев</option><option value="9">9–11 месяцев</option><option value="12">12+ месяцев</option></select></label><div class="comp-v2-builder-known"><strong>Уже введено в трекере</strong><div>'+chips+'</div></div><label>Добавить знакомые продукты<input id="compMenuFoods" placeholder="Например: кабачок, гречка, индейка"></label><button type="button" onclick="complementaryV2GenerateMenu()">✨ Собрать меню</button><div id="compMenuResult"></div></div>';
+}
+function complementaryV2GenerateMenu(){
+  const age=Number(document.getElementById("compMenuAge")?.value||6);
+  const saved=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]").map(x=>x.food).filter(Boolean);
+  const typed=(document.getElementById("compMenuFoods")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  const known=[...new Set([...saved,...typed])];
+  const has=(words)=>known.find(x=>words.some(w=>x.toLowerCase().includes(w)));
+  const veg=has(["кабач","брок","капуст","морков","тыкв","картоф"])||"знакомый овощ";
+  const cereal=has(["греч","овся","рис","кукуруз","каш"])||"знакомая каша";
+  const protein=has(["индей","крол","говяд","кур","мяс","рыб","яйц","чечев","фасол"])||"знакомый источник белка";
+  const fruit=has(["яблок","груш","банан","слив","перс","ягод"])||"знакомый фрукт";
+  const texture=age<9?"пюре / мягко размято":age<12?"размято + мягкие кусочки по навыкам":"мягкие кусочки и семейная еда без лишней соли/сахара";
+  const meals=age<9?[
+    ["Завтрак",cereal+" + "+fruit],
+    ["Обед",veg+" + "+protein]
+  ]:[
+    ["Завтрак",cereal+" + "+fruit],
+    ["Обед",veg+" + "+protein],
+    ["Ужин","знакомые продукты из разных групп"]
+  ];
+  const html=meals.map(x=>'<div class="comp-v2-menu-meal"><b>'+x[0]+'</b><strong>'+x[1]+'</strong></div>').join("");
+  document.getElementById("compMenuResult").innerHTML='<div class="comp-v2-menu-result"><strong>🍽️ Вариант на день</strong>'+html+'<p><b>Текстура:</b> '+texture+'.</p><p>Молочное питание сохраняйте в привычном режиме. Воду предлагайте с едой небольшими глотками. Следуйте сигналам голода и насыщения.</p><div class="comp-v2-note">Новый продукт не обязан появляться каждый день. Если добавляете новый, удобнее не смешивать его сразу с несколькими незнакомыми продуктами.</div></div>';
 }
