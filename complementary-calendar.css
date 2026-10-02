@@ -1,0 +1,84 @@
+.feeding-head{margin:14px;padding:22px;background:#efeade;border-radius:24px}
+.feeding-back{display:block;padding:0;background:none;color:#725f5a;margin-bottom:22px;cursor:pointer}
+.feeding-eyebrow{display:block;font-size:10px;letter-spacing:1.7px;font-weight:700;color:#6c7553;margin-bottom:8px}
+.feeding-head h1{font-size:29px;line-height:1.15;letter-spacing:-.6px;margin:0 0 12px}
+.feeding-head p{font-size:14px;line-height:1.6;margin:0;color:#685d53}
+.feeding-panel{margin:14px;padding:20px;background:#fff;border-radius:20px;box-shadow:0 3px 14px rgba(80,50,40,.04)}
+.feeding-panel h2{font-size:19px;margin:0 0 14px;line-height:1.3}
+.feeding-panel h3{font-size:16px;margin:16px 0 8px}
+.feeding-panel p,.feeding-panel li{font-size:13px;line-height:1.65}
+.feeding-panel p{margin:8px 0}
+.feeding-note{background:#f7eee7;box-shadow:none;border:1px solid #eddfd2}
+.feeding-note strong{font-size:14px}
+.feeding-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.feeding-fields label{font-size:12px;font-weight:600;line-height:1.4;display:flex;flex-direction:column;gap:7px}
+.feeding-fields input,.feeding-fields select{font:inherit;font-size:15px;width:100%;min-width:0;min-height:46px;padding:10px;color:#382d2b;background:#fbf8f4;border:1px solid #dcd4c9;border-radius:11px}
+.feeding-check{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.5;margin:13px 0}
+.feeding-check input{width:18px;height:18px;flex-shrink:0;accent-color:#667651;margin:1px 0}
+.feeding-known{border-top:1px solid #ede6df;margin:16px 0;padding-top:14px}
+.feeding-known summary,.feeding-sources summary{font-size:13px;cursor:pointer;line-height:1.5;font-weight:600}
+.feeding-known-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.feeding-known-grid .feeding-check{font-size:12px;text-transform:capitalize}
+.feeding-primary{width:100%;min-height:48px;border-radius:13px;background:#63744e;color:white;font-weight:600;cursor:pointer}
+.feeding-panel .feeding-muted{color:#786e63;font-size:12px}
+#feeding-status:empty{display:none}
+#feeding-status{color:#4c6239}
+.feeding-age-tabs,.feeding-month-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 0 10px}
+.feeding-age-tabs button,.feeding-month-tabs button{padding:10px 13px;border:1px solid #ded8ce;border-radius:12px;background:#faf8f4;color:#554d45;white-space:nowrap;cursor:pointer;font-size:12px;min-height:42px}
+.feeding-age-tabs button[aria-pressed="true"],.feeding-month-tabs button[aria-pressed="true"]{background:#63744e;border-color:#63744e;color:white}
+.feeding-month-tabs small{display:block;margin-top:4px;font-size:10px}
+.feeding-title-line{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.feeding-title-line h2{margin:0}
+.feeding-print{background:#f1ede5;border-radius:11px;padding:11px;font-size:12px;cursor:pointer}
+.feeding-note-inline{background:#f3f5ec;padding:12px;border-radius:12px;color:#536346}
+.feeding-table-wrap{margin-top:16px}
+.feeding-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.feeding-table caption{text-align:left;font-size:12px;color:#786e63;padding-bottom:12px;line-height:1.5}
+.feeding-table th{text-align:left;font-size:11px;color:#716659;border-bottom:1px solid #d5cabc;padding:12px 6px}
+.feeding-table th:first-child{width:16%}
+.feeding-table th:nth-child(2){width:29%}
+.feeding-table th:nth-child(3){width:35%}
+.feeding-table th:last-child{width:20%}
+.feeding-table td{vertical-align:top;padding:14px 6px;border-bottom:1px solid #ece6dc;line-height:1.55;overflow-wrap:anywhere}
+.feeding-table td>strong{text-transform:capitalize;display:block}
+.feeding-table small{display:block;font-size:10px;line-height:1.5;color:#766c60;margin-top:7px}
+.feeding-amount{display:block;font-size:18px;font-weight:600;color:#54633f;margin:3px 0}
+.feeding-table details{font-size:11px;margin-top:10px}
+.feeding-table details p{font-size:11px}
+.feeding-table summary{cursor:pointer;color:#625441}
+.feeding-badge{display:block;background:#fbebd6;color:#735529;border-radius:6px;font-size:9px;padding:4px 6px;margin-top:8px}
+.feeding-repeat{border:1px solid #dbd5c9;background:#fbfaf6;color:#645d50;min-height:40px;padding:6px 7px;border-radius:9px;margin-top:10px;font-size:10px;cursor:pointer}
+.feeding-meal{margin-bottom:7px}
+.feeding-tips{padding-left:18px;margin:0}
+.feeding-tips li{margin-bottom:10px}
+.feeding-alert{background:#fff0eb;border:1px solid #efd4c8;border-radius:14px;padding:15px;margin:16px 0}
+.feeding-alert strong{font-size:13px}
+.feeding-sources{margin-top:16px;border-top:1px solid #ede6df;padding-top:14px}
+.feeding-sources a{color:#53663c}
+.feeding-panel button:focus-visible,.feeding-panel input:focus-visible,.feeding-panel select:focus-visible,.feeding-back:focus-visible{outline:3px solid #a6b68e;outline-offset:3px}
+@media(max-width:560px){
+  .feeding-panel{padding:16px}
+  .feeding-head h1{font-size:27px}
+  .feeding-fields{gap:12px}
+  .feeding-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .feeding-table,.feeding-table tbody,.feeding-table tr,.feeding-table td{display:block;width:100%}
+  .feeding-table tr{border:1px solid #e1dacd;background:#fffcf8;border-radius:16px;padding:14px;margin-bottom:12px;break-inside:avoid}
+  .feeding-table td{padding:10px 0;border:0}
+  .feeding-table td+td{border-top:1px solid #ece6dc}
+  .feeding-table td:before{content:attr(data-label);display:block;font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#8a7c66;margin-bottom:6px}
+  .feeding-table td:first-child{position:relative;padding-right:118px;min-height:60px}
+  .feeding-table td:first-child:before{display:none}
+  .feeding-table td:first-child>b{font-size:16px}
+  .feeding-table td:first-child .feeding-repeat{position:absolute;right:0;top:0;margin:0;font-size:11px}
+  .feeding-table small{font-size:11px}
+  .feeding-table td:last-child{background:#edf1e5;border-radius:10px;padding:10px;margin-top:6px}
+  .feeding-table td:last-child strong{font-size:12px;text-transform:none}
+  .feeding-badge{display:inline-block;font-size:10px}
+}
+@media(max-width:350px){.feeding-fields,.feeding-known-grid{grid-template-columns:1fr}}
+@media print{
+  header,nav,.feeding-head,.feeding-panel:not(.feeding-calendar-panel),.feeding-repeat,.feeding-print,.feeding-month-tabs{display:none!important}
+  #app{max-width:none;padding:0}.feeding-calendar-panel{margin:0;padding:0;box-shadow:none}
+  .feeding-table{font-size:10px}.feeding-table tr{break-inside:avoid}.feeding-table td{font-size:10px}
+  .feeding-table details{display:none}.feeding-panel{color:#000}.feeding-calendar-panel h2{font-size:20px}
+}

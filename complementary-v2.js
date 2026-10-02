@@ -43,6 +43,10 @@ function complementaryV2Cards(items) {
   return '<div class="comp-v2-card-grid">'+items.map(x=>'<div class="comp-v2-card"><span>'+x[0]+'</span><div><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div></div>').join('')+'</div>';
 }
 function complementaryV2Open(topic) {
+  if(topic === "plan" && typeof openComplementaryCalendar === "function"){
+    openComplementaryCalendar();
+    return;
+  }
   const modal=document.getElementById("modal");
   const modalBody=document.getElementById("modalBody");
   if(!modal || !modalBody) return;
@@ -79,6 +83,9 @@ function openComplementaryV2() {
       <div class="comp-v2-hero"><span>🥣</span><div><small>МАМА ЗНАЕТ · V2.0</small><h1>Прикорм без хаоса</h1><p>Пошаговый навигатор: готовность, первые продукты, текстуры, вода, безопасность и план первых 30 дней.</p></div></div>
       <div class="comp-v2-important"><strong>Главная мысль</strong><p>Прикорм — знакомство с едой и новыми навыками. Начинаем с небольших количеств, постепенно расширяем разнообразие и сохраняем молочное питание.</p></div>
       ${complementaryV2Cards(complementaryV2Basics)}
+      <div class="comp-v2-menu">
+        <button onclick="complementaryV2Open('plan')"><span>📅</span><div><strong>Мой календарь прикорма</strong><small>Выберите дни на один овощ — план подстроится под вас</small></div><b>›</b></button>
+      </div>
       <div class="comp-v2-infographic-section">
         <div class="comp-v2-infographic-heading"><span>🥕</span><div><small>ВИЗУАЛЬНАЯ ШПАРГАЛКА</small><strong>Текстуры и безопасная подача</strong></div></div>
         <button class="comp-v2-infographic-button" type="button" onclick="complementaryV2OpenInfographic()">
@@ -141,7 +148,7 @@ function openComplementaryV2() {
         <button onclick="complementaryV2Open('first')"><span>🥦</span><div><strong>Первые продукты</strong><small>Овощи, каши, мясо, фрукты</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('texture')"><span>🥄</span><div><strong>Пюре и кусочки</strong><small>Как менять текстуру</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('water')"><span>💧</span><div><strong>Вода</strong><small>Когда и как предлагать</small></div><b>›</b></button>
-        <button onclick="complementaryV2Open('plan')"><span>📅</span><div><strong>Первые 30 дней</strong><small>Готовый пошаговый план</small></div><b>›</b></button>
+        <button onclick="complementaryV2Open('plan')"><span>📅</span><div><strong>Календарь по месяцам</strong><small>Ваш темп и порции в чайных ложках</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('schedule')"><span>⏰</span><div><strong>Прикорм в режиме дня</strong><small>Пример для 6 кормлений</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('allergens')"><span>🥚</span><div><strong>Аллергены</strong><small>Как знакомить безопаснее</small></div><b>›</b></button>
         <button onclick="complementaryV2Open('gagging')"><span>😮</span><div><strong>Рвотный рефлекс vs удушье</strong><small>Что важно различать</small></div><b>›</b></button>
@@ -292,3 +299,4 @@ function complementaryV2OpenPortionsInfographic(){
   });
   document.body.appendChild(overlay);
 }
+
