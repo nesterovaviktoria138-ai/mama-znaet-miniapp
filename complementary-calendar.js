@@ -6,26 +6,26 @@
   // Sequence and teaspoon amounts are editable examples, not clinical norms.
   const foods = [
     {id:'zucchini',name:'кабачок',group:'veg',min:4,prep:'Отварить или приготовить на пару, измельчить.'},
-    {id:'turkey',name:'индейка',group:'protein',min:6,priority:1,prep:'Полностью приготовить, измельчить с водой или знакомым пюре.'},
-    {id:'buckwheat',name:'гречневая каша',group:'grain',min:6,priority:2,prep:'Детская каша без сахара, желательно обогащённая железом; приготовить по инструкции.'},
+    {id:'turkey',name:'индейка',group:'protein',min:4,priority:1,prep:'Полностью приготовить, измельчить с водой или знакомым пюре.'},
+    {id:'buckwheat',name:'гречневая каша',group:'grain',min:4,priority:2,prep:'Детская каша без сахара, желательно обогащённая железом; приготовить по инструкции.'},
     {id:'egg',name:'яйцо',group:'protein',min:6,priority:3,allergen:true,prep:'Полностью сваренное яйцо целиком (белок и желток), размять до однородности со знакомым пюре.'},
     {id:'peanut',name:'арахис',group:'extra',min:6,priority:4,allergen:true,prep:'Гладкую пасту без соли и сахара сильно развести водой или знакомым пюре. Количество в таблице — уже разведённая смесь. Не давать орехи и густую пасту.'},
     {id:'broccoli',name:'брокколи',group:'veg',min:4,prep:'Готовить до мягкости; для первых проб измельчить.'},
-    {id:'beef',name:'говядина',group:'protein',min:6,prep:'Полностью приготовить, тщательно измельчить.'},
+    {id:'beef',name:'говядина',group:'protein',min:4,prep:'Полностью приготовить, тщательно измельчить.'},
     {id:'oats',name:'овсяная каша',group:'grain',min:6,allergen:true,prep:'Детская каша без сахара; проверить маркировку на глютен и другие аллергены. Первую пробу готовить без новых добавок.'},
     {id:'cauliflower',name:'цветная капуста',group:'veg',min:4,prep:'Готовить до мягкости, измельчить до подходящей текстуры.'},
     {id:'fish',name:'лосось',group:'protein',min:6,allergen:true,prep:'Полностью приготовить и очень тщательно удалить все кости.'},
     {id:'yogurt',name:'натуральный йогурт',group:'dairy',min:6,allergen:true,prep:'Пастеризованный, обычной жирности, без сахара и добавок; содержит белок молока.'},
-    {id:'apple',name:'яблоко',group:'fruit',min:6,prep:'Очистить, приготовить до мягкости и размять. Сырое твёрдое яблоко кусочками не давать.'},
+    {id:'apple',name:'яблоко',group:'fruit',min:4,prep:'Очистить, приготовить до мягкости и размять. Сырое твёрдое яблоко кусочками не давать.'},
     {id:'lentil',name:'чечевица',group:'protein',min:6,prep:'Разварить до мягкости и тщательно размять или пюрировать.'},
     {id:'pumpkin',name:'тыква',group:'veg',min:4,prep:'Приготовить до мягкости и измельчить.'},
-    {id:'potato',name:'картофель',group:'starch',min:6,prep:'Полностью отварить, размять со знакомым пюре или водой.'},
-    {id:'pear',name:'груша',group:'fruit',min:6,prep:'Очистить; твёрдую грушу приготовить, мягкую спелую — размять.'},
+    {id:'potato',name:'картофель',group:'starch',min:4,prep:'Полностью отварить, размять со знакомым пюре или водой.'},
+    {id:'pear',name:'груша',group:'fruit',min:4,prep:'Очистить; твёрдую грушу приготовить, мягкую спелую — размять.'},
     {id:'carrot',name:'морковь',group:'veg',min:4,prep:'Полностью приготовить до мягкости; сырые кусочки не давать.'},
     {id:'millet',name:'пшённая каша',group:'grain',min:6,prep:'Разварить или использовать подходящую детскую кашу без сахара.'},
     {id:'avocado',name:'авокадо',group:'fruit',min:6,prep:'Мягкий спелый плод очистить и размять.'},
     {id:'wheat',name:'пшеничная каша',group:'grain',min:6,allergen:true,prep:'Содержит глютен. Готовить без сахара, без других новых продуктов.'},
-    {id:'chicken',name:'курица',group:'protein',min:6,prep:'Полностью приготовить, убрать кожу и кости, измельчить.'},
+    {id:'chicken',name:'курица',group:'protein',min:4,prep:'Полностью приготовить, убрать кожу и кости, измельчить.'},
     {id:'plum',name:'слива',group:'fruit',min:6,prep:'Убрать косточку и кожицу, размять мягкую мякоть.'}
   ];
   const portionNames = {
@@ -76,68 +76,100 @@
   function normalize(s={}){
     const start=date(s.start)?s.start:today();
     return {start,age:bounded(s.age,4,11,6),vegDays:bounded(s.vegDays,2,14,3),
-      otherDays:bounded(s.otherDays,3,7,3),ready:s.ready===true,early:s.early===true,
+      otherDays:bounded(s.otherDays,2,14,3),ready:s.ready===true,early:s.early===true,
       known:Array.isArray(s.known)?s.known.filter(id=>foods.some(f=>f.id===id)):[],
       repeats:s.repeats && typeof s.repeats==='object'?Object.fromEntries(Object.entries(s.repeats)
         .filter(([k,v])=>/^\d+$/.test(k) && Number(k)<400 && Number.isInteger(v) && v>0 && v<=30)):{}};
   }
   function spoon(n){ return String(n).replace('0.5','½').replace('.',',')+' ч. л.'; }
+  // This is an example menu, not a mandatory order or prescribed portion.
+  const order = ['zucchini','broccoli','cauliflower','pumpkin','carrot','potato',
+    'turkey','buckwheat','apple','pear','beef','egg','peanut','fish','yogurt',
+    'oats','lentil','millet','avocado','wheat','chicken','plum'];
+  const curves = {
+    veg:[1,3,5,7,9,11,12,13,14,14,14,16,16,18,18,18,20],
+    starch:[1,3,4,6,8,10], protein:[1,2,3,4,5,6],
+    grain:[1,3,5,7,9,11,12], fruit:[1,2,3,4,6], dairy:[1,2,3,4,6,8],
+    extra:[0.5,1]
+  };
+  function curve(values,day){return values[Math.min(Math.max(0,day),values.length-1)];}
   function amount(f,day){
-    const cap=f.id==='peanut'?1:f.id==='egg'?2:3;
-    return Math.min(cap,[0.5,1,2,3][Math.min(day,3)]);
+    if(f.id==='egg') return curve([0.5,1,2],day);
+    return curve(curves[f.group],day);
   }
-  function familiar(known,newFood,age,month,day){
+  function lunchVegetables(day){return curve(curves.veg,day);}
+  function familiar(known,newFood,age,month,day,firstOffered,newAmount){
     const eligible=foods.filter(f=>known.has(f.id) && f.min<=age && f.id!==newFood?.id);
+    const capacity=f=>amount(f,day-(firstOffered.get(f.id) ?? day));
     const pick=(groups,offset=0)=>{
       const a=eligible.filter(f=>groups.includes(f.group) && !['egg','fish'].includes(f.id));
       return a.length?a[(day+offset)%a.length]:null;
     };
     const servings=[];
-    const portions=age<6?{veg:2,grain:0,protein:0,fruit:0,dairy:0}
-      :month===0?{veg:4,grain:3,protein:1,fruit:1,dairy:2}
-      :{veg:8,grain:6,protein:3,fruit:3,dairy:4};
-    const add=(label,parts)=>{ const good=parts.filter(Boolean); if(good.length) servings.push({label,parts:good}); };
-    const part=(f,n)=> f && n>0?{id:f.id,name:portionNames[f.id] || f.name,spoons:n}:null;
-    const veg=pick(['veg']),grain=pick(['grain','starch']),protein=pick(['protein']);
-    add('Обед',[part(veg,portions.veg),part(grain,portions.grain),part(protein,portions.protein)]);
-    const meals=age>=10 && month>=1?3:age>=7 && month>=1?2:1;
-    if(meals>=2) add('Завтрак',[part(pick(['grain']),portions.grain),part(pick(['fruit']),portions.fruit)]);
-    if(meals===3) add('Ужин',[part(pick(['veg'],1),portions.veg),part(pick(['grain','starch'],1),portions.grain),part(pick(['dairy']),portions.dairy)]);
-    // Re-offer allergens regularly once the parent has confirmed tolerance.
-    const allergen=eligible.filter(f=>f.allergen);
-    const repeat=allergen.length?allergen[day%allergen.length]:null;
-    if(repeat && !servings.some(s=>s.parts.some(p=>p.id===repeat.id))){
-      add('Знакомый аллерген',[part(repeat,repeat.id==='peanut'?1:2)]);
+    const add=(label,parts)=>{const good=parts.filter(Boolean);if(good.length)servings.push({label,parts:good});};
+    const part=(f,n)=>f && n>0?{id:f.id,name:portionNames[f.id]||f.name,spoons:Math.min(n,capacity(f))}:null;
+    // The new vegetable is part of the vegetable portion, not added on top of it.
+    let remaining=lunchVegetables(day)-(newFood?.group==='veg'?newAmount:0);
+    const veg=eligible.filter(f=>f.group==='veg').sort((a,b)=>capacity(b)-capacity(a));
+    const full=veg.filter(f=>capacity(f)>=remaining);
+    if(full.length){const chosen=full[day%full.length];veg.splice(veg.indexOf(chosen),1);veg.unshift(chosen);}
+    const vegetableParts=[];
+    for(const f of veg){
+      const n=Math.min(remaining,capacity(f));
+      if(n>0){vegetableParts.push(part(f,n));remaining-=n;}
+      if(remaining<=0)break;
     }
+    const starch=newFood?.group==='starch'?null:(pick(['starch'])||pick(['grain']));
+    const protein=newFood?.group==='protein'?null:pick(['protein']);
+    add('Обед',[...vegetableParts,part(starch,10),part(protein,6)]);
+    const meals=age>=10 && month>=1?3:age>=7 && month>=1?2:1;
+    const fruit=pick(['fruit']);
+    if(meals>=2) add('Завтрак',[part(pick(['grain']),12),part(fruit,6)]);
+    else if(newFood?.group!=='fruit') add('После обеда',[part(fruit,4)]);
+    if(meals===3) add('Ужин',[part(pick(['veg'],1),12),part(pick(['grain','starch'],1),8),part(pick(['dairy']),6)]);
+    const allergens=eligible.filter(f=>f.allergen);
+    const repeat=allergens.length?allergens[day%allergens.length]:null;
+    if(repeat && !servings.some(s=>s.parts.some(p=>p.id===repeat.id)))
+      add('Знакомый аллерген',[part(repeat,repeat.id==='peanut'?1:2)]);
     return servings;
+  }
+  function nextFood(available,day,settings){
+    // A long vegetable introduction must not postpone iron-rich foods for months.
+    const urgent=[...(settings.vegDays>3&&day>=14?['turkey','buckwheat']:[]),...(day>=20?['egg','peanut']:[])];
+    for(const id of urgent){const food=available.find(f=>f.id===id);if(food)return food;}
+    return order.map(id=>available.find(f=>f.id===id)).find(Boolean)||null;
   }
   function build(input){
     const s=normalize(input), start=date(s.start), end=plusMonths(start,12-s.age);
+    // Pure generator follows the same readiness gate as the interface.
+    if(!s.ready || (s.age<6 && !s.early))return [];
     const count=Math.round((end-start)/DAY), rows=[];
-    let known=new Set(s.known), active=null, step=0, raw=0, initial=!known.has('zucchini');
-    const introduced=new Set(known);
+    const known=new Set(s.known), introduced=new Set(known);
+    const firstOffered=new Map(s.known.map(id=>[id,-30]));
+    let active=null,step=0,raw=0;
     while(rows.length<count){
-      const current=plusDays(start,rows.length), age=ageOn(start,s.age,current);
+      const current=plusDays(start,rows.length),age=ageOn(start,s.age,current);
       const month=Math.min(11-s.age,age-s.age);
       if(!active){
-        const available=foods.filter(f=>f.min<=age && !introduced.has(f.id));
-        active=initial?available.find(f=>f.id==='zucchini'):null;
-        if(!active) active=available.find(f=>f.priority) || available[0] || null;
-        initial=false; step=0;
+        active=nextFood(foods.filter(f=>f.min<=age&&!introduced.has(f.id)),raw,s);
+        step=0;
+        if(active)firstOffered.set(active.id,raw);
       }
-      const row={index:rows.length,raw,date:iso(current),age,month,newId:active?.id || null,
-        newAmount:active?amount(active,step):null,step:step+1,
-        duration:active?(active.group==='veg'?s.vegDays:s.otherDays):null,
-        familiar:familiar(known,active,age,month,rows.length),repeated:false};
+      const newAmount=active?amount(active,step):null;
+      const familiarMeals=familiar(known,active,age,month,raw,firstOffered,newAmount);
+      const lunch=familiarMeals.find(m=>m.label==='Обед');
+      const baseAmount=lunch?lunch.parts.reduce((sum,p)=>sum+p.spoons,0):0;
+      const row={index:rows.length,raw,date:iso(current),age,month,newId:active?.id||null,
+        newAmount,step:step+1,duration:active?(active.group==='veg'||active.id==='potato'?s.vegDays:s.otherDays):null,
+        familiar:familiarMeals,baseAmount,lunchTotal:baseAmount+(newAmount||0),repeated:false};
       rows.push(row);
-      const repeats=s.repeats[String(raw)] || 0;
-      for(let i=0;i<repeats && rows.length<count;i++){
-        const repeatDate=plusDays(start,rows.length);
-        rows.push({...row,index:rows.length,date:iso(repeatDate),
-          age:ageOn(start,s.age,repeatDate),month:ageOn(start,s.age,repeatDate)-s.age,repeated:true});
+      for(let i=0;i<(s.repeats[String(raw)]||0)&&rows.length<count;i++){
+        const repeatDate=plusDays(start,rows.length),repeatAge=ageOn(start,s.age,repeatDate);
+        // Repeating freezes ALL portions and introduction progress, even across a month boundary.
+        rows.push({...row,index:rows.length,date:iso(repeatDate),age:repeatAge,month:repeatAge-s.age,repeated:true});
       }
       raw++;
-      if(active && ++step>=row.duration){ known.add(active.id);introduced.add(active.id);active=null; }
+      if(active&&++step>=row.duration){known.add(active.id);introduced.add(active.id);active=null;}
     }
     return rows;
   }
@@ -158,14 +190,14 @@
     document.getElementById('screen').innerHTML=`
       <section class="feeding-head">
         <button class="feeding-back" onclick="location.reload()">← Главная</button>
-        <span class="feeding-eyebrow">ПИТАНИЕ МАЛЫША</span>
+        <span class="feeding-eyebrow">ПИТАНИЕ МАЛЫША · КАЛЕНДАРЬ 2</span>
         <h1>Прикорм в вашем темпе</h1>
         <p>Понятный календарь по месяцам — с маленькими пробами, знакомыми вкусами и правом не торопиться.</p>
       </section>
       <section class="feeding-panel feeding-note">
         <strong>Это лишь ориентир, а не обязательная норма.</strong>
-        <p>Любой этап можно растянуть на несколько дней. Следуйте готовности и аппетиту малыша: отвернулся или закрыл рот — заканчиваем. Количество в таблице можно уменьшить; увеличивать постепенно, если малыш хочет ещё.</p>
-        <p>Все количества — в <b>ровных чайных ложках без горки</b> (ч. л.). Для кусочков ложки служат условной мерой порции. Смесь или грудное молоко остаются важной частью питания до года.</p>
+        <p>Любой этап можно растянуть на несколько дней. Следуйте готовности и аппетиту малыша: отвернулся или закрыл рот — заканчиваем. Количество в таблице можно уменьшить. Увеличивайте только если малыш готов и хочет ещё; кнопка «Повторить день» сохраняет все порции без роста.</p>
+        <p>Все количества — в <b>ровных чайных ложках без горки</b> (ч. л.). Обычная чайная ложка — около 5 мл, детские ложечки могут быть меньше. Объём пюре и его масса не равны точно. Для кусочков ложки служат условной мерой порции. Смесь или грудное молоко остаются важной частью питания до года.</p>
       </section>
       <section class="feeding-panel">
         <h2>Настроим ваш календарь</h2>
@@ -176,9 +208,9 @@
             </label>
             <label>Дата начала прикорма<input type="date" name="start" value="${esc(state.start)}" required min="2020-01-01" max="2100-12-31"></label>
             <label>Дней на один новый овощ<input type="number" name="vegDays" min="2" max="14" step="1" value="${state.vegDays}" required inputmode="numeric"></label>
-            <label>Дней на другие новые продукты<input type="number" name="otherDays" min="3" max="7" step="1" value="${state.otherDays}" required inputmode="numeric"></label>
+            <label>Дней на другие новые продукты<input type="number" name="otherDays" min="2" max="14" step="1" value="${state.otherDays}" required inputmode="numeric"></label>
           </div>
-          <p class="feeding-muted">По умолчанию — 3 дня. CDC предлагает 3–5 дней между новыми продуктами на старте. Выбор 2 дней для овоща — более быстрый вариант; при экземе или аллергии обсудите темп с врачом. Аллергены вводим отдельно.</p>
+          <p class="feeding-muted">По умолчанию — 3 дня. CDC предлагает 3–5 дней между новыми продуктами на старте. В обоих полях можно выбрать от 2 до 14 дней. Выбор 2 дней — более быстрый вариант; при экземе или аллергии обсудите темп с врачом. Аллергены вводим отдельно.</p>
           <label class="feeding-check"><input type="checkbox" name="ready"${check(state.ready)}>Малыш держит голову, устойчиво сидит с поддержкой и может проглатывать пищу.</label>
           <label class="feeding-check"><input type="checkbox" name="early"${check(state.early)}>Если стартуем в 4–5 месяцев: ранний старт согласован с педиатром.</label>
           <details class="feeding-known"><summary>Что малыш уже пробовал и хорошо переносит?</summary>
@@ -210,7 +242,7 @@
         </ul>
         <div class="feeding-alert"><strong>Когда нужна срочная помощь</strong><p>Отёк губ или языка, трудное дыхание, резкая вялость, повторная рвота с бледностью или быстрое ухудшение после еды — прекратите кормление и вызовите экстренную помощь (112 там, где этот номер действует).</p></div>
         <details class="feeding-sources"><summary>На чём основаны подсказки</summary>
-          <p>Порядок блюд и ложки в календаре — примеры для планирования, а не норматив из рекомендаций. Обязательной последовательности овощей нет. Рекомендации разных стран по старту отличаются; базовый ориентир здесь — около 6 месяцев. Проверено 2 октября 2026 года.</p>
+          <p>Порядок блюд и ложки в календаре — примеры для планирования, а не норматив из рекомендаций. Обязательной последовательности овощей нет. Рекомендации разных стран по старту отличаются; базовый ориентир здесь — около 6 месяцев. Проверено 3 октября 2026 года.</p>
           <ul>
             <li><a href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html" target="_blank" rel="noopener">CDC: готовность, первые продукты и интервалы</a></li>
             <li><a href="https://www.nhs.uk/baby/weaning-and-feeding/babys-first-solid-foods/" target="_blank" rel="noopener">NHS: прикорм и питание по возрасту</a></li>
@@ -254,7 +286,7 @@
         <div class="feeding-title-line"><div><span class="feeding-eyebrow">ВАШ ПЛАН</span><h2>Месяц ${selectedMonth+1} прикорма</h2></div><button type="button" class="feeding-print">Печать</button></div>
         <p class="feeding-muted">${readable(view[0].date)} — ${readable(view[view.length-1].date)} · примерно ${state.age+selectedMonth} месяцев · новый овощ на ${state.vegDays} дня</p>
         <div class="feeding-month-tabs" role="group" aria-label="Месяц прикорма">${Array.from({length:months},(_,i)=>`<button type="button" data-month="${i}" aria-pressed="${i===selectedMonth}">Месяц ${i+1}<small>≈ ${state.age+i} мес.</small></button>`).join('')}</div>
-        <p class="feeding-note-inline">Календарь продолжается из месяца в месяц. Можно повторять день без увеличения количества — следующие даты сдвинутся. Порции знакомых блюд тоже указаны в чайных ложках.</p>
+        <p class="feeding-note-inline">Календарь продолжается из месяца в месяц. Можно повторять день без увеличения количества — следующие даты сдвинутся. Новая проба и знакомая основа считаются отдельно. Знакомые порции растут постепенно и не сбрасываются при смене месяца. При старте с нуля: с 2 днями на овощ картофель появится на 11-й день, с 3 днями — на 16-й; при более медленном темпе даты сдвигаются. После первых овощей добавляем источники железа, не дожидаясь знакомства со всеми овощами.</p>
         <div class="feeding-table-wrap"><table class="feeding-table">
           <caption>Пример прикорма: месяц ${selectedMonth+1}. Количество можно уменьшить по аппетиту.</caption>
           <thead><tr><th scope="col">Когда</th><th scope="col">Новый продукт</th><th scope="col">Знакомая еда</th><th scope="col">После еды</th></tr></thead>
@@ -278,9 +310,10 @@
     return `<tr>
       <td data-label="Когда"><b>${readable(r.date)}</b><small>День ${r.index+1}${r.repeated?' · повтор':''}</small><button type="button" class="feeding-repeat" data-repeat="${r.raw}" aria-label="Повторить день ${r.index+1}">Повторить день</button></td>
       <td data-label="Новый продукт">${f?`<strong>${esc(f.name)}</strong><span class="feeding-amount">${spoon(r.newAmount)}</span><small>Проба ${r.step} из ${r.duration} · 11:00–13:00</small>${f.allergen?'<span class="feeding-badge">Аллерген · вводить отдельно</span>':''}<details><summary>Как приготовить</summary><p>${f.prep}</p></details>`:'<strong>Без нового продукта</strong><small>Повторяем уже знакомую еду и осваиваем текстуры.</small>'}</td>
-      <td data-label="Знакомая еда">${known||'<p>Пока без знакомой основы. Только маленькая проба нового продукта.</p>'}<small>Только то, что уже пробовали и хорошо переносите. Можно меньше.</small></td>
+      <td data-label="Знакомая еда">${known||'<p>Пока без знакомой основы. Только маленькая проба нового продукта.</p>'}<small>Только то, что уже пробовали и хорошо переносите. Можно меньше.</small>${r.newId?`<div class="feeding-total">Проба + основа обеда: <b>${spoon(r.lunchTotal)}</b><small>Знакомые фрукты и повтор аллергена после обеда — отдельно.</small></div>`:""}</td>
       <td data-label="После еды"><strong>${MILK}</strong><small>По аппетиту. Продолжайте обычные молочные кормления в течение дня.</small></td>
     </tr>`;
   }
   root.openComplementaryCalendar=function(){show();root.scrollTo(0,0);};
 })(typeof window!=='undefined'?window:null);
+

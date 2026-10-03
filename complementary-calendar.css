@@ -82,3 +82,10 @@
   .feeding-table{font-size:10px}.feeding-table tr{break-inside:avoid}.feeding-table td{font-size:10px}
   .feeding-table details{display:none}.feeding-panel{color:#000}.feeding-calendar-panel h2{font-size:20px}
 }
+
+
+.feeding-total{padding:10px;margin-top:10px;border-radius:10px;background:#f0f3e8;color:#4a5b36;font-size:12px}
+@media(max-width:560px){
+  .feeding-fields{grid-template-columns:minmax(0,1fr)}
+  .feeding-fields input,.feeding-fields select{font-size:16px;max-width:100%;width:100%;min-width:0}
+}
