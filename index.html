@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="breastfeeding-v2.css?v=1">
 <link rel="stylesheet" href="sleep-development-v3.css?v=1">
 <link rel="stylesheet" href="development-v4.css?v=1">
+<link rel="stylesheet" href="vaccination-v2.css?v=1">
 </head>
 
 <body>
@@ -386,7 +387,8 @@
 
             <div class="cards">
 
-                <div class="card" onclick="openSection('development')">
+                <div class="card" role="button" tabindex="0" onclick="openVaccinationCalendar()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVaccinationCalendar()}"><div class="card-icon">💉</div><div><h3>Календарь прививок</h3><p>В России: по возрасту и дополнительные</p></div></div>
+<div class="card" onclick="openSection('development')">
 
                     <div class="card-icon">🌱</div>
 
@@ -663,8 +665,10 @@
 <script src="sleep-development-plus.js?v=1"></script>
 <script src="development-v4-data.js?v=1"></script>
 <script src="development-v4.js?v=1"></script>
+<script src="vaccination-v2.js?v=1"></script>
 </body>
 </html>
+
 
 
 
