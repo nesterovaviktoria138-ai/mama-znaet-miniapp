@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="sleep-development-v3.css?v=1">
 <link rel="stylesheet" href="development-v4.css?v=1">
 <link rel="stylesheet" href="vaccination-v2.css?v=1">
+<link rel="stylesheet" href="exams-v2.css?v=1">
 </head>
 
 <body>
@@ -430,7 +431,8 @@
                 </div>
 
 
-                <div class="card" onclick="openSection('health')">
+                <div class="card" role="button" tabindex="0" onclick="openPreventiveExams()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPreventiveExams()}"><div class="card-icon">🩺</div><div><h3>Профилактические осмотры</h3><p>Врачи, обследования и подготовка по возрасту</p></div></div>
+<div class="card" onclick="openSection('health')">
 
                     <div class="card-icon">🩺</div>
 
@@ -666,8 +668,11 @@
 <script src="development-v4-data.js?v=1"></script>
 <script src="development-v4.js?v=1"></script>
 <script src="vaccination-v2.js?v=1"></script>
+<script src="exams-data.js?v=1"></script>
+<script src="exams-v2.js?v=1"></script>
 </body>
 </html>
+
 
 
 
