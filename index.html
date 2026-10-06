@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="development-v4.css?v=1">
 <link rel="stylesheet" href="vaccination-v2.css?v=1">
 <link rel="stylesheet" href="exams-v2.css?v=1">
+<link rel="stylesheet" href="growth-calendar.css?v=1">
 </head>
 
 <body>
@@ -389,6 +390,7 @@
             <div class="cards">
 
                 <div class="card" role="button" tabindex="0" onclick="openVaccinationCalendar()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVaccinationCalendar()}"><div class="card-icon">💉</div><div><h3>Календарь прививок</h3><p>В России: по возрасту и дополнительные</p></div></div>
+<div class="card" role="button" tabindex="0" onclick="openGrowthCalendar()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGrowthCalendar()}"><div class="card-icon">🌿</div><div><h3>Календарь роста и сна</h3><p>Скачки, изменения сна и утренняя зарядка</p></div></div>
 <div class="card" onclick="openSection('development')">
 
                     <div class="card-icon">🌱</div>
@@ -670,8 +672,11 @@
 <script src="vaccination-v2.js?v=1"></script>
 <script src="exams-data.js?v=1"></script>
 <script src="exams-v2.js?v=1"></script>
+<script src="growth-data.js?v=1"></script>
+<script src="growth-calendar.js?v=1"></script>
 </body>
 </html>
+
 
 
 
