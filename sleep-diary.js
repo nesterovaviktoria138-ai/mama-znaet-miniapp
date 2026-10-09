@@ -9,8 +9,8 @@ function months(b,n){return (n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.
 function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(a))return [];return a.filter(d=>d&&validDate(d.date)).sort((a,b)=>a.date.localeCompare(b.date));}catch{return [];}}
 function save(d){try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(raw))return false;const previous=raw.find(x=>x?.date===d.date);const record={...previous,...d,updatedAt:new Date().toISOString()};const rows=raw.filter(x=>x?.date!==d.date);rows.push(record);localStorage.setItem(KEY,JSON.stringify(rows));return true;}catch{return false;}}
 function get(date){return read().find(x=>x.date===date)||null;}
-function ageOn(date){const n=new Date(date+'T12:00:00');if(typeof baby!=='undefined'&&validDate(baby?.birth)){const a=months(new Date(baby.birth+'T12:00:00'),n);return a>=0&&a<=12?a:'';}try{const s=JSON.parse(localStorage.getItem('mamaTodayV1')||'{}');if(Number.isInteger(s.month)&&validDate(s.ageOn)){const anchor=new Date(s.ageOn+'T12:00:00');const a=s.month+(n>=anchor?months(anchor,n):-months(n,anchor));return a>=0&&a<=12?a:'';}}catch{}return '';}
-function blank(date=today()){return {date,age:ageOn(date),wake:'',bed:'',bedDay:'0',next:'',awake:'',awakeKnown:false,count:'',settle:'',problem:'overview',state:'usual',support:'',preterm:false,complete:false,naps:[],notes:''};}
+function ageOn(date){const n=new Date(date+'T12:00:00');if(typeof baby!=='undefined'&&validDate(baby?.birth)){const a=window.MamaProfile.months(baby.birth,date);return a!==null&&a>=0&&a<=12?a:'';}try{const s=JSON.parse(localStorage.getItem('mamaTodayV1')||'{}');if(Number.isInteger(s.month)&&validDate(s.ageOn)){const anchor=new Date(s.ageOn+'T12:00:00');const a=s.month+(n>=anchor?months(anchor,n):-months(n,anchor));return a!==null&&a>=0&&a<=12?a:'';}}catch{}return '';}
+function blank(date=today()){return {date,age:ageOn(date),wake:'',bed:'',bedDay:'0',next:'',awake:'',awakeKnown:false,count:'',settle:'',problem:'overview',state:'usual',support:'',preterm:!!(window.MamaProfile.get().gestationWeeks&&window.MamaProfile.get().gestationWeeks<37),complete:false,naps:[],notes:''};}
 function normalize(d){return {...blank(d?.date||today()),...d,naps:Array.isArray(d?.naps)?d.naps.map(n=>({...n})):[]};}
 function partialErrors(d){const errors=[];if(!validDate(d.date)||d.date>today())errors.push('Выберите корректную дату не позже сегодняшнего дня.');const t=MamaSleepMath.time;
 for(const [key,label]of [['wake','подъёма'],['bed','ночного засыпания'],['next','следующего подъёма']])if(d[key]&&t(d[key])===null)errors.push('Проверьте время '+label+'.');
@@ -46,3 +46,4 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-journal]')
 document.addEventListener('click',e=>{if(!root.querySelector('#journal-form')||!dirty)return;const b=e.target.closest('[data-mz],.header button');if(b){e.preventDefault();e.stopImmediatePropagation();canLeave();}},true);
 window.addEventListener('beforeunload',e=>{if(root.querySelector('#journal-form')&&dirty){e.preventDefault();e.returnValue='';}});
 })();
+

@@ -75,7 +75,7 @@
   }
   function normalize(s={}){
     const start=date(s.start)?s.start:today();
-    return {start,age:bounded(s.age,4,11,6),vegDays:bounded(s.vegDays,2,14,3),
+    return {profileBirth:typeof s.profileBirth==='string'?s.profileBirth:'',start,age:bounded(s.age,4,11,6),vegDays:bounded(s.vegDays,2,14,3),
       otherDays:bounded(s.otherDays,2,14,3),ready:s.ready===true,early:s.early===true,
       known:Array.isArray(s.known)?s.known.filter(id=>foods.some(f=>f.id===id)):[],
       repeats:s.repeats && typeof s.repeats==='object'?Object.fromEntries(Object.entries(s.repeats)
@@ -185,6 +185,9 @@
   }
   const check=(value)=>value?' checked':'';
   const readable=(v)=>new Date(v+'T00:00:00Z').toLocaleDateString('ru-RU',{day:'numeric',month:'short',timeZone:'UTC'});
+  function profileAge(start){return root.MamaProfile.birth()?root.MamaProfile.months(root.MamaProfile.birth(),start):null;}
+  function stalePlan(){const b=root.MamaProfile.birth();return b&&((state.profileBirth&&state.profileBirth!==b)||profileAge(state.start)!==state.age);}
+  root.MamaPlans.adapters.feeding=()=>{if(stalePlan())return [];const row=build(state).find(r=>r.date>=root.MamaProfile.today());if(!row)return [];const food=foods.find(f=>f.id===row.newId);return [{id:'feeding-'+row.date,kind:'feeding',due:row.date,title:food?'По плану: '+food.name:'Знакомые продукты',note:'День '+(row.index+1)+' · это план, а не запись о съеденном. Темп можно замедлить.',open:()=>root.openComplementaryCalendar()}];};
   function show(){
     root.closeModal?.();
     document.getElementById('screen').innerHTML=`
@@ -201,12 +204,12 @@
       </section>
       <section class="feeding-panel">
         <h2>Настроим ваш календарь</h2>
-        <form id="feeding-form">
+        ${root.MamaProfile.dateField()}<form id="feeding-form">
           <div class="feeding-fields">
             <label>Возраст на дату начала
-              <select name="age">${Array.from({length:8},(_,i)=>i+4).map(a=>`<option value="${a}"${state.age===a?' selected':''}>${a} месяцев</option>`).join('')}</select>
+              <select name="age" ${root.MamaProfile.birth()?'disabled':''}>${Array.from({length:8},(_,i)=>i+4).map(a=>`<option value="${a}"${state.age===a?' selected':''}>${a} месяцев</option>`).join('')}</select>
             </label>
-            <label>Дата начала прикорма<input type="date" name="start" value="${esc(state.start)}" required min="2020-01-01" max="2100-12-31"></label>
+            <p id="feeding-profile-age" class="feeding-muted"></p><label>Дата начала прикорма<input type="date" name="start" value="${esc(state.start)}" required min="2020-01-01" max="2100-12-31"></label>
             <label>Дней на один новый овощ<input type="number" name="vegDays" min="2" max="14" step="1" value="${state.vegDays}" required inputmode="numeric"></label>
             <label>Дней на другие новые продукты<input type="number" name="otherDays" min="2" max="14" step="1" value="${state.otherDays}" required inputmode="numeric"></label>
           </div>
@@ -255,7 +258,8 @@
       event.preventDefault();
       const form=event.currentTarget, fd=new FormData(form);
       if(!date(fd.get('start'))) return;
-      state=normalize({age:fd.get('age'),start:fd.get('start'),vegDays:fd.get('vegDays'),
+      const pa=profileAge(fd.get('start'));if(root.MamaProfile.birth()&&(pa===null||pa<4||pa>11)){document.getElementById('feeding-status').textContent='На дату начала малышу должно быть от 4 до 11 полных месяцев. Проверьте даты; готовность к прикорму обсуждают отдельно.';return;}
+      state=normalize({profileBirth:root.MamaProfile.birth(),age:pa===null?fd.get('age'):pa,start:fd.get('start'),vegDays:fd.get('vegDays'),
         otherDays:fd.get('otherDays'),ready:fd.has('ready'),early:fd.has('early'),known:fd.getAll('known')});
       selectedMonth=0;
       const saved=save();
@@ -263,6 +267,9 @@
       document.getElementById('feeding-status').textContent=saved?'Настройки сохранены на этом устройстве.':'Календарь построен. На этом устройстве сохранить настройки не удалось.';
       document.getElementById('feeding-calendar').scrollIntoView({behavior:'smooth',block:'start'});
     });
+    const startInput=document.querySelector('#feeding-form [name="start"]');
+    function updateAge(){const b=root.MamaProfile.birth(),a=profileAge(startInput.value);document.getElementById('feeding-profile-age').textContent=b?(a===null?'Дата начала раньше рождения.':'Из профиля: '+a+' полных месяцев на дату начала. Для изменения используйте дату начала или профиль.'):'Без точной даты рождения возраст можно выбрать вручную.';if(b&&a>=4&&a<=11)document.querySelector('#feeding-form [name="age"]').value=String(a);}
+    startInput.addEventListener('change',updateAge);updateAge();
     document.querySelectorAll('[data-guide]').forEach(b=>b.addEventListener('click',()=>renderGuide(Number(b.dataset.guide))));
     renderGuide(state.age);
     renderCalendar();
@@ -274,6 +281,7 @@
   }
   function renderCalendar(){
     const container=document.getElementById('feeding-calendar');
+    if(stalePlan()){container.innerHTML='<section class="feeding-panel feeding-note"><h2>Проверьте план после изменения профиля</h2><p>Возраст или дата рождения отличаются от сохранённого плана. Его настройки и повторы сохранены. Проверьте дату начала и нажмите «Построить мой календарь», если хотите пересчитать план.</p></section>';return;}
     if(!state.ready || state.age<6 && !state.early){
       container.innerHTML=`<section class="feeding-panel feeding-note"><h2>Перед началом</h2><p>Обычно стартуют около 6 месяцев при готовности малыша. Отметьте признаки готовности в настройках. Для раннего старта в 4–5 месяцев дополнительно требуется согласование с педиатром.</p><p>Подсказки по возрасту уже доступны выше.</p></section>`;
       return;
@@ -316,4 +324,5 @@
   }
   root.openComplementaryCalendar=function(){show();root.scrollTo(0,0);};
 })(typeof window!=='undefined'?window:null);
+
 
