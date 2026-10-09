@@ -671,6 +671,9 @@ window.openCareV2 = function () {
 };
 function article(id) { const a=DATA.articles.find(x=>x.id===id); if(!a)return;
  show(`<button type="button" class="care-back" data-menu>← Все темы ухода</button><header class="care-hero"><span class="care-kicker">ПОНЯТНО ПО ШАГАМ</span><h1>${a.icon} ${esc(a.title)}</h1><p>${esc(a.short)}</p></header><section class="care-box"><h2>Когда это нужно</h2><p>${esc(a.when)}</p></section><section class="care-box"><h2>Что приготовить</h2>${list(a.prepare)}</section><section class="care-box"><h2>Что делать по порядку</h2><ol class="care-steps">${a.steps.map(([h,t])=>`<li><h3>${esc(h)}</h3><p>${esc(t)}</p></li>`).join('')}</ol></section><section class="care-box care-good"><h2>Как понять, что всё получилось</h2><p>${esc(a.result)}</p></section><section class="care-box"><h2>Чего не делать</h2>${list(a.avoid)}</section><section class="care-box care-warning"><h2>Когда нужен врач</h2><p>${esc(a.help)}</p></section><section class="care-box"><h2>Если возник вопрос</h2>${a.faq.map(([q,v])=>`<details open><summary>${esc(q)}</summary><p>${esc(v)}</p></details>`).join('')}</section>${urgent()}<details class="care-box"><summary>На чём основана памятка</summary><p>Объяснения адаптированы на русский язык. Исходные материалы — на английском.</p><ul>${a.refs.map(k=>`<li><a href="${esc(DATA.sources[k][1])}" target="_blank" rel="noopener noreferrer">${esc(DATA.sources[k][0])} ↗</a></li>`).join('')}</ul></details><button type="button" class="care-back" data-menu>← Выбрать другую тему</button>`);
+window.MamaFavorites?.offer({kind:'care',key:id,title:a.title},root());
 }
 document.addEventListener('click',e=>{const b=e.target.closest('.care-v2 button');if(!b)return;if(b.hasAttribute('data-home'))location.reload();else if(b.hasAttribute('data-menu'))window.openCareV2();else if(b.dataset.article)article(b.dataset.article);});
+window.MamaFavoriteArticles=window.MamaFavoriteArticles||{};window.MamaFavoriteArticles.care=article;
 })();
+

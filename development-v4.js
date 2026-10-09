@@ -33,11 +33,13 @@ function render(focus=false){
  const m=D.months[month],p=profileMonth();
  const root=document.getElementById('screen');
  root.innerHTML=`<div class="dv4"><button class="dv4-back" type="button" data-dv-home>← На главную</button><header class="dv4-header"><span class="dv4-eyebrow">РАСТЁМ И ИГРАЕМ</span><h1>Мир глазами малыша</h1><p>Понятно о развитии. Интересно быть вместе.</p></header><section class="dv4-agebar" aria-label="Выбор возраста"><label for="dv4-age">Возраст малыша</label><div class="dv4-agecontrols"><button type="button" data-dv-step="-1" aria-label="Предыдущий месяц" ${month===0?'disabled':''}>←</button><select id="dv4-age">${D.months.map((m,i)=>`<option value="${i}" ${i===month?'selected':''}>${age(i)}</option>`).join('')}</select><button type="button" data-dv-step="1" aria-label="Следующий месяц" ${month===11?'disabled':''}>→</button></div><p class="dv4-muted">${p===null?'Выберите месяц вручную. Дату рождения можно указать в профиле малыша.':p>11?'Малышу уже год или больше. Здесь показан завершающий этап первого года.':month===p?'Выбран возраст по дате рождения в профиле.':'Вы смотрите другой возраст.'} ${p!==null&&p<=11&&month!==p?'<button type="button" class="dv4-link" data-dv-current>К возрасту моего малыша</button>':''}</p></section><section class="dv4-month"><span class="dv4-month-icon" aria-hidden="true">${m.icon}</span><div><span class="dv4-eyebrow">${age(month)}</span><h2>${esc(m.title)}</h2><p>${esc(m.intro)}</p></div></section><nav class="dv4-tabs" aria-label="Темы развития">${tabs.map(([k,t])=>`<button type="button" data-dv-tab="${k}" aria-pressed="${active===k}" aria-controls="dv4-panel">${t}</button>`).join('')}</nav><section id="dv4-panel" class="dv4-panel">${panel()}</section><p id="dv4-status" class="dv4-status" role="status" aria-live="polite"></p>${help()}${sources()}</div>`;
+ window.MamaFavorites?.offer({kind:'development',key:String(month),tab:active,title:age(month)+' · '+tabs.find(t=>t[0]===active)[1]},root);
  if(focus)root.querySelector('#dv4-panel h2')?.focus({preventScroll:true});
 }
 function captureNote(){if(active!=='notes')return true;const el=document.getElementById('dv4-note');if(!el)return true;const s=read(),prev=typeof s.notes?.[month]==='string'?s.notes[month]:'';if(el.value===prev)return true;if(!s.notes||typeof s.notes!=='object')s.notes={};s.notes[month]=el.value;if(save(s))return true;status('Не удалось сохранить заметку. Скопируйте её перед выходом; можно попробовать ещё раз.');return false;}
 function status(s){const el=document.getElementById('dv4-status');if(el)el.textContent=s;}
 function open(index){if(typeof closeModal==='function')closeModal();const i=Number(index);month=Number.isInteger(i)&&i>=0&&i<=11?i:Math.min(11,profileMonth()??0);active='skills';render();window.scrollTo(0,0);}
+window.openDevelopmentBookmark=(index,tab)=>{open(index);if(tabs.some(t=>t[0]===tab))active=tab;render();};
 window.openDevelopmentV2=()=>open();
 window.openDevelopmentV2Age=index=>open(index);
 document.addEventListener('click',e=>{
@@ -55,3 +57,4 @@ document.addEventListener('change',e=>{
  if(e.target.matches('[data-dv-check]')){const k=e.target.dataset.dvCheck;if(!D.skills[k])return;const s=read();if(!s.checks||typeof s.checks!=='object')s.checks={};s.checks[k]=e.target.checked;if(save(s))status(e.target.checked?'Наблюдение сохранено.':'Отметка снята.');else{e.target.checked=!e.target.checked;status('Не удалось сохранить отметку в браузере. Попробуйте ещё раз.');}}
 });
 })();
+
