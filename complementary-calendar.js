@@ -28,6 +28,8 @@
     {id:'chicken',name:'курица',group:'protein',min:4,prep:'Полностью приготовить, убрать кожу и кости, измельчить.'},
     {id:'plum',name:'слива',group:'fruit',min:6,prep:'Убрать косточку и кожицу, размять мягкую мякоть.'}
   ];
+  // Optional menu ideas, staged by plan month, not medical minimum ages.
+  foods.push(...[{"id": "banana", "name": "банан", "group": "fruit", "min": 6, "planMonth": 2, "prep": "Очистить и размять."}, {"id": "peas", "name": "зелёный горошек", "group": "veg", "min": 6, "planMonth": 2, "prep": "Сварить и размять; не давать целые горошины."}, {"id": "corn", "name": "кукурузная каша", "group": "grain", "min": 6, "planMonth": 2, "prep": "Разварить без соли и сахара."}, {"id": "sweetpotato", "name": "батат", "group": "starch", "min": 6, "planMonth": 2, "prep": "Сварить и размять."}, {"id": "greenbeans", "name": "стручковая фасоль", "group": "veg", "min": 6, "planMonth": 3, "prep": "Убрать жёсткие волокна, сварить и измельчить."}, {"id": "peach", "name": "персик", "group": "fruit", "min": 6, "planMonth": 3, "prep": "Удалить косточку и кожицу, размять."}, {"id": "rice", "name": "рисовая каша", "group": "grain", "min": 6, "planMonth": 3, "prep": "Разварить; чередовать с другими крупами."}, {"id": "pork", "name": "свинина", "group": "protein", "min": 6, "planMonth": 3, "prep": "Полностью приготовить нежирное мясо и измельчить."}, {"id": "spinach", "name": "шпинат", "group": "veg", "min": 6, "planMonth": 4, "prep": "Приготовить и измельчить."}, {"id": "mango", "name": "манго", "group": "fruit", "min": 6, "planMonth": 4, "prep": "Убрать кожуру и косточку, размять."}, {"id": "quinoa", "name": "киноа", "group": "grain", "min": 6, "planMonth": 4, "prep": "Промыть, разварить и размять."}, {"id": "chickpeas", "name": "нут", "group": "protein", "min": 6, "planMonth": 4, "prep": "Разварить и измельчить; не давать целые горошины."}, {"id": "cabbage", "name": "капуста", "group": "veg", "min": 6, "planMonth": 5, "prep": "Приготовить до мягкости и измельчить."}, {"id": "blueberries", "name": "черника", "group": "fruit", "min": 6, "planMonth": 5, "prep": "Вымыть и тщательно размять; не давать целые ягоды."}, {"id": "lamb", "name": "баранина", "group": "protein", "min": 6, "planMonth": 5, "prep": "Полностью приготовить нежирное мясо и измельчить."}, {"id": "parsnip", "name": "пастернак", "group": "veg", "min": 6, "planMonth": 5, "prep": "Очистить, сварить и размять."}, {"id": "pepper", "name": "сладкий перец", "group": "veg", "min": 6, "planMonth": 6, "prep": "Удалить семена, приготовить, снять кожицу и размять."}, {"id": "raspberries", "name": "малина", "group": "fruit", "min": 6, "planMonth": 6, "prep": "Вымыть и размять."}, {"id": "melon", "name": "дыня", "group": "fruit", "min": 6, "planMonth": 6, "prep": "Удалить семена и кожуру, размять мякоть."}, {"id": "whitebeans", "name": "белая фасоль", "group": "protein", "min": 6, "planMonth": 6, "prep": "Полностью сварить и измельчить; без соли."}, {"id": "asparagus", "name": "спаржа", "group": "veg", "min": 6, "planMonth": 7, "prep": "Убрать жёсткие части, сварить и измельчить."}, {"id": "nectarine", "name": "нектарин", "group": "fruit", "min": 6, "planMonth": 7, "prep": "Удалить косточку и кожицу, размять."}, {"id": "swede", "name": "брюква", "group": "veg", "min": 6, "planMonth": 7, "prep": "Очистить, сварить и размять."}, {"id": "kiwi", "name": "киви", "group": "fruit", "min": 6, "planMonth": 7, "prep": "Очистить и размять спелую мякоть."}]);
   const portionNames = {
     zucchini:'кабачка',turkey:'индейки',buckwheat:'гречневой каши',
     egg:'размятого полностью сваренного яйца',peanut:'разведённой арахисовой пасты',
@@ -86,6 +88,7 @@
   const order = ['zucchini','broccoli','cauliflower','pumpkin','carrot','potato',
     'turkey','buckwheat','apple','pear','beef','egg','peanut','fish','yogurt',
     'oats','lentil','millet','avocado','wheat','chicken','plum'];
+  order.push(...foods.filter(f=>f.planMonth).map(f=>f.id));
   const curves = {
     veg:[1,3,5,7,9,11,12,13,14,14,14,16,16,18,18,18,20],
     starch:[1,3,4,6,8,10], protein:[1,2,3,4,5,6],
@@ -151,7 +154,7 @@
       const current=plusDays(start,rows.length),age=ageOn(start,s.age,current);
       const month=Math.min(11-s.age,age-s.age);
       if(!active){
-        active=nextFood(foods.filter(f=>f.min<=age&&!introduced.has(f.id)),raw,s);
+        active=nextFood(foods.filter(f=>f.min<=age&&(f.planMonth??0)<=month&&!introduced.has(f.id)),raw,s);
         step=0;
         if(active)firstOffered.set(active.id,raw);
       }
@@ -244,7 +247,7 @@
           <li>Примерно с 6 месяцев предложите несколько глотков воды из чашки во время еды. Молочные кормления не уменьшайте автоматически по таблице.</li>
         </ul>
         <div class="feeding-alert"><strong>Когда нужна срочная помощь</strong><p>Отёк губ или языка, трудное дыхание, резкая вялость, повторная рвота с бледностью или быстрое ухудшение после еды — прекратите кормление и вызовите экстренную помощь (112 там, где этот номер действует).</p></div>
-        <details class="feeding-sources"><summary>На чём основаны подсказки</summary>
+        <details class="feeding-sources"><summary>На чём основаны подсказки</summary><p>Идеи разнообразия дополнены 10 октября 2026 года. <a href="https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/" target="_blank" rel="noopener">NHS: продукты и безопасная подача с примерно 6 месяцев</a>. Очерёдность дополнительных продуктов по месяцам — пример меню, а не рекомендация NHS.</p>
           <p>Порядок блюд и ложки в календаре — примеры для планирования, а не норматив из рекомендаций. Обязательной последовательности овощей нет. Рекомендации разных стран по старту отличаются; базовый ориентир здесь — около 6 месяцев. Проверено 3 октября 2026 года.</p>
           <ul>
             <li><a href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html" target="_blank" rel="noopener">CDC: готовность, первые продукты и интервалы</a></li>
@@ -289,12 +292,15 @@
     const rows=build(state), months=12-state.age;
     selectedMonth=Math.min(selectedMonth,months-1);
     const view=rows.filter(r=>r.month===selectedMonth);
+    const fresh=[...new Set(view.filter(r=>r.newId&&r.step===1&&!r.repeated).map(r=>r.newId))].map(id=>foods.find(f=>f.id===id).name);
+
     container.innerHTML=`
       <section class="feeding-panel feeding-calendar-panel">
         <div class="feeding-title-line"><div><span class="feeding-eyebrow">ВАШ ПЛАН</span><h2>Месяц ${selectedMonth+1} прикорма</h2></div><button type="button" class="feeding-print">Печать</button></div>
         <p class="feeding-muted">${readable(view[0].date)} — ${readable(view[view.length-1].date)} · примерно ${state.age+selectedMonth} месяцев · новый овощ на ${state.vegDays} дня</p>
         <div class="feeding-month-tabs" role="group" aria-label="Месяц прикорма">${Array.from({length:months},(_,i)=>`<button type="button" data-month="${i}" aria-pressed="${i===selectedMonth}">Месяц ${i+1}<small>≈ ${state.age+i} мес.</small></button>`).join('')}</div>
         <p class="feeding-note-inline">Календарь продолжается из месяца в месяц. Можно повторять день без увеличения количества — следующие даты сдвинутся. Новая проба и знакомая основа считаются отдельно. Знакомые порции растут постепенно и не сбрасываются при смене месяца. При старте с нуля: с 2 днями на овощ картофель появится на 11-й день, с 3 днями — на 16-й; при более медленном темпе даты сдвигаются. После первых овощей добавляем источники железа, не дожидаясь знакомства со всеми овощами.</p>
+        <p class="feeding-note-inline"><b>${fresh.length?'Новые знакомства в этом месяце: '+esc(fresh.join(', '))+'.':'В этом месяце нет начала новой пробы.'}</b> ${fresh.length?'':'Возможно, продолжается длинная проба, продукты уже отмечены знакомыми или список идей этого этапа завершён. '}Дополнительные идеи распределены по месяцам для удобства: это не медицинские сроки и не запрет познакомиться раньше, если возраст и готовность подходят. Не нужно пробовать весь список до года.</p>
         <div class="feeding-table-wrap"><table class="feeding-table">
           <caption>Пример прикорма: месяц ${selectedMonth+1}. Количество можно уменьшить по аппетиту.</caption>
           <thead><tr><th scope="col">Когда</th><th scope="col">Новый продукт</th><th scope="col">Знакомая еда</th><th scope="col">После еды</th></tr></thead>
@@ -317,12 +323,13 @@
     const known=r.familiar.map(s=>`<div class="feeding-meal"><b>${s.label}:</b> ${s.parts.map(p=>`${spoon(p.spoons)} ${esc(p.name)}`).join(' + ')}</div>`).join('');
     return `<tr>
       <td data-label="Когда"><b>${readable(r.date)}</b><small>День ${r.index+1}${r.repeated?' · повтор':''}</small><button type="button" class="feeding-repeat" data-repeat="${r.raw}" aria-label="Повторить день ${r.index+1}">Повторить день</button></td>
-      <td data-label="Новый продукт">${f?`<strong>${esc(f.name)}</strong><span class="feeding-amount">${spoon(r.newAmount)}</span><small>Проба ${r.step} из ${r.duration} · 11:00–13:00</small>${f.allergen?'<span class="feeding-badge">Аллерген · вводить отдельно</span>':''}<details><summary>Как приготовить</summary><p>${f.prep}</p></details>`:'<strong>Без нового продукта</strong><small>Повторяем уже знакомую еду и осваиваем текстуры.</small>'}</td>
+      <td data-label="Новый продукт">${f?`<strong>${esc(f.name)}</strong><span class="feeding-amount">${spoon(r.newAmount)}</span><small>Проба ${r.step} из ${r.duration} · 11:00–13:00</small>${f.allergen?'<span class="feeding-badge">Аллерген · вводить отдельно</span>':''}<details><summary>Как приготовить</summary><p>${f.prep}</p></details>`:'<strong>День знакомых продуктов</strong><small>Новая проба сегодня не запланирована. Чередуем знакомую еду и подходящие навыкам текстуры.</small>'}</td>
       <td data-label="Знакомая еда">${known||'<p>Пока без знакомой основы. Только маленькая проба нового продукта.</p>'}<small>Только то, что уже пробовали и хорошо переносите. Можно меньше.</small>${r.newId?`<div class="feeding-total">Проба + основа обеда: <b>${spoon(r.lunchTotal)}</b><small>Знакомые фрукты и повтор аллергена после обеда — отдельно.</small></div>`:""}</td>
       <td data-label="После еды"><strong>${MILK}</strong><small>По аппетиту. Продолжайте обычные молочные кормления в течение дня.</small></td>
     </tr>`;
   }
   root.openComplementaryCalendar=function(){show();root.scrollTo(0,0);};
 })(typeof window!=='undefined'?window:null);
+
 
 
