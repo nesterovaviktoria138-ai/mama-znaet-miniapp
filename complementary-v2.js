@@ -60,7 +60,7 @@ function complementaryV2Open(topic) {
     allergens:["Аллергены",'<p>Не откладывайте распространённые пищевые аллергены только потому, что они считаются аллергенными. Вводите их по одному, в подходящей безопасной форме и небольшом количестве, когда ребёнок здоров и вы можете наблюдать за реакцией.</p>'+complementaryV2Cards([["🥚","Яйцо","Только хорошо термически обработанное, подходящей малышу текстуры."],["🥜","Арахис","Не цельные орехи и не густая ложка пасты. Используйте безопасную по консистенции форму."],["🐟","Рыба","Полностью приготовленная, тщательно проверенная на кости."],["🌾","Пшеница","Можно знакомить через подходящие по возрасту блюда с безопасной текстурой."],["🥛","Молочные продукты","Подходящие по возрасту продукты вводятся как часть прикорма; коровье молоко не должно заменять основное молочное питание до года."]])+'<div class="comp-v2-note"><strong>Если уже была выраженная реакция, диагностирована пищевая аллергия или ребёнок относится к группе высокого риска</strong> — введение аллергенов заранее обсудите с педиатром или аллергологом.</div>'],
     gagging:["Рвотный рефлекс или удушье",complementaryV2Cards([["😮","Рвотный рефлекс","Малыш может шуметь, кашлять, краснеть, выталкивать пищу языком. Это защитный механизм при обучении текстурам."],["🚨","Удушье","Ребёнок может не издавать звук и не может нормально дышать или кашлять. Это экстренная ситуация."],["📚","Подготовьтесь заранее","До начала кусочков взрослым полезно освоить актуальный алгоритм первой помощи младенцу при удушье на очном курсе или у надёжного медицинского источника."]])+'<div class="comp-v2-danger"><strong>Срочно:</strong> если ребёнок не может дышать, кашлять или издавать звуки, синеет или теряет сознание — вызывайте экстренную помощь и начинайте соответствующую возрасту первую помощь.</div>'],
     avoid:["Что нельзя или опасно",complementaryV2Cards([["🍯","Мёд до 12 месяцев","Не даём мёд ребёнку младше года."],["🥜","Цельные орехи","Опасны из-за риска удушья. Орехи дают только в безопасной по возрасту форме."],["🍇","Круглые твёрдые продукты","Цельный виноград, черри, твёрдые куски моркови и похожие продукты требуют изменения формы и текстуры."],["🧂","Лишние соль и сахар","Не добавляем их специально в еду малыша."],["🥛","Коровье молоко как основной напиток","До года не заменяем им грудное молоко или адаптированную смесь."]])],
-    tracker:["Трекер продуктов",'<p>Отмечайте только то, что действительно пригодится потом: продукт, дату первого знакомства и реакцию.</p><div class="comp-v2-tracker"><label>🥦 Продукт<input id="compTrackerFood" placeholder="Например, брокколи"></label><label>📅 Дата<input id="compTrackerDate" type="date"></label><label>🙂 Реакция<select id="compTrackerReaction"><option>Без особенностей</option><option>Понравилось</option><option>Не понравилось</option><option>Нужно наблюдать</option></select></label><button type="button" onclick="complementaryV2SaveFood()">＋ Добавить продукт</button><div id="compTrackerList"></div></div>'],
+    tracker:["Трекер продуктов",'<p>Отмечайте только то, что действительно пригодится потом: продукт, дату первого знакомства и реакцию.</p><div class="comp-v2-tracker"><label>🥦 Продукт<input id="compTrackerFood" placeholder="Например, брокколи"></label><label>📅 Дата<input id="compTrackerDate" type="date"></label><label>🙂 Реакция<select id="compTrackerReaction"><option>Без особенностей</option><option>Понравилось</option><option>Не понравилось</option><option>Нужно наблюдать</option></select></label><button type="button" onclick="complementaryV2SaveFood()">＋ Добавить продукт</button><p id="compTrackerStatus" role="status" aria-live="polite"></p><div id="compTrackerList"></div></div>'],
     menu:["Меню на день",complementaryV2MenuBuilder()],
     recipes:["Что приготовить?",complementaryV2RecipeBuilder()],
     safety:["Безопасность",complementaryV2Cards(complementaryV2Safety)]
@@ -167,25 +167,52 @@ function openComplementaryV2() {
 }
 
 
+function complementaryV2TrackerMessage(text) {
+  const el=document.getElementById("compTrackerStatus");
+  if(el) el.textContent=text;
+}
+function complementaryV2ReadTracker() {
+  const items=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]");
+  if(!Array.isArray(items)||items.some(x=>!x||typeof x!=="object"||Array.isArray(x)))
+    throw Error("Некорректные записи трекера");
+  return items;
+}
 function complementaryV2SaveFood() {
   const food=document.getElementById("compTrackerFood");
   const date=document.getElementById("compTrackerDate");
   const reaction=document.getElementById("compTrackerReaction");
-  if(!food || !food.value.trim()) return;
-  const items=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]");
-  items.unshift({food:food.value.trim(),date:date&&date.value?date.value:new Date().toISOString().slice(0,10),reaction:reaction?reaction.value:"Без особенностей"});
-  localStorage.setItem("mamaZnaetComplementaryFoods",JSON.stringify(items.slice(0,100)));
+  if(!food || !food.value.trim()) {complementaryV2TrackerMessage("Напишите название продукта.");return;}
+  let items;
+  try {items=complementaryV2ReadTracker();} catch {
+    complementaryV2TrackerMessage("Не удалось прочитать прежние записи. Они не изменены. Сохраните копию данных в разделе «Ещё», прежде чем что-либо очищать.");return;
+  }
+  if(items.length>=10000){complementaryV2TrackerMessage("В трекере уже 10 000 записей. Новая запись не добавлена, прежняя история сохранена. Скачайте копию в разделе «Ещё» перед удалением ненужных записей.");return;}
+  const now=new Date(),today=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+  items.unshift({food:food.value.trim(),date:date&&date.value?date.value:today,reaction:reaction?reaction.value:"Без особенностей"});
+  try {localStorage.setItem("mamaZnaetComplementaryFoods",JSON.stringify(items));} catch {
+    complementaryV2TrackerMessage("Не удалось сохранить продукт. Название осталось в поле, прежние записи не изменены. Проверьте свободное место и разрешение на сохранение данных в браузере, затем повторите попытку.");return;
+  }
   food.value="";
   complementaryV2RenderTracker();
+  complementaryV2TrackerMessage("Продукт сохранён. Все прежние записи остались в истории.");
 }
 function complementaryV2RenderTracker() {
   const box=document.getElementById("compTrackerList"); if(!box)return;
-  const items=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]");
+  let items;
+  try {items=complementaryV2ReadTracker();} catch {
+    box.textContent="История временно недоступна.";
+    complementaryV2TrackerMessage("Не удалось прочитать записи. Сохранённые данные не изменены.");return;
+  }
   box.innerHTML=items.length?items.map((x,i)=>'<div class="comp-v2-tracker-item"><div><strong>'+sleepV2Escape(x.food)+'</strong><small>'+sleepV2Escape(x.date)+' · '+sleepV2Escape(x.reaction)+'</small></div><button onclick="complementaryV2DeleteFood('+i+')" aria-label="Удалить">×</button></div>').join(''):'<div class="comp-v2-tracker-empty">Пока ничего не добавлено.</div>';
 }
 function complementaryV2DeleteFood(i) {
-  const items=JSON.parse(localStorage.getItem("mamaZnaetComplementaryFoods")||"[]"); items.splice(i,1);
-  localStorage.setItem("mamaZnaetComplementaryFoods",JSON.stringify(items)); complementaryV2RenderTracker();
+  try {
+    const items=complementaryV2ReadTracker();
+    if(!Number.isInteger(i)||i<0||i>=items.length)return;
+    items.splice(i,1);
+    localStorage.setItem("mamaZnaetComplementaryFoods",JSON.stringify(items));
+  } catch {complementaryV2TrackerMessage("Не удалось удалить запись. Прежняя история не изменена.");return;}
+  complementaryV2RenderTracker();complementaryV2TrackerMessage("Запись удалена.");
 }
 
 
@@ -299,4 +326,5 @@ function complementaryV2OpenPortionsInfographic(){
   });
   document.body.appendChild(overlay);
 }
+
 
