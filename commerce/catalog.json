@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "draft_not_connected",
+  "bot_username": "Mamatochnoznaetbot",
+  "mini_app_url": "https://nesterovaviktoria138-ai.github.io/mama-znaet-miniapp/",
+  "payment_currency": "XTR",
+  "sales_enabled": false,
+  "auto_renew": false,
+  "term_calendar_months": 12,
+  "products": [
+    {
+      "id": "full_12m",
+      "title": "Полный доступ",
+      "reference_rub": 999,
+      "stars": null,
+      "includes": [
+        "sleep_analyzer",
+        "complementary_feeding",
+        "motor_exercises",
+        "library"
+      ]
+    },
+    {
+      "id": "sleep_12m",
+      "title": "Анализатор сна",
+      "reference_rub": 499,
+      "stars": null,
+      "includes": [
+        "sleep_analyzer"
+      ]
+    },
+    {
+      "id": "feeding_12m",
+      "title": "Прикорм",
+      "reference_rub": 499,
+      "stars": null,
+      "includes": [
+        "complementary_feeding"
+      ]
+    },
+    {
+      "id": "exercises_12m",
+      "title": "Упражнения",
+      "reference_rub": 499,
+      "stars": null,
+      "includes": [
+        "motor_exercises"
+      ]
+    }
+  ],
+  "notes": [
+    "Draft catalog only; no payment processor or access enforcement is implemented by this file.",
+    "Stars prices require owner confirmation. Ruble references are not invoice amounts or exchange rates.",
+    "A backend must validate Telegram identity, confirm successful_payment, persist charges and enforce purchased access.",
+    "Current GitHub Pages content remains publicly accessible; do not enable sales before access enforcement and end-to-end payment tests."
+  ]
+}
