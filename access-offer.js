@@ -21,7 +21,7 @@ function open() {
  root.innerHTML=`<div class="access-page">
  <button type="button" class="mz-link" data-mz="more">← В меню «Ещё»</button>
  <span class="mz-eyebrow">МАМА ЗНАЕТ · ВАРИАНТЫ ДОСТУПА</span>
- <h1 tabindex="-1">Поддержка, которая нужна вам сейчас</h1>
+ <h1 tabindex="-1" style="outline:none">Поддержка, которая нужна вам сейчас</h1>
  <p class="access-lead">Выберите один раздел или всё приложение. Состав выбранного варианта — ниже.</p>
  <p class="access-notice"><strong>Готовим запуск продаж.</strong> Сейчас можно сравнить варианты. Оплата пока недоступна.</p>
  <fieldset><legend>Что вы хотите открыть?</legend>
