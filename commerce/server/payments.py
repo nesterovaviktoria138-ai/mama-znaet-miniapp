@@ -256,6 +256,27 @@ class Application:
                 answer['error_message'] = str(exc) if isinstance(exc, Rejected) else 'Не удалось проверить заказ.'
             self.call(self.token, 'answerPreCheckoutQuery', answer)
         msg = update.get('message', {})
+        text = msg.get('text', '')
+        command = text.split(maxsplit=1)[0].lower() if isinstance(text, str) and text.strip() else ''
+        chat = msg.get('chat', {})
+        if (chat.get('type') == 'private'
+                and command in ('/start', '/start@mamatochnoznaetbot')
+                and type(chat.get('id')) is int
+                and chat['id'] == msg.get('from', {}).get('id')
+                and not msg.get('from', {}).get('is_bot')):
+            self.call(self.token, 'sendMessage', {
+                'chat_id': chat['id'],
+                'text': (
+                    'Привет! Это «Мама знает» 🌿\n\n'
+                    'Помощник в первый год жизни малыша: сон, прикорм, развитие '
+                    'и забота о маме.\n\n'
+                    'Открой приложение и выбери то, что волнует тебя сегодня.'
+                ),
+                'reply_markup': {'inline_keyboard': [[{
+                    'text': 'Открыть «Мама знает»',
+                    'web_app': {'url': 'https://nesterovaviktoria138-ai.github.io/mama-znaet-miniapp/'}
+                }]]}
+            })
         if 'successful_payment' in msg:
             self.ledger.paid(msg['successful_payment'], msg['from']['id'], msg['date'], now)
         if 'refunded_payment' in msg:
